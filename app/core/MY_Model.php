@@ -113,8 +113,7 @@ class MY_Model extends CI_Model
         }
         $this->_set_where($where);
         $this->trigger('before_get');
-        $row = $this->_database->get($this->_table)
-                        ->{$this->_return_type()}();
+        $row = $this->_database->get($this->_table)->{$this->_return_type()}();
         $this->_temporary_return_type = $this->return_type;
         $row = $this->trigger('after_get', $row);
         $this->_with = array();
@@ -148,8 +147,7 @@ class MY_Model extends CI_Model
         if ($this->soft_delete && $this->_temporary_with_deleted !== true) {
             $this->_database->where($this->soft_delete_key, (bool)$this->_temporary_only_deleted);
         }
-        $result = $this->_database->get($this->_table)
-                           ->{$this->_return_type(1)}();
+        $result = $this->_database->get($this->_table)->{$this->_return_type(1)}();
         $this->_temporary_return_type = $this->return_type;
         foreach ($result as $key => &$row) {
             $row = $this->trigger('after_get', $row, ($key == count($result) - 1));
