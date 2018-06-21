@@ -35,15 +35,17 @@ class Product extends CI_Controller
         $this->load->model('Brand_model', 'brands');
         $this->load->model('Lease_model', 'leases');
 
+
+
         // $this->brands->before_dropdown = ['motor'];
 
         $this->data_credits = $this->leases->with('credits')->get_all();
 
-        $this->form_validation->set_rules('name', 'Nama', 'required');
-        $this->form_validation->set_rules('type', 'Tipe', 'required');
+        // $this->form_validation->set_rules('name', 'Nama', 'required');
+        // $this->form_validation->set_rules('type', 'Tipe', 'required');
 
-        $this->opt_brand = $this->brands->dropdown('id', 'name');
-        array_unshift($this->opt_brand, 'Pilih Merek Kendaraan');
+        $this->opt_brand = $this->brands->nested_dropdown_motor();
+        // array_unshift($this->opt_brand, 'Pilih Merek Kendaraan');
     }
 
     public function index()
@@ -68,8 +70,25 @@ class Product extends CI_Controller
 
     public function insert()
     {
-        debug($this->input->post());
+        $this->load->library('uploads', [
+          'encrypt_name' => true,
+          'upload_path' => './assets/uploads/',
+          'allowed_types' => 'gif|jpg|png'
+        ]);
+
+
+
+        // if (! $this->uploads->do_upload('photos')) {
+        //     debug($this->uploads->display_errors());
+        // } else {
+        //     debug($this->uploads->data());
+        // }
+
         if ($this->form_validation->run()) {
+            // $this->uploads->do_upload('photos');
+            // $uploads = $this->uploads->data();
+            $data = $this->input->post();
+            debug($data);
             $this->products->insert($this->input->post());
             redirect('product');
         } else {
@@ -79,10 +98,12 @@ class Product extends CI_Controller
 
     public function edit($id = null)
     {
-        $product = $this->products->get($id);
+        $product = $this->products->with('brand')->get($id);
         $header = ['title' => $this->title, 'styles' => $this->styles];
+        $brands = $this->opt_brand;
+        $leases = $this->data_credits;
         $this->load->view('backend/header', $header);
-        $this->load->view('backend/product/edit', ['product' => $product]);
+        $this->load->view('backend/product/edit', compact('product', 'leases', 'brands'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);
     }
 
@@ -90,6 +111,15 @@ class Product extends CI_Controller
     {
         $product = $this->products->get($id);
         if (!empty($product) && $this->form_validation->run()) {
+
+            $data = $this->input->post();
+            debug($data);
+
+            if ($this->uploads->do_upload('photos')) {
+                $uploads = $this->uploads->data();
+                debug($uploads);
+            }
+
             $this->product->update($product->id, $this->input->post());
             redirect('product');
         } else {

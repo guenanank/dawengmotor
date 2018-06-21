@@ -47,7 +47,7 @@
               </td>
               <td><?php echo $product->description ?></td>
               <td class="text-right">
-                <strong class="text-primary">Rp. <?php echo number_format($product->price) ?></strong>
+                <strong class="text-primary">Rp. <?php echo $product->price ?>.-</strong>
               </td>
               <td class="text-center">
                 <a href="<?php echo base_url('product/edit/' . $product->id) ?>" class="btn btn-info">

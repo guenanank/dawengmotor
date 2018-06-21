@@ -33,7 +33,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Rp. </span>
           </div>
-          <?php echo form_input(['name' => 'price', 'data-mask' => '000.000.000.000.000', 'data-mask-reverse' => 'true', 'id' => 'product-price', 'class' => 'form-control', 'placeholder' => 'Harga Unit Kendaraan', 'value' => set_value('price')]) ?>
+          <?php echo form_input(['name' => 'price', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-price', 'class' => 'form-control', 'placeholder' => 'Harga Unit Kendaraan', 'value' => set_value('price')]) ?>
           <div class="input-group-append">
             <span class="input-group-text">.-</span>
           </div>
@@ -63,64 +63,6 @@
         <div class="small text-danger"><?php echo form_error('photos') ?></div>
       </div>
     </div>
-
-
-
-<!--
-    <div class="m-5">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <?php
-          foreach($leases as $k => $lease) {
-            $active = $k == 0 ? 'active' : null;
-            ?>
-            <li class="nav-item">
-              <a class="nav-link <?php echo $active ?>" id="<?php echo camelize($lease->name) ?>-tab" data-toggle="tab" href="#<?php echo camelize($lease->name) ?>" role="tab" aria-controls="<?php echo camelize($lease->name) ?>" aria-selected="false"><?php echo $lease->name ?></a>
-            </li>
-            <?php
-          }
-        ?>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <?php
-          foreach($leases as $k => $lease) {
-            $show = $k == 0 ? 'show active' : null;
-            ?>
-            <div class="tab-pane fade <?php echo $show ?>" id="<?php echo camelize($lease->name) ?>" role="tabpanel" aria-labelledby="<?php echo camelize($lease->name) ?>-tab">
-              <div class="table-responsive">
-                <table class="table table-condensed table hover">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>Uang Muka</th>
-                      <th>Tenor</th>
-                      <th>Persentase</th>
-                      <th>Pajak</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      foreach ($lease->credits as $credit) {
-                        ?>
-                        <tr>
-                          <td></td>
-                          <td><?php echo number_format($credit->down_payment, 1) ?>%</td>
-                          <td><?php echo $credit->tenor ?> Bulan</td>
-                          <td><?php echo number_format($credit->percentage, 1) ?>%</td>
-                          <td><?php echo number_format($credit->tax, 1) ?>%</td>
-                        </tr>
-                        <?php
-                      }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-            <?php
-          }
-        ?>
-      </div>
-    </div> -->
 
     <hr />
     <div class="form-group">

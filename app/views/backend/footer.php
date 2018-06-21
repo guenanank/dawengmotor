@@ -61,16 +61,15 @@ if(!empty($scripts)) {
     });
 
     $('.krajee').fileinput({
-      theme: 'bootstrap',
+      theme: 'fa',
+      uploadUrl: '',
       maxFileCount: 5,
       allowedFileExtensions: ['jpg', 'png', 'gif'],
       dropZoneEnabled: false,
       showRemove: false,
       showUpload: false,
       previewFileType: 'image',
-      browseLabel: 'Upload Foto',
-      browseIcon: '<i class="fa fa-image"></i> ',
-      removeIcon: '<i class="fa fa-trash"></i> '
+      browseLabel: 'Upload Foto'
     });
   });
 </script>

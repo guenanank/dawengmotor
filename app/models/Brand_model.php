@@ -32,7 +32,8 @@ class Brand_model extends MY_Model
         $brands = $this->get_many_by('type', 'motor');
         $recursive = $this->recursive->make($brands, 'id', 'sub_from');
         $option = $this->recursive->option($recursive, 'name', 'id');
-        array_unshift($option, 'Pilih Sub Merek Kendaraan');
+        // array_unshift($option, 'Pilih Sub Merek Kendaraan');
+        // debug($option);
         return $option;
     }
 }
