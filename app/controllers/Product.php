@@ -13,9 +13,17 @@ class Product extends CI_Controller
     protected $scripts = [
       'assets/js/jquery.dataTables.js',
       'assets/js/dataTables.bootstrap4.js',
-      'assets/js/sb-admin-datatables.min.js'
+      'assets/js/jquery.mask.min.js',
+      'assets/js/gijgo.min.js',
+      'assets/js/fileinput.min.js',
+      'assets/js/theme.min.js'
     ];
-    protected $styles = ['assets/css/dataTables.bootstrap4.css'];
+
+    protected $styles = [
+      'assets/css/dataTables.bootstrap4.css',
+      'assets/css/gijgo.min.css',
+      'assets/css/fileinput.min.css'
+    ];
 
     private $data_credits;
     private $opt_brand;
@@ -27,7 +35,7 @@ class Product extends CI_Controller
         $this->load->model('Brand_model', 'brands');
         $this->load->model('Lease_model', 'leases');
 
-        $this->brands->before_dropdown = ['motor'];
+        // $this->brands->before_dropdown = ['motor'];
 
         $this->data_credits = $this->leases->with('credits')->get_all();
 
@@ -60,6 +68,7 @@ class Product extends CI_Controller
 
     public function insert()
     {
+        debug($this->input->post());
         if ($this->form_validation->run()) {
             $this->products->insert($this->input->post());
             redirect('product');

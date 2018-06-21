@@ -12,8 +12,7 @@ class Lease extends CI_Controller
     protected $title = 'Merek Kendaraan';
     protected $scripts = [
       'assets/js/jquery.dataTables.js',
-      'assets/js/dataTables.bootstrap4.js',
-      'assets/js/sb-admin-datatables.min.js'
+      'assets/js/dataTables.bootstrap4.js'
     ];
     protected $styles = ['assets/css/dataTables.bootstrap4.css'];
 

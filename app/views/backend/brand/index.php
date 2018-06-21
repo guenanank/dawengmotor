@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="pull-right">
-      <a href="<?php echo base_url('product') ?>" class="btn btn-warning">
+      <a href="<?php echo base_url('product') ?>" class="btn btn-secondary">
       <i class="fa fa-arrow-left"></i>&nbsp;Kembali
     </a> &nbsp;
-    <a href="<?php echo base_url('brand/create') ?>" class="btn btn-success">
+      <a href="<?php echo base_url('brand/create') ?>" class="btn btn-success">
       <i class="fa fa-plus"></i>&nbsp;Tambah
     </a>
     </div>
@@ -19,6 +19,7 @@
         <thead>
           <tr>
             <th>Nama</th>
+            <th>Sub Dari Merek</th>
             <th>Jenis</th>
             <th width="20%">Kontrol</th>
           </tr>
@@ -26,6 +27,7 @@
         <tfoot>
           <tr>
             <th>Nama</th>
+            <th>Sub Dari Merek</th>
             <th>Jenis</th>
             <th>Kontrol</th>
           </tr>
@@ -38,7 +40,10 @@
               <td>
                 <?php echo $brand->name ?>
               </td>
-              <td>
+              <td class="text-center">
+                <?php echo isset($brand->parent) ? $brand->parent->name : null ?>
+              </td>
+              <td class="text-center">
                 <?php echo ucwords($brand->type) ?>
               </td>
               <td class="text-center">

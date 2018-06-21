@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="pull-right">
-      <a href="<?php echo base_url('lease') ?>" class="btn btn-warning">
+      <a href="<?php echo base_url('lease') ?>" class="btn btn-secondary">
         <i class="fa fa-arrow-left"></i>&nbsp;Kembali
       </a>
     </div>
@@ -39,7 +39,7 @@
         <button type="submit" class="btn btn-primary">
           <i class="fa fa-save"></i>&nbsp;Simpan
         </button> &nbsp;
-        <a href="<?php current_url() ?>" class="btn btn-default">
+        <a href="<?php current_url() ?>" class="btn btn-secondary">
           <i class="fa fa-refresh"></i>&nbsp;Batal
         </a>
       </div>

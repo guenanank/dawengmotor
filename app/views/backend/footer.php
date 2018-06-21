@@ -35,7 +35,7 @@
 </div>
 <?php
 // Bootstrap core JavaScript
-echo script_tag('assets/js/jquery-3.3.1');
+echo script_tag('assets/js/jquery-3.3.1.js');
 echo script_tag('assets/js/bootstrap.bundle.min.js');
 // Core plugin JavaScript
 echo script_tag('assets/js/jquery.easing.min.js');
@@ -51,6 +51,28 @@ if(!empty($scripts)) {
 }
 ?>
 <script type="text/javascript">
+  $(document).ready(function() {
+    $("#dataTable").DataTable({
+        order: [[ 0, "desc" ]]
+    });
+
+    $('.wysihtml5').editor({
+      uiLibrary: 'bootstrap4'
+    });
+
+    $('.krajee').fileinput({
+      theme: 'bootstrap',
+      maxFileCount: 5,
+      allowedFileExtensions: ['jpg', 'png', 'gif'],
+      dropZoneEnabled: false,
+      showRemove: false,
+      showUpload: false,
+      previewFileType: 'image',
+      browseLabel: 'Upload Foto',
+      browseIcon: '<i class="fa fa-image"></i> ',
+      removeIcon: '<i class="fa fa-trash"></i> '
+    });
+  });
 </script>
 <?php echo script_tag('assets/js/sb-admin.min.js') ?>
 </body>

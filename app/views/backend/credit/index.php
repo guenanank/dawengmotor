@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="pull-right">
-      <a href="<?php echo base_url('product') ?>" class="btn btn-warning">
+      <a href="<?php echo base_url('product') ?>" class="btn btn-secondary">
       <i class="fa fa-arrow-left"></i>&nbsp;Kembali
     </a>&nbsp;
-    <a href="<?php echo base_url('lease') ?>" class="btn btn-info">
+    <a href="<?php echo base_url('lease') ?>" class="btn btn-dark">
       <i class="fa fa-list"></i>&nbsp;Daftar Leasing
     </a>&nbsp;
     <a href="<?php echo base_url('credit/create') ?>" class="btn btn-success">

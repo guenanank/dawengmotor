@@ -13,7 +13,7 @@ class Credit extends CI_Controller
     protected $scripts = [
       'assets/js/jquery.dataTables.js',
       'assets/js/dataTables.bootstrap4.js',
-      'assets/js/sb-admin-datatables.min.js'
+      'assets/js/jquery.mask.min.js'
     ];
     protected $styles = ['assets/css/dataTables.bootstrap4.css'];
 

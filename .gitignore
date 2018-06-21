@@ -5,6 +5,7 @@
 !*/cache/index.html
 !*/cache/.htaccess
 
+.DS_Store
 user_guide/*
 
 #codeigniter 3
