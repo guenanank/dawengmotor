@@ -26,6 +26,7 @@ class Product extends CI_Controller
     ];
 
     private $data_credits;
+    private $parent_brand;
     private $opt_brand;
 
     public function __construct()
@@ -35,27 +36,31 @@ class Product extends CI_Controller
         $this->load->model('Brand_model', 'brands');
         $this->load->model('Lease_model', 'leases');
 
+        $this->load->library('uploads', [
+          'upload_path' => './assets/uploads/original',
+          'allowed_types' => 'gif|jpg|png|jpeg',
+          'encrypt_name' => true,
+        ]);
 
-
-        // $this->brands->before_dropdown = ['motor'];
-
+        $this->brands->before_dropdown = ['motor'];
         $this->data_credits = $this->leases->with('credits')->get_all();
 
-        // $this->form_validation->set_rules('name', 'Nama', 'required');
-        // $this->form_validation->set_rules('type', 'Tipe', 'required');
+        $this->form_validation->set_rules('brand_id', 'Merek', 'required');
+        $this->form_validation->set_rules('price', 'Harga', 'required');
+        $this->form_validation->set_rules('description', 'Keterangan', 'required');
 
-        $this->opt_brand = $this->brands->nested_dropdown_motor();
-        // array_unshift($this->opt_brand, 'Pilih Merek Kendaraan');
+        $this->parent_brand = $this->brands->parent();
+        $this->opt_brand = $this->brands->nested_dropdown();
     }
 
     public function index()
     {
+        $parent_brand = $this->parent_brand;
         $products = $this->products->with('brand')->get_all();
         $header = ['title' => $this->title, 'styles' => $this->styles];
-        $scripts = $this->scripts;
         $this->load->view('backend/header', $header);
-        $this->load->view('backend/product/index', ['products' => $products]);
-        $this->load->view('backend/footer', compact('scripts'));
+        $this->load->view('backend/product/index', compact('products', 'parent_brand'));
+        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
     }
 
     public function create()
@@ -70,26 +75,17 @@ class Product extends CI_Controller
 
     public function insert()
     {
-        $this->load->library('uploads', [
-          'encrypt_name' => true,
-          'upload_path' => './assets/uploads/',
-          'allowed_types' => 'gif|jpg|png'
-        ]);
-
-
-
-        // if (! $this->uploads->do_upload('photos')) {
-        //     debug($this->uploads->display_errors());
-        // } else {
-        //     debug($this->uploads->data());
-        // }
-
         if ($this->form_validation->run()) {
-            // $this->uploads->do_upload('photos');
-            // $uploads = $this->uploads->data();
+            $filename = [];
+            if ($this->uploads->do_upload('photos')) {
+                $filename = array_column($this->uploads->data(), 'file_name');
+            } else {
+                // debug($this->uploads->display_errors());
+                return $this->create();
+            }
             $data = $this->input->post();
-            debug($data);
-            $this->products->insert($this->input->post());
+            $data['photos'] = json_encode($filename, true);
+            $this->products->insert($data);
             redirect('product');
         } else {
             return $this->create();
@@ -110,17 +106,19 @@ class Product extends CI_Controller
     public function update($id = null)
     {
         $product = $this->products->get($id);
-        if (!empty($product) && $this->form_validation->run()) {
-
-            $data = $this->input->post();
-            debug($data);
-
+        if ($this->form_validation->run()) {
+            $filename = [];
             if ($this->uploads->do_upload('photos')) {
-                $uploads = $this->uploads->data();
-                debug($uploads);
+                $filename = array_column($this->uploads->data(), 'file_name');
+            } else {
+                // debug($this->uploads->display_errors());
+                return $this->edit($product->id);
             }
 
-            $this->product->update($product->id, $this->input->post());
+            $data = $this->input->post();
+            $data['photos'] = json_encode($filename, true);
+
+            $this->products->update($product->id, $data);
             redirect('product');
         } else {
             return $this->edit($product->id);
@@ -131,9 +129,9 @@ class Product extends CI_Controller
     {
         $product = $this->products->get($id);
         if (!empty($product)) {
-            $this->product->delete($product->id);
+            return $this->product->delete($product->id);
         }
 
-        redirect('product');
+        return false;
     }
 }

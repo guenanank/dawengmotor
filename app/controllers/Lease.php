@@ -76,8 +76,8 @@ class Lease extends CI_Controller
     {
         $lease = $this->leases->get($id);
         if (!empty($lease)) {
-            $this->leases->delete($lease->id);
+            return $this->leases->delete($lease->id);
         }
-        redirect('lease');
+        return false;
     }
 }

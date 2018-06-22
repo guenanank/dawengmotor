@@ -89,9 +89,9 @@ class Credit extends CI_Controller
     {
         $credit = $this->credits->get($id);
         if (!empty($credit)) {
-            $this->credits->delete($credit->id);
+            return $this->credits->delete($credit->id);
         }
 
-        redirect('credit');
+        return false;
     }
 }

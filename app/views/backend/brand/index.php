@@ -21,7 +21,7 @@
             <th>Nama</th>
             <th>Sub Dari Merek</th>
             <th>Jenis</th>
-            <th width="20%">Kontrol</th>
+            <th>Kontrol</th>
           </tr>
         </thead>
         <tfoot>
@@ -50,7 +50,7 @@
                 <a href="<?php echo base_url('brand/edit/' . $brand->id) ?>" class="btn btn-info">
                   <i class="fa fa-pencil"></i>&nbsp;Ubah
                 </a>
-                <a href="<?php echo base_url('brand/delete/' . $brand->id) ?>" class="btn btn-danger">
+                <a href="<?php echo base_url('brand/delete/' . $brand->id) ?>" class="btn btn-danger delete">
                   <i class="fa fa-trash"></i>&nbsp;Hapus
                 </a>
               </td>

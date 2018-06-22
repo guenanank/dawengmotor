@@ -133,7 +133,7 @@ class MY_Model extends CI_Model
     public function get_many_by()
     {
         $where = func_get_args();
-
+        // debug($where);
         $this->_set_where($where);
         return $this->get_all();
     }

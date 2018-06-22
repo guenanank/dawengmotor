@@ -21,39 +21,40 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
+            <th>Foto</th>
             <th>Unit</th>
-            <th>Keterangan</th>
             <th>Harga</th>
-            <th width="20%">Kontrol</th>
+            <th>Kontrol</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
+            <th>Foto</th>
             <th>Unit</th>
-            <th>Keterangan</th>
             <th>Harga</th>
             <th>Kontrol</th>
           </tr>
         </tfoot>
         <tbody>
           <?php
-            foreach($products as $product) {
-              ?>
+            foreach ($products as $product) {
+                ?>
             <tr>
               <td>
-                <strong>
-                    <?php echo sprintf('%s %s', ucwords($product->brand->type), $product->brand->name) ?>
-                 </strong>
+                <img alt="<?php echo $product->brand->name ?>" src="<?php echo $this->image->resize($product->photos[array_rand($product->photos)], 0, 150) ?>" class="img-fluid rounded mx-auto d-block" />
               </td>
-              <td><?php echo $product->description ?></td>
+              <td>
+                <strong><?php echo sprintf('%s %s %s', ucwords($product->brand->type), $parent_brand[$product->brand->sub_from], $product->brand->name) ?></strong><br />
+                <?php echo word_limiter($product->description, 13) ?>
+              </td>
               <td class="text-right">
-                <strong class="text-primary">Rp. <?php echo $product->price ?>.-</strong>
+                <h4><strong class="text-primary">Rp. <?php echo $product->price ?>.-</strong></h4>
               </td>
               <td class="text-center">
                 <a href="<?php echo base_url('product/edit/' . $product->id) ?>" class="btn btn-info">
                       <i class="fa fa-pencil"></i>&nbsp;Ubah
                     </a>&nbsp;
-                <a href="<?php echo base_url('product/delete/' . $product->id) ?>" class="btn btn-danger">
+                <a href="<?php echo base_url('product/delete/' . $product->id) ?>" class="btn btn-danger delete">
                       <i class="fa fa-trash"></i>&nbsp;Hapus
                     </a>
               </td>

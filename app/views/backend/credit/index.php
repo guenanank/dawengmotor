@@ -26,7 +26,7 @@
             <th>Tenor</th>
             <th>Persentase</th>
             <th>Pajak</th>
-            <th width="20%">Kontrol</th>
+            <th>Kontrol</th>
           </tr>
         </thead>
         <tfoot>
@@ -63,7 +63,7 @@
                 <a href="<?php echo base_url('credit/edit/' . $credit->id) ?>" class="btn btn-info">
                   <i class="fa fa-pencil"></i>&nbsp;Ubah
                 </a>
-                <a href="<?php echo base_url('credit/delete/' . $credit->id) ?>" class="btn btn-danger">
+                <a href="<?php echo base_url('credit/delete/' . $credit->id) ?>" class="btn btn-danger delete">
                   <i class="fa fa-trash"></i>&nbsp;Hapus
                 </a>
               </td>

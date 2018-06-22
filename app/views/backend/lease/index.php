@@ -20,7 +20,7 @@
           <tr>
             <th>Nama</th>
             <th>Keterangan</th>
-            <th width="20%">Kontrol</th>
+            <th>Kontrol</th>
           </tr>
         </thead>
         <tfoot>
@@ -45,7 +45,7 @@
                 <a href="<?php echo base_url('lease/edit/' . $lease->id) ?>" class="btn btn-info">
                   <i class="fa fa-pencil"></i>&nbsp;Ubah
                 </a>
-                <a href="<?php echo base_url('lease/delete/' . $lease->id) ?>" class="btn btn-danger">
+                <a href="<?php echo base_url('lease/delete/' . $lease->id) ?>" class="btn btn-danger delete">
                   <i class="fa fa-trash"></i>&nbsp;Hapus
                 </a>
               </td>

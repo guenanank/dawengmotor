@@ -75,8 +75,9 @@ class Brand extends CI_Controller
     {
         $brand = $this->brands->get($id);
         if (!empty($brand)) {
-            $this->brands->delete($brand->id);
+            return $this->brands->delete($brand->id);
         }
-        redirect('brand');
+
+        return false;
     }
 }

@@ -26,14 +26,25 @@ class Brand_model extends MY_Model
         return $this;
     }
 
-    public function nested_dropdown_motor()
+    public function parent()
     {
-        $this->_temporary_return_type = 'array';
-        $brands = $this->get_many_by('type', 'motor');
-        $recursive = $this->recursive->make($brands, 'id', 'sub_from');
-        $option = $this->recursive->option($recursive, 'name', 'id');
-        // array_unshift($option, 'Pilih Sub Merek Kendaraan');
-        // debug($option);
-        return $option;
+        return $this->dropdown('id', 'name');
+    }
+
+    public function nested_dropdown()
+    {
+        $args = func_get_args();
+        $this->trigger('before_dropdown');
+        $parents = $this->parent();
+        $brands[null] = 'Pilih Unit Merek Kendaraan';
+        foreach ($this->_database->get($this->_table)->result() as $brand) {
+            if (is_null($brand->sub_from)) {
+                continue;
+            }
+
+            $brands[$brand->id] = sprintf('%s %s %s', ucwords($brand->type), $parents[$brand->sub_from], $brand->name);
+        }
+
+        return $brands;
     }
 }
