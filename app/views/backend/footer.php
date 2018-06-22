@@ -42,10 +42,6 @@ echo script_tag('assets/js/jquery.easing.min.js');
 echo script_tag('assets/js/sweetalert.min.js');
 // Custom scripts for all pages
 if(!empty($scripts)) {
-  if(!is_array($scripts)) {
-    $scripts = array($scripts);
-  }
-
   foreach($scripts as $script) {
     echo script_tag($script);
   }
@@ -55,7 +51,7 @@ if(!empty($scripts)) {
     $(document).ready(function() {
       $("#dataTable").DataTable({
         order: [
-          [0, "desc"]
+          [0, 'desc']
         ]
       });
 
@@ -98,7 +94,7 @@ if(!empty($scripts)) {
         theme: 'fa',
         uploadUrl: '',
         maxFileCount: 5,
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'],
         dropZoneEnabled: false,
         showRemove: false,
         showUpload: false,

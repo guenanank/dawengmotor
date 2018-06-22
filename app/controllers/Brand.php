@@ -35,7 +35,8 @@ class Brand extends CI_Controller
 
     public function create()
     {
-        $parents = $this->brands->nested_dropdown_motor();
+        $this->brands->before_dropdown = ['parent'];
+        $parents = $this->brands->get_parent();
         $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
         $this->load->view('backend/brand/create', compact('parents'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);
@@ -54,7 +55,8 @@ class Brand extends CI_Controller
     public function edit($id = null)
     {
         $brand = $this->brands->get($id);
-        $parents = $this->brands->nested_dropdown_motor();
+        $this->brands->before_dropdown = ['parent'];
+        $parents = $this->brands->get_parent();
         $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
         $this->load->view('backend/brand/edit', compact('brand', 'parents'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);

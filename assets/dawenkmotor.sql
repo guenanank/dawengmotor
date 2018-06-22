@@ -38,26 +38,24 @@ CREATE TABLE `brands` (
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `sub_from` (`sub_from`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_at`) VALUES
 (1,	'Honda',	NULL,	'motor',	'2018-06-12 19:50:01',	'2018-06-13 19:33:19'),
-(2,	'Yamaha',	NULL,	'motor',	'2018-06-12 19:50:12',	'2018-06-12 19:50:12'),
 (3,	'Suzuki',	NULL,	'motor',	'2018-06-12 19:50:21',	'2018-06-12 19:50:21'),
 (4,	'Kawasaki',	NULL,	'motor',	'2018-06-12 19:50:36',	'2018-06-12 19:50:36'),
-(6,	'Vespa',	NULL,	'motor',	'2018-06-15 13:55:58',	'0000-00-00 00:00:00'),
-(7,	'Bajaj Pulsar',	NULL,	'motor',	'2018-06-15 13:56:16',	'0000-00-00 00:00:00'),
-(8,	'Minerva',	NULL,	'motor',	'2018-06-15 13:56:27',	'0000-00-00 00:00:00'),
-(9,	'Aprilia',	0,	'motor',	'2018-06-15 13:56:36',	'2018-06-21 07:41:55'),
-(10,	'KTM',	NULL,	'motor',	'2018-06-15 13:56:43',	'0000-00-00 00:00:00'),
-(11,	'Ducati',	NULL,	'motor',	'2018-06-15 13:56:51',	'0000-00-00 00:00:00'),
-(12,	'BMW',	NULL,	'mobil',	'2018-06-15 13:57:02',	'2018-06-15 16:26:59'),
-(13,	'Toyota',	NULL,	'mobil',	'2018-06-15 13:57:16',	'0000-00-00 00:00:00'),
-(14,	'Daihatsu',	NULL,	'mobil',	'2018-06-15 13:57:24',	'0000-00-00 00:00:00'),
-(15,	'Hyundai',	NULL,	'mobil',	'2018-06-15 13:57:45',	'0000-00-00 00:00:00'),
 (16,	'Vario',	1,	'motor',	'2018-06-21 11:46:35',	'2018-06-21 11:46:35'),
-(17,	'BeAT FI',	1,	'motor',	'2018-06-21 07:50:27',	'0000-00-00 00:00:00'),
-(18,	'Satria FU',	5,	'motor',	'2018-06-21 07:51:58',	'0000-00-00 00:00:00');
+(17,	'BeAT FI',	1,	'motor',	'2018-06-21 07:50:27',	'2018-06-22 13:58:10'),
+(18,	'Satria FU',	3,	'motor',	'2018-06-21 07:51:58',	'2018-06-21 15:09:28'),
+(19,	'Mio Sporty',	28,	'motor',	'2018-06-21 15:10:25',	'2018-06-22 05:38:29'),
+(20,	'Nouvo Z',	28,	'motor',	'2018-06-21 15:10:37',	'2018-06-22 05:38:16'),
+(21,	'Fino Grande FI',	28,	'motor',	'2018-06-21 15:10:59',	'2018-06-22 05:38:44'),
+(22,	'KLX DTracker',	4,	'motor',	'2018-06-21 15:11:29',	'2018-06-22 13:58:16'),
+(23,	'Supra 125',	1,	'motor',	'2018-06-21 15:11:49',	'2018-06-22 13:58:24'),
+(24,	'All New PCX 150',	1,	'motor',	'2018-06-21 15:12:42',	'0000-00-00 00:00:00'),
+(26,	'Ninja 250 FI',	4,	'motor',	'2018-06-21 15:13:46',	'0000-00-00 00:00:00'),
+(27,	'Skywave',	3,	'motor',	'2018-06-21 15:13:58',	'0000-00-00 00:00:00'),
+(28,	'Yamaha',	NULL,	'motor',	'2018-06-22 05:37:48',	'0000-00-00 00:00:00');
 
 DROP TABLE IF EXISTS `configs`;
 CREATE TABLE `configs` (
@@ -71,7 +69,7 @@ INSERT INTO `configs` (`id`, `key`, `value`) VALUES
 (1,	'SITE_NAME',	'Dawenk Motor'),
 (2,	'SITE_DESC',	'Dawenk Motor, Jual Beli Motor Baru Dan Bekas'),
 (3,	'SITE_KEYWORDS',	'jual motor, beli motor, beli motor bekas'),
-(4,	'CREDENTIAL',	'{\'username\':\'dawenkmotor\',\'babacoi\':\'dawenkmotor\',\'name\': \'Dawenk\'}');
+(4,	'CREDENTIAL',	'{\'username\':\'dawenkmotor\',\'password\':\'babacoi\',\'name\': \'Dawenk\'}');
 
 DROP TABLE IF EXISTS `credits`;
 CREATE TABLE `credits` (
@@ -144,10 +142,12 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `brand_id` (`brand_id`),
   CONSTRAINT `products_ibfk_2` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `products` (`id`, `brand_id`, `description`, `condition`, `price`, `negotiable`, `sold`, `photos`, `created_at`, `updated_at`) VALUES
-(1,	17,	'',	0,	7600000.00,	1,	0,	'',	'2018-06-14 19:10:26',	'2018-06-14 19:10:26');
+(1,	18,	'<span itemprop=\"description\">stnk bpkb lengkap<br>\r\nplat b-dki jakpus<br>\r\npajak hidup<br>\r\nkaleng panjang 2020<br>\r\nmesin halus terawat<br>\r\nstater hidup halus<br>\r\nkelistrikan normal<br>\r\nkm 14rban<br>\r\nbodi  cat lis orisinil kinclong<br>\r\nban tebal<br>\r\njarang pakai gan</span>',	0,	7600000.00,	1,	0,	'[\"359aabd475b00a1d7d30a1fa9b84634c.jpg\",\"c3ffa85b9f769a340dc8d98a2fc727df.jpg\"]',	'2018-06-14 19:10:26',	'2018-06-22 12:48:19'),
+(2,	19,	'Lorem Ipsum Dolor Sit Amet<br>',	1,	4500000.00,	1,	0,	'[\"996406bcd2c3959fe563ef9336f82e7c.jpg\",\"2e2dea7ad4a9818b04d2416301eae436.jpg\"]',	'2018-06-22 12:59:20',	'0000-00-00 00:00:00'),
+(3,	23,	'$data',	1,	7800000.00,	1,	0,	'[\"6eb84abdd122a88cb5dcabaf7804000a.jpg\",\"bafbe0addbee6d8f30323558c224bf4f.jpg\",\"d14ea9e0bcfaf5277cb530104cd7c3e3.jpg\"]',	'2018-06-22 13:04:46',	'2018-06-22 13:29:28');
 
 DROP TABLE IF EXISTS `product_credits`;
 CREATE TABLE `product_credits` (
@@ -175,4 +175,4 @@ CREATE TABLE `submissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2018-06-21 09:12:48
+-- 2018-06-22 12:14:02

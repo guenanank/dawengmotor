@@ -26,7 +26,6 @@ class Product extends CI_Controller
     ];
 
     private $data_credits;
-    private $parent_brand;
     private $opt_brand;
 
     public function __construct()
@@ -42,20 +41,19 @@ class Product extends CI_Controller
           'encrypt_name' => true,
         ]);
 
-        $this->brands->before_dropdown = ['motor'];
+        $this->brands->before_dropdown = ['motor', 'parent'];
         $this->data_credits = $this->leases->with('credits')->get_all();
 
         $this->form_validation->set_rules('brand_id', 'Merek', 'required');
         $this->form_validation->set_rules('price', 'Harga', 'required');
         $this->form_validation->set_rules('description', 'Keterangan', 'required');
 
-        $this->parent_brand = $this->brands->parent();
         $this->opt_brand = $this->brands->nested_dropdown();
     }
 
     public function index()
     {
-        $parent_brand = $this->parent_brand;
+        $parent_brand = $this->brands->get_parent();
         $products = $this->products->with('brand')->get_all();
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $this->load->view('backend/header', $header);
