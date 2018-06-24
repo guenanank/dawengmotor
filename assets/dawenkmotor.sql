@@ -1,4 +1,4 @@
--- Adminer 4.6.2 MySQL dump
+-- Adminer 4.2.5 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -38,7 +38,7 @@ CREATE TABLE `brands` (
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
   KEY `sub_from` (`sub_from`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_at`) VALUES
 (1,	'Honda',	NULL,	'motor',	'2018-06-12 19:50:01',	'2018-06-13 19:33:19'),
@@ -78,6 +78,7 @@ CREATE TABLE `credits` (
   `down_payment` decimal(7,2) NOT NULL,
   `tenor` int(3) NOT NULL,
   `percentage` decimal(7,2) NOT NULL,
+  `insurance` decimal(7,2) NOT NULL,
   `tax` decimal(7,2) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -86,19 +87,19 @@ CREATE TABLE `credits` (
   CONSTRAINT `credits_ibfk_2` FOREIGN KEY (`lease_id`) REFERENCES `leases` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
-INSERT INTO `credits` (`id`, `lease_id`, `down_payment`, `tenor`, `percentage`, `tax`, `created_at`, `updated_at`) VALUES
-(1,	1,	10.00,	11,	20.00,	2.50,	'2018-06-13 20:00:11',	'2018-06-13 20:00:11'),
-(2,	1,	11.60,	11,	20.00,	2.50,	'2018-06-15 16:10:55',	'0000-00-00 00:00:00'),
-(3,	1,	12.90,	11,	20.00,	2.50,	'2018-06-15 16:11:21',	'0000-00-00 00:00:00'),
-(4,	1,	14.30,	11,	20.00,	2.50,	'2018-06-15 16:12:24',	'0000-00-00 00:00:00'),
-(5,	1,	15.60,	11,	20.00,	2.50,	'2018-06-15 16:12:46',	'0000-00-00 00:00:00'),
-(6,	1,	17.00,	11,	20.00,	2.50,	'2018-06-15 16:13:40',	'0000-00-00 00:00:00'),
-(7,	1,	18.40,	11,	20.00,	2.50,	'2018-06-15 16:14:04',	'0000-00-00 00:00:00'),
-(8,	1,	19.70,	11,	20.00,	2.50,	'2018-06-15 16:14:30',	'0000-00-00 00:00:00'),
-(9,	1,	21.10,	11,	20.00,	2.50,	'2018-06-15 16:14:53',	'0000-00-00 00:00:00'),
-(10,	1,	22.40,	11,	20.00,	2.50,	'2018-06-15 16:15:15',	'0000-00-00 00:00:00'),
-(11,	1,	23.80,	11,	20.00,	2.50,	'2018-06-15 16:15:36',	'0000-00-00 00:00:00'),
-(12,	1,	25.20,	11,	20.00,	2.50,	'2018-06-15 16:16:03',	'0000-00-00 00:00:00');
+INSERT INTO `credits` (`id`, `lease_id`, `down_payment`, `tenor`, `percentage`, `insurance`, `tax`, `created_at`, `updated_at`) VALUES
+(1,	1,	10.00,	11,	20.00,	0.00,	2.50,	'2018-06-13 20:00:11',	'2018-06-13 20:00:11'),
+(2,	1,	11.60,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:10:55',	'0000-00-00 00:00:00'),
+(3,	1,	12.90,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:11:21',	'0000-00-00 00:00:00'),
+(4,	1,	14.30,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:12:24',	'0000-00-00 00:00:00'),
+(5,	1,	15.60,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:12:46',	'0000-00-00 00:00:00'),
+(6,	1,	17.00,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:13:40',	'0000-00-00 00:00:00'),
+(7,	1,	18.40,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:14:04',	'0000-00-00 00:00:00'),
+(8,	1,	19.70,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:14:30',	'0000-00-00 00:00:00'),
+(9,	1,	21.10,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:14:53',	'0000-00-00 00:00:00'),
+(10,	1,	22.40,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:15:15',	'0000-00-00 00:00:00'),
+(11,	1,	23.80,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:15:36',	'0000-00-00 00:00:00'),
+(12,	1,	25.20,	11,	20.00,	0.00,	2.50,	'2018-06-15 16:16:03',	'0000-00-00 00:00:00');
 
 DROP TABLE IF EXISTS `leases`;
 CREATE TABLE `leases` (
@@ -111,9 +112,8 @@ CREATE TABLE `leases` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `leases` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1,	'PT. Mandiri Utama Finance (MUF)',	'',	'2018-06-13 19:56:15',	'2018-06-21 07:40:36'),
-(2,	'Mandiri Tunas Finance (MTF)',	'',	'2018-06-14 00:39:17',	'2018-06-21 07:40:28'),
-(3,	'Bussan Auto Finance (BAF)',	NULL,	'2018-06-14 00:40:13',	'2018-06-14 00:40:13');
+(1,	'PT. Mandiri Utama Finance',	'',	'2018-06-13 19:56:15',	'2018-06-24 22:37:57'),
+(3,	'Adira Finance',	'',	'2018-06-14 00:40:13',	'2018-06-24 22:37:44');
 
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
@@ -134,6 +134,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `condition` tinyint(1) NOT NULL DEFAULT '1',
   `price` decimal(15,2) unsigned NOT NULL,
+  `down_payment` decimal(15,2) unsigned NOT NULL,
   `negotiable` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `sold` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `photos` text NOT NULL,
@@ -144,10 +145,10 @@ CREATE TABLE `products` (
   CONSTRAINT `products_ibfk_2` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
-INSERT INTO `products` (`id`, `brand_id`, `description`, `condition`, `price`, `negotiable`, `sold`, `photos`, `created_at`, `updated_at`) VALUES
-(1,	18,	'<span itemprop=\"description\">stnk bpkb lengkap<br>\r\nplat b-dki jakpus<br>\r\npajak hidup<br>\r\nkaleng panjang 2020<br>\r\nmesin halus terawat<br>\r\nstater hidup halus<br>\r\nkelistrikan normal<br>\r\nkm 14rban<br>\r\nbodi  cat lis orisinil kinclong<br>\r\nban tebal<br>\r\njarang pakai gan</span>',	0,	7600000.00,	1,	0,	'[\"359aabd475b00a1d7d30a1fa9b84634c.jpg\",\"c3ffa85b9f769a340dc8d98a2fc727df.jpg\"]',	'2018-06-14 19:10:26',	'2018-06-22 12:48:19'),
-(2,	19,	'Lorem Ipsum Dolor Sit Amet<br>',	1,	4500000.00,	1,	0,	'[\"996406bcd2c3959fe563ef9336f82e7c.jpg\",\"2e2dea7ad4a9818b04d2416301eae436.jpg\"]',	'2018-06-22 12:59:20',	'0000-00-00 00:00:00'),
-(3,	23,	'$data',	1,	7800000.00,	1,	0,	'[\"6eb84abdd122a88cb5dcabaf7804000a.jpg\",\"bafbe0addbee6d8f30323558c224bf4f.jpg\",\"d14ea9e0bcfaf5277cb530104cd7c3e3.jpg\"]',	'2018-06-22 13:04:46',	'2018-06-22 13:29:28');
+INSERT INTO `products` (`id`, `brand_id`, `description`, `condition`, `price`, `down_payment`, `negotiable`, `sold`, `photos`, `created_at`, `updated_at`) VALUES
+(1,	18,	'<span itemprop=\"description\">stnk bpkb lengkap<br>\r\nplat b-dki jakpus<br>\r\npajak hidup<br>\r\nkaleng panjang 2020<br>\r\nmesin halus terawat<br>\r\nstater hidup halus<br>\r\nkelistrikan normal<br>\r\nkm 14rban<br>\r\nbodi  cat lis orisinil kinclong<br>\r\nban tebal<br>\r\njarang pakai gan</span>',	0,	7600000.00,	0.00,	1,	0,	'[\"359aabd475b00a1d7d30a1fa9b84634c.jpg\",\"c3ffa85b9f769a340dc8d98a2fc727df.jpg\"]',	'2018-06-14 19:10:26',	'2018-06-22 12:48:19'),
+(2,	19,	'Lorem Ipsum Dolor Sit Amet<br>',	1,	4500000.00,	0.00,	1,	0,	'[\"996406bcd2c3959fe563ef9336f82e7c.jpg\",\"2e2dea7ad4a9818b04d2416301eae436.jpg\"]',	'2018-06-22 12:59:20',	'0000-00-00 00:00:00'),
+(3,	23,	'$data',	1,	7800000.00,	0.00,	1,	0,	'[\"6eb84abdd122a88cb5dcabaf7804000a.jpg\",\"bafbe0addbee6d8f30323558c224bf4f.jpg\",\"d14ea9e0bcfaf5277cb530104cd7c3e3.jpg\"]',	'2018-06-22 13:04:46',	'2018-06-22 13:29:28');
 
 DROP TABLE IF EXISTS `product_credits`;
 CREATE TABLE `product_credits` (
@@ -175,4 +176,4 @@ CREATE TABLE `submissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2018-06-22 12:14:02
+-- 2018-06-24 16:52:43

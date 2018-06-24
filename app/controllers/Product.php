@@ -83,6 +83,7 @@ class Product extends CI_Controller
             }
             $data = $this->input->post();
             $data['photos'] = json_encode($filename, true);
+            debug($data);
             $this->products->insert($data);
             redirect('product');
         } else {
