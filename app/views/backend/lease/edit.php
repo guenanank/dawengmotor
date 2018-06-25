@@ -15,7 +15,7 @@
     <?php echo form_open('lease/update/' . $lease->id, 'class="form-horizontal" role="form"') ?>
     <div class="form-group">
       <?php echo form_label('Nama', 'lease-name', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <?php echo form_input(['name' => 'name', 'id' => 'lease-name', 'class' => 'form-control', 'placeholder' => 'Nama Leasing Pembayaran', 'value' => $lease->name]) ?>
       </div>
       <div class="col-xs-12 col-lg-4">
@@ -25,7 +25,7 @@
 
     <div class="form-group">
       <?php echo form_label('Keterangan', 'lease-description', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <?php echo form_textarea(['name' => 'description', 'id' => 'lease-description', 'class' => 'form-control', 'placeholder' => 'Keterangan Leasing Pembayaran', 'value' => $lease->description]) ?>
       </div>
       <div class="col-xs-12 col-lg-4">

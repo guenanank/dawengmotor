@@ -16,8 +16,8 @@
 
     <div class="form-group">
       <?php echo form_label('Merek', 'product-brand_id', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
-        <?php echo form_dropdown('brand_id', $brands, [$product->brand->id], ['class' => 'form-control']) ?>
+      <div class="col-xs-12 col-lg-8">
+        <?php echo form_dropdown('brand_id', $brands, [$product->brand->id], ['class' => 'form-control selectpicker', 'data-live-search' => 'true']) ?>
       </div>
       <div class="col-xs-12 col-lg-3">
         <div class="small text-danger">
@@ -28,7 +28,7 @@
 
     <div class="form-group">
       <?php echo form_label('Harga', 'product-price', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Rp. </span>
@@ -46,7 +46,7 @@
 
     <div class="form-group">
       <?php echo form_label('Keterangan', 'product-description', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <?php echo form_textarea(['name' => 'description', 'id' => 'product-description', 'class' => 'form-control wysihtml5', 'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)', 'value' => $product->description]) ?>
       </div>
       <div class="col-xs-12 col-lg-4">
@@ -56,7 +56,7 @@
 
     <div class="form-group">
       <?php echo form_label('Foto', 'product-photos', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <?php echo form_upload(['name' => 'photos[]', 'id' => 'product-photos', 'class' => 'form-control krajee', 'multiple' => 'true']) ?>
       </div>
       <div class="col-xs-12 col-lg-4">

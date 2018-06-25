@@ -15,8 +15,8 @@
     <?php echo form_open('credit/update/' . $credit->id, 'class="form-horizontal" role="form"') ?>
     <div class="form-group">
       <?php echo form_label('Nama Leasing', 'credit-lease_id', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
-        <?php echo form_dropdown('lease_id', $leases, $credit->lease_id, ['class' => 'form-control', 'id' => 'credit-lease_id']) ?>
+      <div class="col-xs-12 col-lg-8">
+        <?php echo form_dropdown('lease_id', $leases, $credit->lease_id, ['class' => 'form-control selectpicker', 'id' => 'credit-lease_id']) ?>
       </div>
       <div class="col-xs-12 col-lg-4">
         <div class="small text-danger"><?php echo form_error('lease_id') ?></div>
@@ -25,7 +25,7 @@
 
     <div class="form-group">
       <?php echo form_label('DP', 'credit-down_payment', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <div class="input-group mb-3">
           <?php echo form_input(['name' => 'down_payment', 'data-mask' => '00.00', 'id' => 'credit-down_payment', 'class' => 'form-control', 'placeholder' => 'Uang Muka', 'value' => $credit->down_payment]) ?>
           <div class="input-group-append">
@@ -40,7 +40,7 @@
 
     <div class="form-group">
       <?php echo form_label('Tenor', 'credit-tenor', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <div class="input-group mb-3">
           <?php echo form_input(['name' => 'tenor', 'data-mask' => '00', 'id' => 'credit-tenor', 'class' => 'form-control', 'placeholder' => 'Tenor Kredit', 'value' => $credit->tenor]) ?>
           <div class="input-group-append">
@@ -55,7 +55,7 @@
 
     <div class="form-group">
       <?php echo form_label('Persentase', 'credit-percentage', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <div class="input-group mb-3">
           <?php echo form_input(['name' => 'percentage', 'data-mask' => '00.00', 'id' => 'credit-percentage', 'class' => 'form-control', 'placeholder' => 'Persentase Kredit', 'value' => $credit->percentage]) ?>
           <div class="input-group-append">
@@ -70,7 +70,7 @@
 
     <div class="form-group">
       <?php echo form_label('Pajak', 'credit-tax', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-8">
         <div class="input-group mb-3">
           <?php echo form_input(['name' => 'tax', 'data-mask' => '00.00', 'id' => 'credit-tax', 'class' => 'form-control', 'placeholder' => 'Pajak Kredit', 'value' => $credit->tax]) ?>
           <div class="input-group-append">

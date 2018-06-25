@@ -17,6 +17,7 @@
     echo meta($default_meta);
     echo link_tag('assets/css/bootstrap.min.css');
     echo link_tag('assets/css/font-awesome.min.css');
+    echo link_tag('assets/css/bootstrap-select.min.css');
     echo link_tag('assets/css/sweetalert.min.css');
     if (!empty($styles)) {
         foreach ($styles as $style) {

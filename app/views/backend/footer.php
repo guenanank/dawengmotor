@@ -39,6 +39,7 @@ echo script_tag('assets/js/jquery-3.3.1.js');
 echo script_tag('assets/js/bootstrap.bundle.min.js');
 // Core plugin JavaScript
 echo script_tag('assets/js/jquery.easing.min.js');
+echo script_tag('assets/js/bootstrap-select.bundle.min.js');
 echo script_tag('assets/js/sweetalert.min.js');
 // Custom scripts for all pages
 if(!empty($scripts)) {
@@ -54,6 +55,8 @@ if(!empty($scripts)) {
           [0, 'desc']
         ]
       });
+
+      $('.selectpicker').selectpicker();
 
       $('body').on('click', 'a.delete', function(e) {
         e.preventDefault();

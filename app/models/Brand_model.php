@@ -28,7 +28,7 @@ class Brand_model extends MY_Model
 
     public function parent()
     {
-        $this->_database->where('sub_from IS NULL', null, false);
+        $this->_database->where('sub_from IS NULL', null, false)->order_by('created_at', 'desc');
         return $this;
     }
 
