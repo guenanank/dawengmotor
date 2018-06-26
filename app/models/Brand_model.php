@@ -14,6 +14,8 @@ class Brand_model extends MY_Model
     public $before_create = ['created_at'];
     public $before_update = ['updated_at'];
 
+    public $types = ['motor' => 'Motor', 'mobil' => 'Mobil'];
+
     public function __construct()
     {
         parent::__construct();
@@ -28,15 +30,13 @@ class Brand_model extends MY_Model
 
     public function parent()
     {
-        $this->_database->where('sub_from IS NULL', null, false)->order_by('created_at', 'desc');
+        $this->_database->where('sub_from =', '0')->order_by('created_at', 'desc');
         return $this;
     }
 
     public function get_parent()
     {
-        $dropdown = $this->dropdown('id', 'name');
-        $dropdown[null] = 'Pilih Merek Kendaraan';
-        return $dropdown;
+        return $this->dropdown('id', 'name');
     }
 
     public function nested_dropdown()
@@ -44,12 +44,11 @@ class Brand_model extends MY_Model
         $args = func_get_args();
         $this->trigger('before_dropdown');
         $parents = $this->get_parent();
-        $brands[null] = 'Pilih Unit Merek Kendaraan';
-        $query = $this->_database->where('sub_from IS NOT NULL', null, false)->get($this->_table);
+        $query = $this->_database->select('id, name, sub_from')->where('sub_from !=', '0')->get($this->_table);
         foreach ($query->result() as $brand) {
-            $brands[$brand->id] = sprintf('%s %s %s', ucwords($brand->type), $parents[$brand->sub_from], $brand->name);
+            $brands[$parents[$brand->sub_from]][$brand->id] = $brand->name;
         }
 
-        return $brands;
+        return is_empty($brands) ? [] : $brands;
     }
 }

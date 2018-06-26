@@ -16,25 +16,10 @@
     <div class="form-group">
       <?php echo form_label('Nama Leasing', 'credit-lease_id', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
       <div class="col-xs-12 col-lg-8">
-        <?php echo form_dropdown('lease_id', $leases, $credit->lease_id, ['class' => 'form-control selectpicker', 'id' => 'credit-lease_id']) ?>
+        <?php echo form_dropdown('lease_id', $leases, $credit->lease_id, ['class' => 'form-control selectpicker', 'id' => 'credit-lease_id', 'title' => 'Pilih Leasing Pembayaran']) ?>
       </div>
       <div class="col-xs-12 col-lg-4">
         <div class="small text-danger"><?php echo form_error('lease_id') ?></div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <?php echo form_label('DP', 'credit-down_payment', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
-      <div class="col-xs-12 col-lg-8">
-        <div class="input-group mb-3">
-          <?php echo form_input(['name' => 'down_payment', 'data-mask' => '00.00', 'id' => 'credit-down_payment', 'class' => 'form-control', 'placeholder' => 'Uang Muka', 'value' => $credit->down_payment]) ?>
-          <div class="input-group-append">
-            <span class="input-group-text">%</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-lg-4">
-        <div class="small text-danger"><?php echo form_error('down_payment') ?></div>
       </div>
     </div>
 
@@ -53,7 +38,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <?php echo form_label('Persentase', 'credit-percentage', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
       <div class="col-xs-12 col-lg-8">
         <div class="input-group mb-3">
@@ -66,9 +51,9 @@
       <div class="col-xs-12 col-lg-4">
         <div class="small text-danger"><?php echo form_error('percentage') ?></div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <?php echo form_label('Pajak', 'credit-tax', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
       <div class="col-xs-12 col-lg-8">
         <div class="input-group mb-3">
@@ -80,6 +65,21 @@
       </div>
       <div class="col-xs-12 col-lg-4">
         <div class="small text-danger"><?php echo form_error('tax') ?></div>
+      </div>
+    </div> -->
+
+    <div class="form-group">
+      <?php echo form_label('Asuransi', 'credit-insurance', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
+      <div class="col-xs-12 col-lg-8">
+        <div class="input-group mb-3">
+          <?php echo form_input(['name' => 'insurance', 'data-mask' => '00.00', 'id' => 'credit-insurance', 'class' => 'form-control', 'placeholder' => 'Asuransi Kredit', 'value' => $credit->insurance]) ?>
+          <div class="input-group-append">
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-lg-4">
+        <div class="small text-danger"><?php echo form_error('insurance') ?></div>
       </div>
     </div>
 

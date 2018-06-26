@@ -37,8 +37,9 @@ class Brand extends CI_Controller
     {
         $this->brands->before_dropdown = ['parent'];
         $parents = $this->brands->get_parent();
+        $types = $this->brands->types;
         $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
-        $this->load->view('backend/brand/create', compact('parents'));
+        $this->load->view('backend/brand/create', compact('parents', 'types'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);
     }
 
@@ -57,8 +58,9 @@ class Brand extends CI_Controller
         $brand = $this->brands->get($id);
         $this->brands->before_dropdown = ['parent'];
         $parents = $this->brands->get_parent();
+        $types = $this->brands->types;
         $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
-        $this->load->view('backend/brand/edit', compact('brand', 'parents'));
+        $this->load->view('backend/brand/edit', compact('brand', 'parents', 'types'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);
     }
 

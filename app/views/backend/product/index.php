@@ -23,6 +23,7 @@
           <tr>
             <th>Foto</th>
             <th>Unit</th>
+            <th>Uang Muka</th>
             <th>Harga</th>
             <th>Kontrol</th>
           </tr>
@@ -31,6 +32,7 @@
           <tr>
             <th>Foto</th>
             <th>Unit</th>
+            <th>Uang Muka</th>
             <th>Harga</th>
             <th>Kontrol</th>
           </tr>
@@ -41,11 +43,21 @@
                 ?>
             <tr>
               <td>
-                <img alt="<?php echo $product->brand->name ?>" src="<?php echo $this->image->resize($product->photos[array_rand($product->photos)], 0, 150) ?>" class="img-fluid rounded mx-auto d-block" />
+                <?php
+                  if(empty($product->photos)) {
+                      echo img(['src' => 'assets/img/no-image.jpg', 'width' => 130, 'class' => 'img-fluid rounded mx-auto d-block']);
+                  } else {
+                      $thumb = $product->photos[array_rand($product->photos)];
+                      echo img(['src' => $this->image->thumbnail($thumb, 130), 'class' => 'img-fluid rounded mx-auto d-block']);
+                  }
+                ?>
               </td>
               <td>
-                <strong><?php echo sprintf('%s %s %s', ucwords($product->brand->type), $parent_brand[$product->brand->sub_from], $product->brand->name) ?></strong><br />
+                <strong><?php echo sprintf('%s %s', $parent_brand[$product->brand->sub_from], $product->brand->name) ?></strong><br />
                 <?php echo word_limiter($product->description, 13) ?>
+              </td>
+              <td class="text-right">
+                <h4><strong class="text-primary">Rp. <?php echo $product->down_payment ?>.-</strong></h4>
               </td>
               <td class="text-right">
                 <h4><strong class="text-primary">Rp. <?php echo $product->price ?>.-</strong></h4>

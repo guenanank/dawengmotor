@@ -26,7 +26,7 @@
     <div class="form-group">
       <?php echo form_label('Sub Dari Merek', 'brand-sub_from', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
       <div class="col-xs-12 col-lg-8">
-        <?php echo form_dropdown('sub_from', $parents, [$brand->sub_from], ['class' => 'form-control selectpicker']) ?>
+        <?php echo form_dropdown('sub_from', $parents, [$brand->sub_from], ['class' => 'form-control selectpicker', 'title' => 'Pilih Merek Kendaraan']) ?>
       </div>
       <div class="col-xs-12 col-lg-4">
         <div class="small text-danger"><?php echo form_error('sub_from') ?></div>
@@ -36,10 +36,7 @@
     <div class="form-group">
       <?php echo form_label('Tipe', 'brand-type', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
       <div class="col-xs-12 col-lg-8">
-        <?php
-          $options = [null => 'Pilih Tipe Merek Kendaraan', 'motor' => 'Motor', 'mobil' => 'Mobil'];
-          echo form_dropdown('type', $options, [$brand->type], ['class' => 'form-control selectpicker'])
-        ?>
+        <?php echo form_dropdown('type', $types, [$brand->type], ['class' => 'form-control selectpicker', 'title' => 'Pilih Tipe Merek Kendaraan']) ?>
       </div>
       <div class="col-xs-12 col-lg-4">
         <div class="small text-danger"><?php echo form_error('type') ?></div>

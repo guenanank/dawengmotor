@@ -18,11 +18,55 @@ class Image
     {
         $this->ci = &get_instance();
         $this->ci->load->library('image_lib', [
-          'image_library' => 'gd2',
           'maintain_ratio' => true
         ]);
     }
 
+    public function thumbnail($image, $size = 150)
+    {
+        $original_image = sprintf('%s/original/%s', $this->directory, $image);
+        $new_image = sprintf('%s/%s', $this->directory, $image);
+        if (!file_exists($new_image)) {
+            $config['source_image'] = $original_image;
+            $config['new_image'] = $new_image;
+            $config['maintain_ratio'] = false;
+
+            list($image_width, $image_height) = getimagesize($original_image);
+            if ($image_width > $image_height) {
+                $config['width'] = $image_height;
+                $config['height'] = $image_height;
+                $config['x_axis'] = (($image_width / 2) - ($config['width'] / 2));
+            } else {
+                $config['height'] = $image_width;
+                $config['width'] = $image_width;
+                $config['y_axis'] = (($image_height / 2) - ($config['height'] / 2));
+            }
+
+            $this->ci->image_lib->initialize($config);
+            $this->ci->image_lib->crop();
+            $this->ci->image_lib->clear();
+        }
+
+        $thumbnail_dir = sprintf('thumb:%d', $size);
+        $thumbnail = sprintf('%s/%s/%s', $this->directory, $thumbnail_dir, $image);
+        if (!file_exists($thumbnail)) {
+            $this->make_directory($thumbnail_dir);
+            $this->ci->image_lib->initialize([
+              'maintain_ratio' => true,
+              'source_image' => $new_image,
+              'new_image' => $thumbnail,
+              'width' => $size,
+              'height' => $size,
+              'quality' => '70%'
+            ]);
+
+            $this->ci->image_lib->resize();
+            $this->ci->image_lib->clear();
+        }
+
+        $this->remove_image($new_image);
+        return base_url($thumbnail);
+    }
 
     /**
      * Function Resize()
@@ -55,7 +99,7 @@ class Image
         return base_url($new_image);
     }
 
-    public function crop($image, $y_axis, $x_axis, $ratio = true)
+    public function crop($image, $y_axis, $x_axis)
     {
         $dir = sprintf('crop:%dx%d', $y_axis, $x_axis);
         $original_image = sprintf('%s/original/%s', $this->directory, $image);
@@ -85,12 +129,19 @@ class Image
     {
     }
 
-    private function make_directory($name)
+    public function make_directory($name)
     {
         $dir = sprintf('%s/%s', $this->directory, $name);
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
+        return;
+    }
+
+    public function remove_image($image)
+    {
+        chmod($image, 0666);
+        unlink($image);
         return;
     }
 }

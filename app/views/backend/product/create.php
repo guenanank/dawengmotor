@@ -17,7 +17,7 @@
     <div class="form-group">
       <?php echo form_label('Merek', 'product-brand_id', ['class' => 'control-label col-xs-12 col-lg-2']) ?>
       <div class="col-xs-12 col-lg-8">
-        <?php echo form_dropdown('brand_id', $brands, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true']) ?>
+        <?php echo form_dropdown('brand_id', $brands, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Pilih Unit Merek Kendaraan']) ?>
       </div>
       <div class="col-xs-12 col-lg-3">
         <div class="small text-danger">

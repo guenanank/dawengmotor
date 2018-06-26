@@ -22,20 +22,20 @@
         <thead>
           <tr>
             <th>Nama Leasing</th>
-            <th>Uang Muka</th>
             <th>Tenor</th>
-            <th>Persentase</th>
-            <th>Pajak</th>
+            <!-- <th>Persentase</th> -->
+            <!-- <th>Pajak</th> -->
+            <th>Asuransi</th>
             <th>Kontrol</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
             <th>Nama Leasing</th>
-            <th>Uang Muka</th>
             <th>Tenor</th>
-            <th>Persentase</th>
-            <th>Pajak</th>
+            <!-- <th>Persentase</th> -->
+            <!-- <th>Pajak</th> -->
+            <th>Asuransi</th>
             <th>Kontrol</th>
           </tr>
         </tfoot>
@@ -48,16 +48,16 @@
                 <?php echo $credit->lease->name ?>
               </td>
               <td class="text-center">
-                <?php echo number_format($credit->down_payment, 1) ?>%
-              </td>
-              <td class="text-center">
                 <?php echo $credit->tenor ?> Bulan
               </td>
-              <td class="text-center">
+              <!-- <td class="text-center">
                 <?php echo number_format($credit->percentage, 1) ?>%
-              </td>
-              <td class="text-center">
+              </td> -->
+              <!-- <td class="text-center">
                 <?php echo number_format($credit->tax, 1) ?>%
+              </td> -->
+              <td class="text-center">
+                <?php echo number_format($credit->insurance, 1) ?>%
               </td>
               <td class="text-center">
                 <a href="<?php echo base_url('credit/edit/' . $credit->id) ?>" class="btn btn-info">
