@@ -20,6 +20,7 @@ class Brand extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Brand_model', 'brands');
+        $this->brands->before_dropdown = ['parent'];
 
         $this->form_validation->set_rules('name', 'Nama', 'required|max_length[127]');
         $this->form_validation->set_rules('type', 'Tipe', 'required');
@@ -35,7 +36,6 @@ class Brand extends CI_Controller
 
     public function create()
     {
-        $this->brands->before_dropdown = ['parent'];
         $parents = $this->brands->get_parent();
         $types = $this->brands->types;
         $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
@@ -56,7 +56,6 @@ class Brand extends CI_Controller
     public function edit($id = null)
     {
         $brand = $this->brands->get($id);
-        $this->brands->before_dropdown = ['parent'];
         $parents = $this->brands->get_parent();
         $types = $this->brands->types;
         $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
