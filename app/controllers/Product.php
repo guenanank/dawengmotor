@@ -47,7 +47,9 @@ class Product extends CI_Controller
         $this->data_credits = $this->leases->with('credits')->get_all();
 
         $this->form_validation->set_rules('brand_id', 'Merek', 'required');
+        $this->form_validation->set_rules('year', 'Tahun', 'required');
         $this->form_validation->set_rules('price', 'Harga', 'required');
+        $this->form_validation->set_rules('down_payment', 'Uang Muka', 'required');
         $this->form_validation->set_rules('description', 'Keterangan', 'required');
     }
 
@@ -66,8 +68,9 @@ class Product extends CI_Controller
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $brands = $this->brands->nested_dropdown();
         $leases = $this->data_credits;
+        $years = $this->products->years(2003, 2018);
         $this->load->view('backend/header', $header);
-        $this->load->view('backend/product/create', compact('brands', 'leases'));
+        $this->load->view('backend/product/create', compact('brands', 'leases', 'years'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);
     }
 

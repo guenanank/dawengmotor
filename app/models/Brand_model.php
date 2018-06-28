@@ -49,6 +49,6 @@ class Brand_model extends MY_Model
             $brands[$parents[$brand->sub_from]][$brand->id] = $brand->name;
         }
 
-        return is_empty($brands) ? [] : $brands;
+        return empty($brands) ? [] : $brands;
     }
 }

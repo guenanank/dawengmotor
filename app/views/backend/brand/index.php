@@ -47,11 +47,11 @@
                 <?php echo ucwords($brand->type) ?>
               </td>
               <td class="text-center">
-                <a href="<?php echo base_url('brand/edit/' . $brand->id) ?>" class="btn btn-info">
-                  <i class="fa fa-pencil"></i>&nbsp;Ubah
-                </a>
-                <a href="<?php echo base_url('brand/delete/' . $brand->id) ?>" class="btn btn-danger delete">
-                  <i class="fa fa-trash"></i>&nbsp;Hapus
+                <a href="<?php echo base_url('brand/edit/' . $brand->id) ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Ubah <?php echo $brand->name ?>">
+                  <i class="fa fa-edit"></i>
+                </a>&nbsp;
+                <a href="<?php echo base_url('brand/delete/' . $brand->id) ?>" class="btn btn-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus <?php echo $brand->name ?>?">
+                  <i class="fa fa-trash"></i>
                 </a>
               </td>
             </tr>
