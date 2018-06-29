@@ -10,9 +10,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Product_model extends MY_Model
 {
     public $belongs_to = ['brand'];
-    public $after_get = ['get_photo', 'get_price'];
-    public $before_create = ['set_price', 'created_at'];
-    public $before_update = ['set_price', 'updated_at'];
+    public $after_get = ['get_photo', 'get_money'];
+    public $before_create = ['set_money', 'created_at'];
+    public $before_update = ['set_money', 'updated_at'];
 
     public function __construct()
     {
@@ -29,28 +29,40 @@ class Product_model extends MY_Model
         return $row;
     }
 
-    public function get_price($row)
+    public function get_money($row)
     {
         if (is_object($row)) {
             $row->price = number_format($row->price);
+            $row->down_payment = number_format($row->down_payment);
         } else {
             $row['price'] = number_format($row['price']);
+            $row['down_payment'] = number_format($row['down_payment']);
         }
         return $row;
     }
 
-    public function set_price($row)
+    public function set_money($row)
     {
         if (is_object($row)) {
             $row->price = str_replace(',', null, $row->price);
+            $row->down_payment = str_replace(',', null, $row->down_payment);
         } else {
             $row['price'] = str_replace(',', null, $row['price']);
+            $row['down_payment'] = str_replace(',', null, $row['down_payment']);
         }
         return $row;
     }
 
-    public function years($start, $end)
+    public function years($start = null, $end = null)
     {
+        if (is_null($end)) {
+            $end = date('Y');
+        }
+
+        if (is_null($start)) {
+            $start = $end - 25;
+        }
+
         return range($end, $start);
     }
 }

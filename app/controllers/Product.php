@@ -68,7 +68,7 @@ class Product extends CI_Controller
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $brands = $this->brands->nested_dropdown();
         $leases = $this->data_credits;
-        $years = $this->products->years(2003, 2018);
+        $years = $this->products->years();
         $this->load->view('backend/header', $header);
         $this->load->view('backend/product/create', compact('brands', 'leases', 'years'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);
@@ -99,8 +99,9 @@ class Product extends CI_Controller
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $brands = $this->brands->nested_dropdown();
         $leases = $this->data_credits;
+        $years = $this->products->years();
         $this->load->view('backend/header', $header);
-        $this->load->view('backend/product/edit', compact('product', 'leases', 'brands'));
+        $this->load->view('backend/product/edit', compact('product', 'leases', 'brands', 'years'));
         $this->load->view('backend/footer', ['scripts' => $this->scripts]);
     }
 
@@ -110,14 +111,11 @@ class Product extends CI_Controller
         if ($this->form_validation->run()) {
             $filename = [];
 
-
-            // foreach ($product->photos as $photo) {
-            //     echo $photo;
-            //     unlink(sprintf('%s/%s', $this->upload_path, $photo));
-            // }
-
             if ($this->uploads->do_upload('photos')) {
                 $filename = array_column($this->uploads->data(), 'file_name');
+                foreach($product->photos as $photo) {
+                  $this->image->remove(sprintf('%s/%s', $this->upload_path, $photo));
+                }
                 // $this->image->thumbnail($filename, 2);
             } else {
                 // debug($this->uploads->display_errors());

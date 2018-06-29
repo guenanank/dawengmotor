@@ -64,7 +64,7 @@ class Image
             $this->ci->image_lib->clear();
         }
 
-        $this->remove_image($new_image);
+        $this->remove($new_image);
         return base_url($thumbnail);
     }
 
@@ -138,8 +138,14 @@ class Image
         return;
     }
 
-    public function remove_image($image)
+    public function remove($image)
     {
+        if (is_array($image)) {
+            foreach ($image as $img) {
+                $this->remove($img);
+            }
+        }
+
         chmod($image, 0666);
         unlink($image);
         return;

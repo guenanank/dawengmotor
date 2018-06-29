@@ -24,7 +24,7 @@
       </div>
       <div class="col-md-2 mb-2">
         <?php echo form_label('Tahun', 'product-year') ?>
-        <?php echo form_dropdown('year', $years, null, ['class' => 'form-control selectpicker', 'title' => 'Pilih Unit Tahun']) ?>
+        <?php echo form_dropdown('year', $years, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Pilih Unit Tahun']) ?>
         <div class="small text-danger">
           <?php echo form_error('year') ?>
         </div>
