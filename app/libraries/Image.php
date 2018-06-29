@@ -68,16 +68,6 @@ class Image
         return base_url($thumbnail);
     }
 
-    /**
-     * Function Resize()
-     *
-     * @access public
-     * @param string $image
-     * @param int $width
-     * @param int $height
-     * @return String
-     *
-     */
     public function resize($image, $width = 0, $height = 0)
     {
         $dir = sprintf('resize:%dx%d', $width, $height);
@@ -107,9 +97,13 @@ class Image
         if (!file_exists($new_image)) {
             $this->make_directory($dir);
 
+            list($image_width, $image_height) = getimagesize($original_image);
+
             $config['source_image'] = $original_image;
             $config['new_image'] = $new_image;
             $config['maintain_ratio'] = false;
+            $config['width'] = $image_width;
+            $config['height'] = $image_height;
             $config['x_axis'] = $x_axis;
             $config['y_axis'] = $y_axis;
 
@@ -121,8 +115,14 @@ class Image
         return base_url($new_image);
     }
 
-    public function rotate()
+    public function rotate($image, $angle = '90')
     {
+        $config['source_image'] = sprintf('%s/original/%s', $this->directory, $image);
+        $config['rotation_angle'] = $angle;
+        $this->ci->image_lib->initialize($config);
+        $this->ci->image_lib->rotate();
+        $this->ci->image_lib->clear();
+        return;
     }
 
     public function watermark()
