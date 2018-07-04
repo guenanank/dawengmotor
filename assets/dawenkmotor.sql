@@ -9,24 +9,6 @@ DROP DATABASE IF EXISTS `dawenkmotor`;
 CREATE DATABASE `dawenkmotor` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `dawenkmotor`;
 
-DROP TABLE IF EXISTS `applicants`;
-CREATE TABLE `applicants` (
-  `id` int(31) unsigned NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(255) NOT NULL,
-  `address` text NOT NULL,
-  `email` varchar(127) NOT NULL,
-  `phone` int(15) unsigned NOT NULL,
-  `domicile` text NOT NULL,
-  `home_status` char(15) NOT NULL,
-  `work` varchar(63) NOT NULL,
-  `work_experience` varchar(63) NOT NULL,
-  `income` decimal(15,2) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `id` int(7) unsigned NOT NULL AUTO_INCREMENT,
@@ -78,8 +60,8 @@ INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_a
 (35,	'BEAT FI SPORTY CBS',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (36,	'BEAT FI SPORTY CW',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (37,	'BEAT FI SPORTY CBS ISS',	1,	'motor',	'0000-00-00 00:00:00',	'2018-06-26 05:43:44'),
-(38,	'BEAT FISPORTY CW ESP',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(39,	'BEAT FISPORTY CWPLUS',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+(38,	'BEAT FI SPORTY CW ESP',	1,	'motor',	'0000-00-00 00:00:00',	'2018-06-26 11:55:48'),
+(39,	'BEAT FI SPORTY CW PLUS',	1,	'motor',	'0000-00-00 00:00:00',	'2018-06-26 11:55:40'),
 (40,	'BEAT FI SPORTY CBS PLUS',	1,	'motor',	'0000-00-00 00:00:00',	'2018-06-26 06:56:54'),
 (41,	'BEAT FUNKY',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (42,	'BEAT GROOVY & BOLD',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
@@ -1002,7 +984,27 @@ CREATE TABLE `credits` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 INSERT INTO `credits` (`id`, `lease_id`, `tenor`, `percentage`, `insurance`, `tax`, `created_at`, `updated_at`) VALUES
-(13,	3,	11,	0.00,	2.85,	0.00,	'2018-06-26 05:52:22',	'0000-00-00 00:00:00');
+(13,	3,	11,	0.00,	2.85,	0.00,	'2018-06-26 05:52:22',	'2018-07-04 09:04:12');
+
+DROP TABLE IF EXISTS `debtors`;
+CREATE TABLE `debtors` (
+  `id` int(31) unsigned NOT NULL AUTO_INCREMENT,
+  `number` varchar(15) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `gender` varchar(7) NOT NULL,
+  `address` text NOT NULL,
+  `email` varchar(127) NOT NULL,
+  `phone` int(15) unsigned NOT NULL,
+  `domicile` text NOT NULL,
+  `home_status` char(15) NOT NULL,
+  `work` varchar(63) NOT NULL,
+  `work_experience` varchar(63) NOT NULL,
+  `income` decimal(15,2) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 DROP TABLE IF EXISTS `leases`;
 CREATE TABLE `leases` (
@@ -1015,7 +1017,7 @@ CREATE TABLE `leases` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `leases` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1,	'PT. Mandiri Utama Finance',	'',	'2018-06-13 19:56:15',	'2018-06-24 22:37:57'),
+(1,	'PT. Mandiri Utama Finance',	'',	'2018-06-13 19:56:15',	'2018-07-04 09:22:18'),
 (3,	'ADIRA FINANCE',	'',	'2018-06-14 00:40:13',	'2018-06-26 05:36:16');
 
 DROP TABLE IF EXISTS `posts`;
@@ -1050,9 +1052,9 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 INSERT INTO `products` (`id`, `brand_id`, `year`, `description`, `condition`, `price`, `down_payment`, `negotiable`, `sold`, `photos`, `created_at`, `updated_at`) VALUES
-(9,	752,	'0000',	'kracker',	1,	34700000.00,	0.00,	1,	0,	'[\"394eab61db6f6a3f9b6dfb1c44a32562.jpg\",\"5fb00272696f792d617b35baf554ba4e.jpg\",\"980186403600a4c992cc1086f357a978.jpg\"]',	'2018-06-26 07:12:21',	'0000-00-00 00:00:00'),
-(10,	9,	'0000',	'honda airblade<br>',	1,	43750000.00,	0.00,	1,	0,	'[\"778a4a2bca3c072288ee1fc5882e5f6a.jpg\",\"bebae0fc30678a5ffcda41d607d84641.jpg\"]',	'2018-06-26 07:16:53',	'0000-00-00 00:00:00'),
-(11,	547,	'0000',	'bandit',	1,	66000000.00,	0.00,	1,	0,	'[\"bbad97e30fa90d1ca7022840a1ec0a4b.jpg\",\"93e467b1bec5eee647a071b3f3c3edb9.jpg\"]',	'2018-06-26 07:17:58',	'0000-00-00 00:00:00');
+(9,	752,	'2010',	'kracker',	1,	34700000.00,	11250000.00,	1,	0,	'[\"889a025c81505ed6b227390ad985188f.jpg\",\"f249583f752c795f531792d54e520f1f.jpg\"]',	'2018-06-26 07:12:21',	'2018-07-04 13:30:42'),
+(10,	9,	'2013',	'honda airblade<br>',	1,	43750000.00,	7.00,	1,	0,	'',	'2018-06-26 07:16:53',	'2018-06-29 12:56:36'),
+(11,	547,	'2017',	'bandit',	1,	66000000.00,	10000000.00,	1,	0,	'',	'2018-06-26 07:17:58',	'2018-06-29 13:00:53');
 
 DROP TABLE IF EXISTS `product_credits`;
 CREATE TABLE `product_credits` (
@@ -1067,17 +1069,18 @@ CREATE TABLE `product_credits` (
 
 DROP TABLE IF EXISTS `submissions`;
 CREATE TABLE `submissions` (
-  `applicant_id` int(31) unsigned NOT NULL,
+  `debtor_id` int(31) unsigned NOT NULL,
   `product_id` int(31) unsigned NOT NULL,
   `survey_schedule` varchar(127) NOT NULL,
   `reference` varchar(63) NOT NULL,
   `notes` text NOT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT '0',
-  KEY `applicant_id` (`applicant_id`),
+  `approved_when` datetime NOT NULL,
   KEY `product_id` (`product_id`),
-  CONSTRAINT `submissions_ibfk_3` FOREIGN KEY (`applicant_id`) REFERENCES `applicants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `submissions_ibfk_4` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `debtor_id` (`debtor_id`),
+  CONSTRAINT `submissions_ibfk_4` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `submissions_ibfk_6` FOREIGN KEY (`debtor_id`) REFERENCES `debtors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2018-06-26 08:34:43
+-- 2018-07-04 11:31:22

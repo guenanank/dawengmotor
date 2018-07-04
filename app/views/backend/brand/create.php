@@ -13,44 +13,34 @@
   </div>
   <div class="card-body">
     <?php echo form_open('brand/insert/') ?>
-
-    <div class="form-row">
-      <div class="col-md-10 mb-2">
+    <div class="form-row mb-2">
+      <div class="form-group col-md-10">
         <?php echo form_label('Nama', 'brand-name') ?>
-        <?php echo form_input(['name' => 'name', 'id' => 'brand-name', 'class' => 'form-control', 'placeholder' => 'Nama Merek Kendaraan', 'value' => set_value('name')]) ?>
-        <div class="small text-danger">
+        <?php echo form_input(['name' => 'name', 'id' => 'brand-name', 'class' => empty(form_error('name')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Nama Merek Kendaraan', 'value' => set_value('name')]) ?>
+        <div class="invalid-feedback">
           <?php echo form_error('name') ?>
         </div>
       </div>
     </div>
-
-    <div class="form-row">
-      <div class="col-md-10 mb-2">
+    <div class="form-row mb-2">
+      <div class="form-group col-md-10">
         <?php echo form_label('Sub Dari Merek', 'brand-sub_from') ?>
-        <?php echo form_dropdown('sub_from', $parents, null, ['class' => 'form-control selectpicker', 'title' => 'Pilih Merek Kendaraan']) ?>
-        <div class="small text-danger">
+        <?php echo form_dropdown('sub_from', $parents, null, ['class' => empty(form_error('sub_from')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'brand-sub_from', 'title' => 'Pilih Merek Kendaraan']) ?>
+        <div class="invalid-feedback">
           <?php echo form_error('sub_from') ?>
         </div>
       </div>
     </div>
-
-    <div class="form-row">
-      <div class="col-md-10 mb-2">
+    <div class="form-row mb-2">
+      <div class="form-group col-md-10">
         <?php echo form_label('Tipe', 'brand-type') ?>
-        <?php echo form_dropdown('type', $types, null, ['class' => 'form-control selectpicker', 'title' => 'Pilih Tipe Merek Kendaraan']) ?>
-        <div class="small text-danger">
+        <?php echo form_dropdown('type', $types, null, ['class' => empty(form_error('type')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'brand-type', 'title' => 'Pilih Tipe Merek Kendaraan']) ?>
+        <div class="invalid-feedback">
           <?php echo form_error('type') ?>
         </div>
       </div>
     </div>
-
-    <hr />
-    <button type="submit" class="btn btn-primary">
-      <i class="fa fa-save"></i>&nbsp;Simpan
-    </button>&nbsp;
-    <a href="<?php echo current_url() ?>" class="btn btn-secondary">
-      <i class="fa fa-refresh"></i>&nbsp;Batal
-    </a>
+    <?php include APPPATH . 'views/backend/button_form.php' ?>
     <?php echo form_close() ?>
   </div>
 </div>

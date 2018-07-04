@@ -63,6 +63,10 @@ class Product_model extends MY_Model
             $start = $end - 25;
         }
 
-        return range($end, $start);
+        foreach(range($end, $start) as $year) {
+            $years[$year] = $year;
+        }
+
+        return $years;
     }
 }

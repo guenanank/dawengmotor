@@ -22,7 +22,7 @@ class Brand extends CI_Controller
         $this->load->model('Brand_model', 'brands');
         $this->brands->before_dropdown = ['parent'];
 
-        $this->form_validation->set_rules('name', 'Nama', 'required|max_length[127]');
+        $this->form_validation->set_rules('name', 'Nama', 'required|max_length[64]');
         $this->form_validation->set_rules('type', 'Tipe', 'required');
     }
 

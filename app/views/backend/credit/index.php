@@ -15,7 +15,7 @@
 </div>
 <div class="card mt-3">
   <div class="card-header">
-    <i class="fa fa-table">&nbsp;</i>Daftar Simulasi Angsuran</div>
+    <i class="fa fa-table">&nbsp;</i>Daftar Leasing Credit</div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -140,8 +140,12 @@ class Image
 
     public function remove($image)
     {
+        if (empty($image)) {
+            return;
+        }
+
         if (is_array($image)) {
-            foreach ($image as $img) {
+            foreach (array_flatten($image) as $img) {
                 $this->remove($img);
             }
         }

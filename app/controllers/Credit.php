@@ -24,8 +24,8 @@ class Credit extends CI_Controller
         $this->load->model('Credit_model', 'credits');
 
         $this->form_validation->set_rules('lease_id', 'Nama Leasing', 'required');
-        $this->form_validation->set_rules('tenor', 'Tenor', 'required');
-        $this->form_validation->set_rules('insurance', 'Pajak', 'required');
+        $this->form_validation->set_rules('tenor', 'Tenor', 'required|numeric|max_length[100]');
+        $this->form_validation->set_rules('insurance', 'Asuransi', 'required|decimal');
     }
 
     public function index()
@@ -58,7 +58,7 @@ class Credit extends CI_Controller
 
     public function edit($id = null)
     {
-        $credit = $this->credits->get($id);
+        $credit = $this->credits->with('lease')->get($id);
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $leases = $this->leases->dropdown('id', 'name');
         $this->load->view('backend/header', $header);

@@ -21,17 +21,17 @@ class Debtor extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Debtor_model', 'debtors');
-
-        $this->form_validation->set_rules('number', 'Nomer Urut', 'required');
+        $this->form_validation->set_rules('number', 'Nomer Urut', 'required|max_length[16]');
         $this->form_validation->set_rules('gender', 'Jenis Kelamin', 'required');
-        $this->form_validation->set_rules('fullname', 'Nama Lengkap', 'required');
+        $this->form_validation->set_rules('fullname', 'Nama Lengkap', 'required|min_length[8]|max_length[256]');
         $this->form_validation->set_rules('gender', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('address', 'Alamat', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('phone', 'Telepon', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]');
+        $this->form_validation->set_rules('phone', 'Telepon', 'required|numeric|max_length[16]');
         $this->form_validation->set_rules('domicile', 'Domisili', 'required');
+        $this->form_validation->set_rules('home_status', 'Status Tempat Tinggal', 'required');
         $this->form_validation->set_rules('work', 'Pekerjaan', 'required');
-        $this->form_validation->set_rules('work_experience', 'Lama Bekerja', 'required');
+        $this->form_validation->set_rules('work_experience', 'Lama Bekerja', 'required|max_length[64]');
         $this->form_validation->set_rules('income', 'Penghasilan', 'required');
     }
 
@@ -48,6 +48,7 @@ class Debtor extends CI_Controller
     {
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $option = [
+          'number' => $this->debtors->number(),
           'gender' => $this->debtors->gender(),
           'home_status' => $this->debtors->home_status(),
           'works' => $this->debtors->works(),

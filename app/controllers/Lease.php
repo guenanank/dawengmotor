@@ -20,18 +20,17 @@ class Lease extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Lease_model', 'leases');
-
-        $this->form_validation->set_rules('name', 'Nama', 'required');
+        $this->form_validation->set_rules('name', 'Nama', 'required|max_length[128]');
+        $this->form_validation->set_rules('description', 'Keterangan', 'alpha_numeric');
     }
 
     public function index()
     {
         $leases = $this->leases->get_all();
         $header = ['title' => $this->title, 'styles' => $this->styles];
-        $scripts = $this->scripts;
         $this->load->view('backend/header', $header);
-        $this->load->view('backend/lease/index', ['leases' => $leases]);
-        $this->load->view('backend/footer', compact('scripts'));
+        $this->load->view('backend/lease/index', compact('leases'));
+        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
     }
 
     public function create()

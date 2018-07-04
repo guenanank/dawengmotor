@@ -17,11 +17,22 @@ class Debtor_model extends MY_Model
         parent::__construct();
     }
 
+    public function number()
+    {
+        $terakhir = $this->_database->select('number')->where([
+          'substring(number, 0, 2) = ' => date('y'),
+          'substring(number, 5, 2) = ' => date('m')
+        ])->order_by('number', 'desc')->limit('1')->get($this->_table)->result();
+
+        $nomer = empty($terakhir) ? 0 : substr($terakhir, 6);
+        return sprintf('%dDW%02d%04d', date('y'), date('m'), $nomer + 1);
+    }
+
     public function gender()
     {
         return [
-          'male' => 'Bpk',
-          'female' => 'Ibu'
+          'male' => 'Pria',
+          'female' => 'Wanita'
         ];
     }
 
@@ -29,9 +40,10 @@ class Debtor_model extends MY_Model
     {
         return [
           'pribadi' => 'Pribadi',
-          'kontrak' => 'Kontrak',
+          'sewa' => 'Sewa/Kontrak',
           'keluarga' => 'Keluarga',
-          'lainnya' => 'Lainnya',
+          'kantor' => 'Kantor',
+          'lainnya' => 'Lainnya'
         ];
     }
 
@@ -49,6 +61,16 @@ class Debtor_model extends MY_Model
 
     public function incomes()
     {
-        return [];
+        return [
+          '<900' => 'Lebih Kecil dari Rp. 900,000',
+          '900-1250' => 'Rp. 900,001 -  Rp. 1,250,000',
+          '1250-1750' => 'Rp. 1,250,001 - Rp. 1,750,000',
+          '1750-2500' => 'Rp. 1,750,001 - Rp. 2,500,000',
+          '2500-4000' => 'Rp. 2,500,001 - Rp. 4,000,000',
+          '4000-6000' => 'Rp. 4,000,001 - Rp. 6,000,000',
+          '6000-10000' => 'Rp. 6,000,001 - Rp. 10.000.000',
+          '10000-15000' => 'Rp. 10,000,001 - Rp. 15,000,000',
+          '>15000' => 'Lebih Besar dari Rp. 15,000,000'
+        ];
     }
 }

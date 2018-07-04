@@ -26,7 +26,7 @@ class Product extends CI_Controller
     ];
 
     private $data_credits;
-    private $upload_path = './assets/uploads/original';
+    private $upload_path = 'assets/uploads';
 
     public function __construct()
     {
@@ -36,7 +36,7 @@ class Product extends CI_Controller
         $this->load->model('Lease_model', 'leases');
 
         $this->load->library('uploads', [
-          'upload_path' => $this->upload_path,
+          'upload_path' => sprintf('%s/original', $this->upload_path),
           'allowed_types' => 'gif|jpg|png|jpeg',
           'overwrite' => true,
           'encrypt_name' => true,
@@ -47,10 +47,10 @@ class Product extends CI_Controller
         $this->data_credits = $this->leases->with('credits')->get_all();
 
         $this->form_validation->set_rules('brand_id', 'Merek', 'required');
-        $this->form_validation->set_rules('year', 'Tahun', 'required');
+        $this->form_validation->set_rules('year', 'Tahun', 'required|max_length[9999]');
         $this->form_validation->set_rules('price', 'Harga', 'required');
         $this->form_validation->set_rules('down_payment', 'Uang Muka', 'required');
-        $this->form_validation->set_rules('description', 'Keterangan', 'required');
+        $this->form_validation->set_rules('description', 'Keterangan', 'required|alpha_numeric');
     }
 
     public function index()
@@ -66,7 +66,7 @@ class Product extends CI_Controller
     public function create()
     {
         $header = ['title' => $this->title, 'styles' => $this->styles];
-        $brands = $this->brands->nested_dropdown();
+        $brands = $this->brands->custom_dropdown();
         $leases = $this->data_credits;
         $years = $this->products->years();
         $this->load->view('backend/header', $header);
@@ -97,7 +97,7 @@ class Product extends CI_Controller
     {
         $product = $this->products->with('brand')->get($id);
         $header = ['title' => $this->title, 'styles' => $this->styles];
-        $brands = $this->brands->nested_dropdown();
+        $brands = $this->brands->custom_dropdown();
         $leases = $this->data_credits;
         $years = $this->products->years();
         $this->load->view('backend/header', $header);
@@ -112,11 +112,8 @@ class Product extends CI_Controller
             $filename = [];
 
             if ($this->uploads->do_upload('photos')) {
+                $this->delete_photo($product->photos);
                 $filename = array_column($this->uploads->data(), 'file_name');
-                foreach($product->photos as $photo) {
-                  $this->image->remove(sprintf('%s/%s', $this->upload_path, $photo));
-                }
-                // $this->image->thumbnail($filename, 2);
             } else {
                 // debug($this->uploads->display_errors());
                 return $this->edit($product->id);
@@ -124,7 +121,6 @@ class Product extends CI_Controller
 
             $data = $this->input->post();
             $data['photos'] = json_encode($filename, true);
-
             $this->products->update($product->id, $data);
             redirect('product');
         } else {
@@ -136,9 +132,24 @@ class Product extends CI_Controller
     {
         $product = $this->products->get($id);
         if (!empty($product)) {
+            $this->delete_photo($product->photos);
             return $this->product->delete($product->id);
         }
 
         return false;
+    }
+
+    private function delete_photo($photos)
+    {
+        $this->load->helper('directory');
+        $map = directory_map($this->upload_path);
+        $images = [];
+        foreach (array_keys($map) as $available_path) {
+            $images[] = array_map(function($photo) use($available_path) {
+                return sprintf('%s/%s%s', $this->upload_path, $available_path, $photo);
+            }, $photos);
+        }
+
+        $this->image->remove($images);
     }
 }

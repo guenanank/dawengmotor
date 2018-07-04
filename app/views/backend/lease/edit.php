@@ -13,35 +13,25 @@
   </div>
   <div class="card-body">
     <?php echo form_open('lease/update/' . $lease->id) ?>
-
-    <div class="form-row">
-      <div class="col-md-10 mb-2">
+    <div class="form-row mb-2">
+      <div class="form-group col-md-10">
         <?php echo form_label('Nama', 'lease-name') ?>
-        <?php echo form_input(['name' => 'name', 'id' => 'lease-name', 'class' => 'form-control', 'placeholder' => 'Nama Leasing Pembayaran', 'value' => $lease->name]) ?>
-        <div class="small text-danger">
+        <?php echo form_input(['name' => 'name', 'id' => 'lease-name', 'class' => empty(form_error('name')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Nama Leasing Pembayaran', 'value' => $lease->name]) ?>
+        <div class="invalid-feedback">
           <?php echo form_error('name') ?>
         </div>
       </div>
     </div>
-
-    <div class="form-row">
-      <div class="col-md-10 mb-2">
+    <div class="form-row mb-2">
+      <div class="form-group col-md-10">
         <?php echo form_label('Keterangan', 'lease-description') ?>
-        <?php echo form_textarea(['name' => 'description', 'id' => 'lease-description', 'class' => 'form-control', 'placeholder' => 'Keterangan Leasing Pembayaran', 'value' => $lease->description]) ?>
-        <div class="small text-danger">
+        <?php echo form_textarea(['name' => 'description', 'id' => 'lease-description', 'class' => empty(form_error('description')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Keterangan Leasing Pembayaran', 'value' => $lease->description]) ?>
+        <div class="invalid-feedback">
           <?php echo form_error('description') ?>
         </div>
       </div>
     </div>
-
-    <hr />
-    <button type="submit" class="btn btn-primary">
-      <i class="fa fa-save"></i>&nbsp;Simpan
-    </button>&nbsp;
-    <a href="<?php echo current_url() ?>" class="btn btn-secondary">
-      <i class="fa fa-refresh"></i>&nbsp;Batal
-    </a>
-
+    <?php include APPPATH . 'views/backend/button_form.php' ?>
     <?php echo form_close() ?>
   </div>
 </div>

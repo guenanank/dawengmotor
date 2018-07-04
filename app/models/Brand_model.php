@@ -39,9 +39,8 @@ class Brand_model extends MY_Model
         return $this->dropdown('id', 'name');
     }
 
-    public function nested_dropdown()
+    public function custom_dropdown()
     {
-        $args = func_get_args();
         $this->trigger('before_dropdown');
         $parents = $this->get_parent();
         $query = $this->_database->select('id, name, sub_from')->where('sub_from !=', '0')->get($this->_table);
@@ -49,6 +48,7 @@ class Brand_model extends MY_Model
             $brands[$parents[$brand->sub_from]][$brand->id] = $brand->name;
         }
 
+        $brands = $this->trigger('after_dropdown', $brands);
         return empty($brands) ? [] : $brands;
     }
 }
