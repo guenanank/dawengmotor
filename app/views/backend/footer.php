@@ -39,8 +39,14 @@ echo script_tag('assets/js/jquery-3.3.1.js');
 echo script_tag('assets/js/bootstrap.bundle.min.js');
 // Core plugin JavaScript
 echo script_tag('assets/js/jquery.easing.min.js');
-echo script_tag('assets/js/bootstrap-select.bundle.min.js');
+
+echo script_tag('assets/js/jquery.dataTables.js');
+echo script_tag('assets/js/dataTables.bootstrap4.js');
+echo script_tag('assets/js/jquery.easing.min.js');
 echo script_tag('assets/js/sweetalert.min.js');
+
+echo script_tag('assets/js/bootstrap-select.bundle.min.js');
+echo script_tag('assets/js/jquery.mask.min.js');
 // Custom scripts for all pages
 if(!empty($scripts)) {
   foreach($scripts as $script) {

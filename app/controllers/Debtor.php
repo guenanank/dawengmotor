@@ -10,38 +10,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Debtor extends CI_Controller
 {
     protected $title = 'Simulasi Angsuran';
-    protected $scripts = [
-      'assets/js/jquery.dataTables.js',
-      'assets/js/dataTables.bootstrap4.js',
-      'assets/js/jquery.mask.min.js'
-    ];
-    protected $styles = ['assets/css/dataTables.bootstrap4.css'];
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('Debtor_model', 'debtors');
-        $this->form_validation->set_rules('number', 'Nomer Urut', 'required|max_length[16]');
+        $this->form_validation->set_rules('number', 'Nomer Urut', 'trim|required|max_length[16]');
         $this->form_validation->set_rules('gender', 'Jenis Kelamin', 'required');
-        $this->form_validation->set_rules('fullname', 'Nama Lengkap', 'required|min_length[8]|max_length[256]');
+        $this->form_validation->set_rules('fullname', 'Nama Lengkap', 'trim|required|min_length[8]|max_length[256]');
         $this->form_validation->set_rules('gender', 'Jenis Kelamin', 'required');
         $this->form_validation->set_rules('address', 'Alamat', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]');
-        $this->form_validation->set_rules('phone', 'Telepon', 'required|numeric|max_length[16]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]');
+        $this->form_validation->set_rules('phone', 'Telepon', 'trim|required|numeric|max_length[16]');
         $this->form_validation->set_rules('domicile', 'Domisili', 'required');
         $this->form_validation->set_rules('home_status', 'Status Tempat Tinggal', 'required');
         $this->form_validation->set_rules('work', 'Pekerjaan', 'required');
-        $this->form_validation->set_rules('work_experience', 'Lama Bekerja', 'required|max_length[64]');
+        $this->form_validation->set_rules('work_experience', 'Lama Bekerja', 'trim|required|max_length[64]');
         $this->form_validation->set_rules('income', 'Penghasilan', 'required');
     }
 
     public function index()
     {
         $debtors = $this->debtors->get_all();
-        $header = ['title' => $this->title, 'styles' => $this->styles];
-        $this->load->view('backend/header', $header);
+        $this->load->view('backend/header', ['title' => $this->title]);
         $this->load->view('backend/debtor/index', compact('debtors'));
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('backend/footer');
     }
 
     public function create()
@@ -54,9 +47,9 @@ class Debtor extends CI_Controller
           'works' => $this->debtors->works(),
           'incomes' => $this->debtors->incomes()
         ];
-        $this->load->view('backend/header', $header);
+        $this->load->view('backend/header', ['title' => $this->title]);
         $this->load->view('backend/debtor/create', $option);
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('backend/footer');
     }
 
     public function insert()
@@ -72,15 +65,14 @@ class Debtor extends CI_Controller
     public function edit($id = null)
     {
         $debtor = $this->debtors->get($id);
-        $header = ['title' => $this->title, 'styles' => $this->styles];
         $option = [
           'home_status' => $this->debtors->home_status(),
           'work' => $this->debtors->works(),
           'income' => $this->debtors->incomes()
         ];
-        $this->load->view('backend/header', $header);
+        $this->load->view('backend/header', ['title' => $this->title]);
         $this->load->view('backend/debtor/edit', $option);
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('backend/footer');
     }
 
     public function update($id = null)

@@ -16,6 +16,7 @@
 
     echo meta($default_meta);
     echo link_tag('assets/css/bootstrap.min.css');
+    echo link_tag('assets/css/dataTables.bootstrap4.css');
     echo link_tag('assets/css/font-awesome.min.css');
     echo link_tag('assets/css/bootstrap-select.min.css');
     echo link_tag('assets/css/sweetalert.min.css');
@@ -42,7 +43,7 @@
     </script>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <?php require_once 'menu.php' ?>
+  <?php include APPPATH . 'views/backend/menu.php' ?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <div class="row">

@@ -11,22 +11,18 @@ class Product extends CI_Controller
 {
     protected $title = 'Unit Produk';
     protected $scripts = [
-      'assets/js/jquery.dataTables.js',
-      'assets/js/dataTables.bootstrap4.js',
-      'assets/js/jquery.mask.min.js',
       'assets/js/gijgo.min.js',
       'assets/js/fileinput.min.js',
       'assets/js/theme.min.js'
     ];
 
     protected $styles = [
-      'assets/css/dataTables.bootstrap4.css',
       'assets/css/gijgo.min.css',
       'assets/css/fileinput.min.css'
     ];
 
     private $data_credits;
-    private $upload_path = 'assets/uploads';
+    private $file_upload;
 
     public function __construct()
     {
@@ -35,13 +31,15 @@ class Product extends CI_Controller
         $this->load->model('Brand_model', 'brands');
         $this->load->model('Lease_model', 'leases');
 
-        $this->load->library('uploads', [
-          'upload_path' => sprintf('%s/original', $this->upload_path),
-          'allowed_types' => 'gif|jpg|png|jpeg',
-          'overwrite' => true,
-          'encrypt_name' => true,
-        ]);
+        $this->config->load('file_upload', true);
+        $this->file_upload = $this->config->item('file_upload');
 
+        $this->load->library('uploads', [
+          'upload_path' => sprintf('%soriginal', $this->file_upload['path']),
+          'allowed_types' => $this->file_upload['image_allowed'],
+          'encrypt_name' => true,
+          'file_ext_tolower' => true
+        ]);
 
         $this->brands->before_dropdown = ['motor', 'parent'];
         $this->data_credits = $this->leases->with('credits')->get_all();
@@ -50,7 +48,7 @@ class Product extends CI_Controller
         $this->form_validation->set_rules('year', 'Tahun', 'required|max_length[9999]');
         $this->form_validation->set_rules('price', 'Harga', 'required');
         $this->form_validation->set_rules('down_payment', 'Uang Muka', 'required');
-        $this->form_validation->set_rules('description', 'Keterangan', 'required|alpha_numeric');
+        $this->form_validation->set_rules('description', 'Keterangan', 'required');
     }
 
     public function index()
@@ -141,12 +139,16 @@ class Product extends CI_Controller
 
     private function delete_photo($photos)
     {
+        if(empty($photos)) {
+          return;
+        }
+        
         $this->load->helper('directory');
-        $map = directory_map($this->upload_path);
+        $map = directory_map($this->file_upload['path']);
         $images = [];
         foreach (array_keys($map) as $available_path) {
             $images[] = array_map(function($photo) use($available_path) {
-                return sprintf('%s/%s%s', $this->upload_path, $available_path, $photo);
+                return sprintf('%s%s%s', $this->file_upload['path'], $available_path, $photo);
             }, $photos);
         }
 

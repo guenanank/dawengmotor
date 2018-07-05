@@ -30,7 +30,6 @@ class Image
             $config['source_image'] = $original_image;
             $config['new_image'] = $new_image;
             $config['maintain_ratio'] = false;
-
             list($image_width, $image_height) = getimagesize($original_image);
             if ($image_width > $image_height) {
                 $config['width'] = $image_height;
@@ -41,12 +40,10 @@ class Image
                 $config['width'] = $image_width;
                 $config['y_axis'] = (($image_height / 2) - ($config['height'] / 2));
             }
-
             $this->ci->image_lib->initialize($config);
             $this->ci->image_lib->crop();
             $this->ci->image_lib->clear();
         }
-
         $thumbnail_dir = sprintf('thumb:%d', $size);
         $thumbnail = sprintf('%s/%s/%s', $this->directory, $thumbnail_dir, $image);
         if (!file_exists($thumbnail)) {
@@ -75,38 +72,41 @@ class Image
         $new_image = sprintf('%s/%s/%s', $this->directory, $dir, $image);
         if (!file_exists($new_image)) {
             $this->make_directory($dir);
-
             $config['source_image'] = $original_image;
             $config['new_image'] = $new_image;
             $config['width'] = $width;
             $config['height'] = $height;
-
             $this->ci->image_lib->initialize($config);
             $this->ci->image_lib->resize();
             $this->ci->image_lib->clear();
         }
-
         return base_url($new_image);
     }
 
-    public function crop($image, $y_axis, $x_axis)
+    public function crop($image, $width, $height)
     {
-        $dir = sprintf('crop:%dx%d', $y_axis, $x_axis);
+        $dir = sprintf('crop:%dx%d', $width, $height);
         $original_image = sprintf('%s/original/%s', $this->directory, $image);
         $new_image = sprintf('%s/%s/%s', $this->directory, $dir, $image);
         if (!file_exists($new_image)) {
             $this->make_directory($dir);
-
             list($image_width, $image_height) = getimagesize($original_image);
-
             $config['source_image'] = $original_image;
             $config['new_image'] = $new_image;
             $config['maintain_ratio'] = false;
-            $config['width'] = $image_width;
-            $config['height'] = $image_height;
-            $config['x_axis'] = $x_axis;
-            $config['y_axis'] = $y_axis;
-
+            $source_ratio = $image_width / $image_height;
+            $ratio = $width / $height;
+            if ($ratio > $source_ratio || (($ratio == 1) && $source_ratio < 1)) {
+                $config['width'] = $image_width;
+                $config['height'] = round($image_width / $ratio);
+                $config['y_axis'] = round(($image_height - $config['height']) / 2);
+                $config['x_axis'] = 0;
+            } else {
+                $config['width'] = round($image_height * $ratio);
+                $config['height'] = $image_height;
+                $config['y_axis'] = round(($image_width - $config['width']) / 2);
+                $config['x_axis'] = 0;
+            }
             $this->ci->image_lib->initialize($config);
             $this->ci->image_lib->crop();
             $this->ci->image_lib->clear();

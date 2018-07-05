@@ -10,11 +10,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Brand extends CI_Controller
 {
     protected $title = 'Merek Kendaraan';
-    protected $scripts = [
-      'assets/js/jquery.dataTables.js',
-      'assets/js/dataTables.bootstrap4.js'
-    ];
-    protected $styles = ['assets/css/dataTables.bootstrap4.css'];
 
     public function __construct()
     {
@@ -22,25 +17,25 @@ class Brand extends CI_Controller
         $this->load->model('Brand_model', 'brands');
         $this->brands->before_dropdown = ['parent'];
 
-        $this->form_validation->set_rules('name', 'Nama', 'required|max_length[64]');
+        $this->form_validation->set_rules('name', 'Nama', 'trim|required|max_length[64]');
         $this->form_validation->set_rules('type', 'Tipe', 'required');
     }
 
     public function index()
     {
         $brands = $this->brands->with('parent')->get_all();
-        $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
+        $this->load->view('backend/header', ['title' => $this->title]);
         $this->load->view('backend/brand/index', compact('brands'));
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('backend/footer');
     }
 
     public function create()
     {
         $parents = $this->brands->get_parent();
         $types = $this->brands->types;
-        $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
+        $this->load->view('backend/header', ['title' => $this->title]);
         $this->load->view('backend/brand/create', compact('parents', 'types'));
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('backend/footer');
     }
 
     public function insert()
@@ -58,9 +53,9 @@ class Brand extends CI_Controller
         $brand = $this->brands->get($id);
         $parents = $this->brands->get_parent();
         $types = $this->brands->types;
-        $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
+        $this->load->view('backend/header', ['title' => $this->title]);
         $this->load->view('backend/brand/edit', compact('brand', 'parents', 'types'));
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('backend/footer');
     }
 
     public function update($id = null)
