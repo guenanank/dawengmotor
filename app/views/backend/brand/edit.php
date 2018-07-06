@@ -25,7 +25,17 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Sub Dari Merek', 'brand-sub_from') ?>
-        <?php echo form_dropdown('sub_from', $parents, [$brand->sub_from], ['class' => empty(form_error('sub_from')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'brand-sub_from', 'title' => 'Pilih Merek Kendaraan']) ?>
+        <select name="sub_from" class="form-control selectpicker<?php echo empty(form_error('sub_from')) ? null : ' is-invalid' ?>" id="brand-sub_from" title="Pilih Merek Kendaraan">
+        <?php
+          foreach ($parents as $key => $value) {
+            ?>
+              <option value="<?php echo $key ?>" <?php echo set_select('sub_from', $key, $key == $brand->sub_from ? true : false) ?>>
+                <?php echo $value ?>
+              </option>
+            <?php
+          }
+        ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('sub_from') ?>
         </div>
@@ -34,7 +44,17 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Tipe', 'brand-type') ?>
-        <?php echo form_dropdown('type', $types, [$brand->type], ['class' => empty(form_error('type')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'brand-type', 'title' => 'Pilih Tipe Merek Kendaraan']) ?>
+        <select name="type" class="form-control selectpicker<?php echo empty(form_error('type')) ? null : ' is-invalid' ?>" id="brand-type" title="Pilih Tipe Merek Kendaraan">
+        <?php
+          foreach ($types as $key => $value) {
+            ?>
+              <option value="<?php echo $key ?>" <?php echo set_select('type', $key, $key == $brand->type ? true : false) ?>>
+                <?php echo $value ?>
+              </option>
+            <?php
+          }
+        ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('type') ?>
         </div>

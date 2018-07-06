@@ -39,7 +39,7 @@
           ?>
     <div class="col-lg-4 col-md-6 mb-4">
       <div class="card h-100">
-        <a href="<?php echo base_url('item/preview/' . $product->id) ?>">
+        <a href="<?php echo base_url('preview/' . $product->id) ?>">
           <?php
                       $photo = $product->photos[array_rand($product->photos)];
                       echo img(['src' => $this->image->crop($photo, 700, 400), 'class' => 'card-img-top']);
@@ -47,7 +47,7 @@
         </a>
         <div class="card-body">
           <h4 class="card-title">
-                  <a href="<?php echo base_url('item/preview/' . $product->id) ?>">
+                  <a href="<?php echo base_url('preview/' . $product->id) ?>">
                     <?php echo $product->brand->name ?>
                   </a>
                 </h4>

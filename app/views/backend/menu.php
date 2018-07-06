@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-  <a class="navbar-brand" href="<?php echo base_url('backend') ?>">Dawenk Motor</a>
+  <a class="navbar-brand" href="<?php echo base_url('dashboard') ?>">Dawenk Motor</a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-        <a class="nav-link" href="<?php echo base_url('backend') ?>">
+        <a class="nav-link" href="<?php echo base_url('dashboard') ?>">
           <i class="fa fa-fw fa-home"></i>
           <span class="nav-link-text">Halaman Utama</span>
         </a>

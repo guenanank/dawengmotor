@@ -67,8 +67,17 @@
     </div>
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
-        <?php echo form_label('Status Rumah', 'debtor-home_status') ?>
-        <?php echo form_dropdown('home_status', $home_status, [$debtor->home_status], ['class' => empty(form_error('home_status')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'debtor-home_status', 'title' => 'Pilih Status Tempat Tinggal/Rumah']) ?>
+        <select name="home_status" class="form-control selectpicker<?php echo empty(form_error('home_status')) ? null : ' is-invalid' ?>" id="debtor-home_status" title="Pilih Status Tempat Tinggal/Rumah">
+          <?php
+            foreach($home_status as $key => $value) {
+              ?>
+                <option value="<?php echo $key ?>" <?php echo set_select('home_status', $key, $key == $debtor->home_status ? true : false) ?>>
+                  <?php echo $value ?>
+                </option>
+              <?php
+            }
+          ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('home_status') ?>
         </div>
@@ -77,7 +86,17 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Pekerjaan', 'debtor-work') ?>
-        <?php echo form_dropdown('work', $works, [$debtor->work], ['class' => empty(form_error('work')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'debtor-work', 'title' => 'Pilih Pekerjaan Debitur']) ?>
+        <select name="work" class="form-control selectpicker<?php echo empty(form_error('work')) ? null : ' is-invalid' ?>" id="debtor-work" title="Pilih Pekerjaan Debitur">
+          <?php
+            foreach($works as $key => $value) {
+              ?>
+                <option value="<?php echo $key ?>" <?php echo set_select('work', $key, $key == $debtor->work ? true : false) ?>>
+                  <?php echo $value ?>
+                </option>
+              <?php
+            }
+          ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('work') ?>
         </div>
@@ -95,7 +114,17 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Pemasukan', 'debtor-income') ?>
-        <?php echo form_dropdown('income', $incomes, [$debtor->income], ['class' => empty(form_error('income')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'debtor-income', 'title' => 'Pilih Pemasukan Debitur']) ?>
+        <select name="income" class="form-control selectpicker<?php echo empty(form_error('income')) ? null : ' is-invalid' ?>" id="debtor-income" title="Pilih Pemasukan Debitur">
+          <?php
+            foreach($incomes as $key => $value) {
+              ?>
+                <option value="<?php echo $key ?>" <?php echo set_select('income', $key, $key == $debtor->income ? true : false) ?>>
+                  <?php echo $value ?>
+                </option>
+              <?php
+            }
+          ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('income') ?>
         </div>

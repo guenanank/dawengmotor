@@ -12,7 +12,7 @@
     <i class="fa fa-plus">&nbsp;</i>Tambah Merek Kendaraan
   </div>
   <div class="card-body">
-    <?php echo form_open('brand/insert/') ?>
+    <?php echo form_open('brand/insert') ?>
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Nama', 'brand-name') ?>
@@ -25,7 +25,17 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Sub Dari Merek', 'brand-sub_from') ?>
-        <?php echo form_dropdown('sub_from', $parents, null, ['class' => empty(form_error('sub_from')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'brand-sub_from', 'title' => 'Pilih Merek Kendaraan']) ?>
+        <select name="sub_from" class="form-control selectpicker<?php echo empty(form_error('sub_from')) ? null : ' is-invalid' ?>" id="brand-sub_from" title="Pilih Merek Kendaraan">
+        <?php
+          foreach ($parents as $key => $value) {
+            ?>
+              <option value="<?php echo $key ?>" <?php echo set_select('sub_from', $key) ?>>
+                <?php echo $value ?>
+              </option>
+            <?php
+          }
+        ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('sub_from') ?>
         </div>
@@ -34,7 +44,17 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Tipe', 'brand-type') ?>
-        <?php echo form_dropdown('type', $types, null, ['class' => empty(form_error('type')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'brand-type', 'title' => 'Pilih Tipe Merek Kendaraan']) ?>
+        <select name="type" class="form-control selectpicker<?php echo empty(form_error('type')) ? null : ' is-invalid' ?>" id="brand-type" title="Pilih Tipe Merek Kendaraan">
+        <?php
+          foreach ($types as $key => $value) {
+            ?>
+              <option value="<?php echo $key ?>" <?php echo set_select('type', $key) ?>>
+                <?php echo $value ?>
+              </option>
+            <?php
+          }
+        ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('type') ?>
         </div>

@@ -25,4 +25,11 @@ class Homepage extends CI_Controller
         $this->load->view('footer');
     }
 
+    public function preview($product_id)
+    {
+        $product = $this->products->with('brand')->get($product_id);
+        $this->load->view('header');
+        $this->load->view('item', compact('product'));
+        $this->load->view('footer');
+    }
 }

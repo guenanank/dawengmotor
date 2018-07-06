@@ -30,7 +30,7 @@ class Image
             $config['source_image'] = $original_image;
             $config['new_image'] = $new_image;
             $config['maintain_ratio'] = false;
-            list($image_width, $image_height) = getimagesize($original_image);
+            list($image_width, $image_height) = @getimagesize($original_image);
             if ($image_width > $image_height) {
                 $config['width'] = $image_height;
                 $config['height'] = $image_height;
@@ -90,7 +90,7 @@ class Image
         $new_image = sprintf('%s/%s/%s', $this->directory, $dir, $image);
         if (!file_exists($new_image)) {
             $this->make_directory($dir);
-            list($image_width, $image_height) = getimagesize($original_image);
+            list($image_width, $image_height) = @getimagesize($original_image);
             $config['source_image'] = $original_image;
             $config['new_image'] = $new_image;
             $config['maintain_ratio'] = false;
@@ -150,8 +150,10 @@ class Image
             }
         }
 
-        chmod($image, 0666);
-        unlink($image);
+        if (file_exists($image)) {
+            chmod($image, 0666);
+            unlink($image);
+        }
         return;
     }
 }

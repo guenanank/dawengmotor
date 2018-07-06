@@ -16,14 +16,42 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-8">
         <?php echo form_label('Merek', 'product-brand_id') ?>
-        <?php echo form_dropdown('brand_id', $brands, [$product->brand->id], ['class' => empty(form_error('brand_id')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'data-live-search' => 'true', 'title' => 'Pilih Unit Merek Kendaraan']) ?>
+        <select name="brand_id" class="form-control selectpicker<?php echo empty(form_error('brand_id')) ? null : ' is-invalid' ?>" id="product-brand_id" data-live-search="true" title="Pilih Unit Merek Kendaraan">
+          <?php
+            foreach ($brands as $parent => $brand) {
+              ?>
+              <optgroup label="<?php echo $parent ?>">
+              <?php
+              foreach($brand as $k => $v) {
+                ?>
+                <option value="<?php echo $k ?>" <?php echo set_select('brand_id', $k, $k == $product->brand->id ? true : false) ?>>
+                  <?php echo $v ?>
+                </option>
+                <?php
+              }
+              ?>
+            </optgroup>
+              <?php
+            }
+          ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('brand_id') ?>
         </div>
       </div>
       <div class="form-group col-md-2">
         <?php echo form_label('Tahun', 'product-year') ?>
-        <?php echo form_dropdown('year', $years, [$product->year], ['class' => empty(form_error('year')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'data-live-search' => 'true', 'title' => 'Pilih Unit Tahun']) ?>
+        <select name="year" class="form-control selectpicker<?php echo empty(form_error('year')) ? null : ' is-invalid' ?>" id="product-year" data-live-search="true" title="Pilih Unit Tahun">
+        <?php
+          foreach ($years as $key => $value) {
+            ?>
+              <option value="<?php echo $key ?>" <?php echo set_select('year', $key, $key == $product->year ? true : false) ?>>
+                <?php echo $value ?>
+              </option>
+            <?php
+          }
+        ?>
+        </select>
         <div class="invalid-feedback">
           <?php echo form_error('year') ?>
         </div>
@@ -58,7 +86,7 @@
     <div class="form-row mb-2">
       <div class="form-group col-md-10">
         <?php echo form_label('Keterangan', 'product-description') ?>
-        <?php echo form_textarea(['name' => 'description', 'id' => 'product-description', 'class' => empty(form_error('description')) ? 'form-control wysihtml5' : 'form-control wysihtml5 is-invalid', 'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)', 'value' => $product->description]) ?>
+        <?php echo form_textarea(['name' => 'description', 'id' => 'product-description', 'class' => empty(form_error('description')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)', 'value' => $product->description]) ?>
         <div class="invalid-feedback">
           <?php echo form_error('description') ?>
         </div>

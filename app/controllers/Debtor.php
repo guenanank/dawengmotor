@@ -39,7 +39,6 @@ class Debtor extends CI_Controller
 
     public function create()
     {
-        $header = ['title' => $this->title, 'styles' => $this->styles];
         $option = [
           'number' => $this->debtors->number(),
           'gender' => $this->debtors->gender(),

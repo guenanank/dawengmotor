@@ -3,9 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Dawenk Motor
-    <?php echo empty($title) ? null : ' - ' . $title ?>
-  </title>
+  <title>Dawenk Motor <?php echo empty($title) ? null : ' - ' . $title ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('asset/images/favicon.ico') ?>" />
   <?php
@@ -19,6 +17,7 @@
 
     echo meta($default_meta);
     echo link_tag('assets/css/bootstrap.min.css');
+    echo link_tag('assets/css/font-awesome.min.css');
     echo link_tag('assets/css/dawenkmotor.css');
     if (!empty($styles)) {
         foreach ($styles as $style) {

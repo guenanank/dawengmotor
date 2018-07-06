@@ -11,13 +11,11 @@ class Product extends CI_Controller
 {
     protected $title = 'Unit Produk';
     protected $scripts = [
-      'assets/js/gijgo.min.js',
       'assets/js/fileinput.min.js',
       'assets/js/theme.min.js'
     ];
 
     protected $styles = [
-      'assets/css/gijgo.min.css',
       'assets/css/fileinput.min.css'
     ];
 
@@ -131,7 +129,7 @@ class Product extends CI_Controller
         $product = $this->products->get($id);
         if (!empty($product)) {
             $this->delete_photo($product->photos);
-            return $this->product->delete($product->id);
+            return $this->products->delete($product->id);
         }
 
         return false;
@@ -142,7 +140,7 @@ class Product extends CI_Controller
         if(empty($photos)) {
           return;
         }
-        
+
         $this->load->helper('directory');
         $map = directory_map($this->file_upload['path']);
         $images = [];
