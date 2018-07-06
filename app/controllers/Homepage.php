@@ -14,14 +14,19 @@ class Homepage extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Product_model', 'products');
+        // $this->load->model('Product_model', 'products');
+        $this->load->library('Repositories');
     }
 
     public function index()
     {
-        $products = $this->products->with('brand')->limit(10)->get_many_by('sold', false);
+        $data = [
+          'sliders' => $this->repositories->sliders(),
+          'latest_products' => $this->repositories->latest_products(),
+        ];
+
         $this->load->view('header');
-        $this->load->view('homepage', compact('products'));
+        $this->load->view('homepage', $data);
         $this->load->view('footer');
     }
 

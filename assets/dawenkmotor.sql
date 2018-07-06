@@ -5,8 +5,6 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP DATABASE IF EXISTS `dawenkmotor`;
-CREATE DATABASE `dawenkmotor` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `dawenkmotor`;
 
 DROP TABLE IF EXISTS `brands`;
@@ -271,7 +269,6 @@ INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_a
 (246,	'VERZA 150 CW MMC',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (247,	'VERZA 150 SP MMC',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (248,	'VERZA 150 SW',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(249,	'WIN',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (250,	'WIN',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (251,	'WIN MCB',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (252,	'ZN 110D',	1,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
@@ -650,8 +647,8 @@ INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_a
 (635,	'SATRIA RU 120 LSCM',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (636,	'SATRIA RU 120 LU',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (637,	'SATRIA WHITE FIGHTER',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(638,	'SATRIA  FU150 SCD2A',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(639,	'SATRIA  FU150SCD2B',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+(638,	'SATRIA  FU150 SCD2A',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+(639,	'SATRIA  FU150SCD2B',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (640,	'SHOGUN',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (641,	'SHOGUN 125',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (642,	'SHOGUN 125',	3,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
@@ -884,7 +881,7 @@ INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_a
 (869,	'W175',	4,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (870,	'KLX 150 BF SE EXT',	4,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (871,	'NINJA 250 SL',	4,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(872,	'NINJA 250 ABS SE LTD',	4,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+(872,	'NINJA 250 ABS SE LTD',	4,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (873,	'BEVERLY CRUISER 250',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (874,	'CORSA',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (875,	'DNA VIAGINO',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
@@ -952,7 +949,8 @@ INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_a
 (937,	'X-9 TOURING',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (938,	'X9-180 4T',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (939,	'X-EVO 250',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(940,	'ZIP 100',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00');
+(940,	'ZIP 100',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `name` = VALUES(`name`), `sub_from` = VALUES(`sub_from`), `type` = VALUES(`type`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
 
 DROP TABLE IF EXISTS `configs`;
 CREATE TABLE `configs` (
@@ -966,7 +964,8 @@ INSERT INTO `configs` (`id`, `key`, `value`) VALUES
 (1,	'SITE_NAME',	'Dawenk Motor'),
 (2,	'SITE_DESC',	'Dawenk Motor, Jual Beli Motor Baru Dan Bekas'),
 (3,	'SITE_KEYWORDS',	'jual motor, beli motor, beli motor bekas'),
-(4,	'CREDENTIAL',	'{\'username\':\'dawenkmotor\',\'password\':\'babacoi\',\'name\': \'Dawenk\'}');
+(4,	'CREDENTIAL',	'{\'username\':\'dawenkmotor\',\'password\':\'babacoi\',\'name\': \'Dawenk\'}')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `key` = VALUES(`key`), `value` = VALUES(`value`);
 
 DROP TABLE IF EXISTS `credits`;
 CREATE TABLE `credits` (
@@ -981,10 +980,11 @@ CREATE TABLE `credits` (
   PRIMARY KEY (`id`),
   KEY `lease_id` (`lease_id`),
   CONSTRAINT `credits_ibfk_2` FOREIGN KEY (`lease_id`) REFERENCES `leases` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 INSERT INTO `credits` (`id`, `lease_id`, `tenor`, `percentage`, `insurance`, `tax`, `created_at`, `updated_at`) VALUES
-(13,	3,	11,	0.00,	2.85,	0.00,	'2018-06-26 05:52:22',	'2018-07-04 09:04:12');
+(14,	3,	23,	0.00,	2.45,	0.00,	'2018-07-06 06:42:32',	'0000-00-00 00:00:00')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `lease_id` = VALUES(`lease_id`), `tenor` = VALUES(`tenor`), `percentage` = VALUES(`percentage`), `insurance` = VALUES(`insurance`), `tax` = VALUES(`tax`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
 
 DROP TABLE IF EXISTS `debtors`;
 CREATE TABLE `debtors` (
@@ -1018,12 +1018,14 @@ CREATE TABLE `leases` (
 
 INSERT INTO `leases` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
 (1,	'PT. Mandiri Utama Finance',	'',	'2018-06-13 19:56:15',	'2018-07-04 09:22:18'),
-(3,	'ADIRA FINANCE',	'',	'2018-06-14 00:40:13',	'2018-06-26 05:36:16');
+(3,	'ADIRA FINANCE',	'',	'2018-06-14 00:40:13',	'2018-06-26 05:36:16')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `name` = VALUES(`name`), `description` = VALUES(`description`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
 
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
   `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(127) NOT NULL,
+  `slug` varchar(127) NOT NULL,
   `content` text NOT NULL,
   `tags` text NOT NULL,
   `created_at` datetime NOT NULL,
@@ -1049,12 +1051,11 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `brand_id` (`brand_id`),
   CONSTRAINT `products_ibfk_2` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 INSERT INTO `products` (`id`, `brand_id`, `year`, `description`, `condition`, `price`, `down_payment`, `negotiable`, `sold`, `photos`, `created_at`, `updated_at`) VALUES
-(9,	752,	'2010',	'kracker',	1,	34700000.00,	11250000.00,	1,	0,	'[\"889a025c81505ed6b227390ad985188f.jpg\",\"f249583f752c795f531792d54e520f1f.jpg\"]',	'2018-06-26 07:12:21',	'2018-07-04 13:30:42'),
-(10,	9,	'2013',	'honda airblade<br>',	1,	43750000.00,	7.00,	1,	0,	'',	'2018-06-26 07:16:53',	'2018-06-29 12:56:36'),
-(11,	547,	'2017',	'bandit',	1,	66000000.00,	10000000.00,	1,	0,	'',	'2018-06-26 07:17:58',	'2018-06-29 13:00:53');
+(14,	232,	'2017',	'vario',	1,	19700000.00,	1500000.00,	1,	0,	'[\"938bf172a1d4ccc406164f8836d4e986.jpg\",\"9adfa36f79f98afad75c0e1709e790dc.jpg\"]',	'2018-07-06 10:49:40',	'0000-00-00 00:00:00')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `brand_id` = VALUES(`brand_id`), `year` = VALUES(`year`), `description` = VALUES(`description`), `condition` = VALUES(`condition`), `price` = VALUES(`price`), `down_payment` = VALUES(`down_payment`), `negotiable` = VALUES(`negotiable`), `sold` = VALUES(`sold`), `photos` = VALUES(`photos`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
 
 DROP TABLE IF EXISTS `product_credits`;
 CREATE TABLE `product_credits` (
@@ -1083,4 +1084,4 @@ CREATE TABLE `submissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2018-07-04 11:31:22
+-- 2018-07-06 13:51:35

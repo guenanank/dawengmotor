@@ -1,4 +1,4 @@
-<div id="carouselIndicators" class="carousel slide my-4" data-ride="carousel">
+<div id="carouselIndicators" class="carousel slide my-4 d-none d-md-block" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselIndicators" data-slide-to="1"></li>
@@ -6,7 +6,7 @@
   </ol>
   <div class="carousel-inner" role="listbox">
     <?php
-      foreach ($products as $index => $product) {
+      foreach ($sliders as $index => $product) {
         ?>
       <div class="carousel-item <?php echo $index == 0 ? 'active' : null ?>">
         <?php
@@ -35,7 +35,7 @@
 <div class="row">
 
   <?php
-        foreach ($products as $product) {
+        foreach ($latest_products as $product) {
           ?>
     <div class="col-lg-4 col-md-6 mb-4">
       <div class="card h-100">
