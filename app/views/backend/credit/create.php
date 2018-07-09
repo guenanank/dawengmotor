@@ -14,7 +14,7 @@
   <div class="card-body">
     <?php echo form_open('credit/insert/') ?>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Nama Leasing', 'credit-lease_id') ?>
         <?php echo form_dropdown('lease_id', $leases, null, ['class' => empty(form_error('lease_id')) ? 'form-control selectpicker' : 'form-control selectpicker is-invalid', 'id' => 'credit-lease_id', 'title' => 'Pilih Leasing Pembayaran']) ?>
         <div class="invalid-feedback">
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Tenor', 'credit-tenor') ?>
         <div class="input-group">
           <?php echo form_input(['name' => 'tenor', 'data-mask' => '00', 'id' => 'credit-tenor', 'class' => empty(form_error('tenor')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Tenor Kredit', 'value' => set_value('tenor')]) ?>
@@ -38,7 +38,7 @@
     </div>
 
     <!-- <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Persentase', 'credit-percentage') ?>
         <div class="input-group">
           <?php echo form_input(['name' => 'percentage', 'data-mask' => '00.00', 'id' => 'credit-percentage', 'class' => empty(form_error('percentage')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Persentase Kredit', 'value' => set_value('percentage')]) ?>
@@ -53,7 +53,7 @@
     </div> -->
 
     <!-- <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Pajak', 'credit-tax') ?>
         <div class="input-group">
           <?php echo form_input(['name' => 'tax', 'data-mask' => '00.00', 'id' => 'credit-tax', 'class' => empty(form_error('tax')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Pajak Kredit', 'value' => set_value('tax')]) ?>
@@ -68,7 +68,7 @@
     </div> -->
 
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Asuransi', 'credit-insurance') ?>
         <div class="input-group">
           <?php echo form_input(['name' => 'insurance', 'data-mask' => '00.00', 'id' => 'credit-insurance', 'class' => empty(form_error('insurance')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Asuransi Kredit', 'value' => set_value('insurance')]) ?>

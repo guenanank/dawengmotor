@@ -12,7 +12,8 @@ class Product extends CI_Controller
     protected $title = 'Unit Produk';
     protected $scripts = [
       'assets/js/fileinput.min.js',
-      'assets/js/theme.min.js'
+      'assets/js/theme.min.js',
+      'assets/js/backend.js',
     ];
 
     protected $styles = [
@@ -46,6 +47,7 @@ class Product extends CI_Controller
         $this->form_validation->set_rules('year', 'Tahun', 'required|max_length[9999]');
         $this->form_validation->set_rules('price', 'Harga', 'required');
         $this->form_validation->set_rules('down_payment', 'Uang Muka', 'required');
+        $this->form_validation->set_rules('administration', 'Administrasi', 'required');
         $this->form_validation->set_rules('description', 'Keterangan', 'required');
     }
 
@@ -137,15 +139,15 @@ class Product extends CI_Controller
 
     private function delete_photo($photos)
     {
-        if(empty($photos)) {
-          return;
+        if (empty($photos)) {
+            return;
         }
 
         $this->load->helper('directory');
         $map = directory_map($this->file_upload['path']);
         $images = [];
         foreach (array_keys($map) as $available_path) {
-            $images[] = array_map(function($photo) use($available_path) {
+            $images[] = array_map(function ($photo) use ($available_path) {
                 return sprintf('%s%s%s', $this->file_upload['path'], $available_path, $photo);
             }, $photos);
         }

@@ -14,7 +14,7 @@
   <div class="card-body">
     <?php echo form_open('debtor/insert/', null, ['number' => $number]) ?>
     <div class="form-row mb-2">
-      <div class="form-group col-md-7">
+      <div class="form-group col-md-9">
         <?php echo form_label('Nama Lengkap', 'debtor-fullname') ?>
         <?php echo form_input(['name' => 'fullname', 'id' => 'debtor-fullname', 'class' => empty(form_error('fullname')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Nama Lengkap Debitur', 'value' => set_value('fullname')]) ?>
         <div class="invalid-feedback">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Alamat', 'debtor-address') ?>
         <?php echo form_textarea(['name' => 'address', 'id' => 'debtor-address', 'class' => empty(form_error('address')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Alamat Sesuai KTP', 'value' => set_value('address')]) ?>
         <div class="invalid-feedback">
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Email', 'debtor-email') ?>
         <?php echo form_input(['name' => 'email', 'id' => 'debtor-email', 'class' => empty(form_error('email')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Email Debitur', 'value' => set_value('email')]) ?>
         <div class="invalid-feedback">
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('No Telepon', 'debtor-phone') ?>
         <?php echo form_input(['name' => 'phone', 'id' => 'debtor-phone', 'class' => empty(form_error('phone')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Nomer Telepon Debitur', 'value' => set_value('phone')]) ?>
         <div class="invalid-feedback">
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Domisili', 'debtor-domicile') ?>
         <?php echo form_textarea(['name' => 'domicile', 'id' => 'debtor-domicile', 'class' => empty(form_error('domicile')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Alamat Domisili', 'value' => set_value('domicile')]) ?>
         <div class="invalid-feedback">
@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Status Rumah', 'debtor-home_status') ?>
         <select name="home_status" class="form-control selectpicker<?php echo empty(form_error('home_status')) ? null : ' is-invalid' ?>" id="debtor-home_status" title="Pilih Status Tempat Tinggal/Rumah">
           <?php
@@ -85,7 +85,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Pekerjaan', 'debtor-work') ?>
         <select name="work" class="form-control selectpicker<?php echo empty(form_error('work')) ? null : ' is-invalid' ?>" id="debtor-work" title="Pilih Pekerjaan Debitur">
           <?php
@@ -104,7 +104,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Lama Bekerja', 'debtor-work_experience') ?>
         <?php echo form_input(['name' => 'work_experience', 'id' => 'debtor-work_experience', 'class' => empty(form_error('work_experience')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Lama Bekerja/Usaha Debitur, Contoh: 1 Tahun', 'value' => set_value('work_experience')]) ?>
         <div class="invalid-feedback">
@@ -113,7 +113,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Pemasukan', 'debtor-income') ?>
         <select name="income" class="form-control selectpicker<?php echo empty(form_error('income')) ? null : ' is-invalid' ?>" id="debtor-income" title="Pilih Pemasukan Debitur">
           <?php

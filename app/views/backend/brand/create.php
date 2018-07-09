@@ -14,7 +14,7 @@
   <div class="card-body">
     <?php echo form_open('brand/insert') ?>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Nama', 'brand-name') ?>
         <?php echo form_input(['name' => 'name', 'id' => 'brand-name', 'class' => empty(form_error('name')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Nama Merek Kendaraan', 'value' => set_value('name')]) ?>
         <div class="invalid-feedback">
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Sub Dari Merek', 'brand-sub_from') ?>
         <select name="sub_from" class="form-control selectpicker<?php echo empty(form_error('sub_from')) ? null : ' is-invalid' ?>" id="brand-sub_from" title="Pilih Merek Kendaraan">
         <?php
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-12">
         <?php echo form_label('Tipe', 'brand-type') ?>
         <select name="type" class="form-control selectpicker<?php echo empty(form_error('type')) ? null : ' is-invalid' ?>" id="brand-type" title="Pilih Tipe Merek Kendaraan">
         <?php

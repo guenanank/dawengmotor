@@ -57,10 +57,10 @@
                 <?php echo word_limiter($product->description, 13) ?>
               </td>
               <td class="text-right">
-                <h4><strong class="text-primary">Rp. <?php echo $product->down_payment ?>.-</strong></h4>
+                <h5><strong class="text-primary">Rp. <?php echo $product->down_payment ?>.-</strong></h5>
               </td>
               <td class="text-right">
-                <h4><strong class="text-primary">Rp. <?php echo $product->price ?>.-</strong></h4>
+                <h5><strong class="text-primary">Rp. <?php echo $product->price ?>.-</strong></h5>
               </td>
               <td class="text-center">
                 <a href="<?php echo base_url('product/edit/' . $product->id) ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Ubah <?php echo $product->brand->name ?>">
