@@ -112,6 +112,7 @@
         </div>
       </div>
     </div>
+    <div id="leases"></div>
     <div class="form-row mb-2">
       <div class="form-group col-md-12">
         <?php echo form_label('Keterangan', 'product-description') ?>

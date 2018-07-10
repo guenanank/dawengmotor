@@ -5,19 +5,40 @@
   var administration = $('input[name="administration"]').val().replace(/,/g , '');
 
   $('select[name="leases"]').on('changed.bs.select', function() {
-      var lists = '<ul class="list-group list-group-flush">';
 
       $.getJSON($('base').attr('href') + 'credit/get/' + $(this).val(), function(credit) {
-
+        // var lists = '<ul class="list-group list-group-flush">';
+        var lists = '';
         $.each(credit, function(k, v) {
-            // console.log(v);
-            lists += '<li class="list-group-item">' + v.tenor + '</li>';
+            if(v.tenor == 11) {
+              var pureDP, percent, netFinance, formula1, formula2, installment, flat;
+              // console.log(price);
+              // console.log(downPayment);
+              // console.log(administration);
+              // console.log(v.insurance);
+
+              console.log(downPayment - administration);
+              console.log(price * v.insurance);
+              // console.log(v.insurance);
+              pureDP = (downPayment - administration) - (price * v.insurance);
+              percent = pureDP / price;
+              netFinance = price + (v.insurance * price) + administration - downPayment;
+              formula1 = v.effective_rate / 12;
+              formula2 = (1 + formula1) ^ - v.tenor;
+              installment = ((netFinance - v.effective_rate) * formula1) / (1 - formula2);
+              // flat =
+              // lists += '<li class="list-group-item">' + v.tenor + ' x ' + installment + '</li>';
+              lists += '<p>' + v.tenor + ' x ' + pureDP + '</p>';
+
+            }
         });
 
+        lists += '';
+        // console.log(lists);
+        $('div#leases').html(lists);
       });
 
-      lists += '</ul>';
-      console.log(lists);
+      lists = '';
   });
 
 
