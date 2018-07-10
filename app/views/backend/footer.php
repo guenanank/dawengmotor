@@ -56,10 +56,10 @@ if(!empty($scripts)) {
 }
 ?>
   <script type="text/javascript">
-    $('form.ajaxform').submit(function(e) {
-      e.preventDefault();
-      $(this).ajaxform();
-    });
+    // $('form.ajaxform').submit(function(e) {
+    //   e.preventDefault();
+    //   $(this).ajaxform();
+    // });
 
     $(document).ready(function() {
       $("#dataTable").DataTable({
@@ -117,21 +117,7 @@ if(!empty($scripts)) {
             }
           });
 
-      });
-
-      $('.krajee').fileinput({
-        theme: 'fa',
-        uploadUrl: '',
-        maxFileCount: 5,
-        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'],
-        dropZoneEnabled: false,
-        showRemove: false,
-        showUpload: false,
-        previewFileType: 'image',
-        browseLabel: 'Upload Foto'
-      });
-
-
+      });    
     });
   </script>
   <?php echo script_tag('assets/js/sb-admin.min.js') ?>

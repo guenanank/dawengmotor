@@ -20,6 +20,7 @@ class Credit extends CI_Controller
         $this->form_validation->set_rules('lease_id', 'Nama Leasing', 'trim|required');
         $this->form_validation->set_rules('tenor', 'Tenor', 'trim|required|numeric|max_length[100]');
         $this->form_validation->set_rules('insurance', 'Asuransi', 'trim|required|decimal');
+        $this->form_validation->set_rules('effective_rate', 'Rata-rata Efektif', 'trim|required|decimal');
     }
 
     public function index()
@@ -76,5 +77,16 @@ class Credit extends CI_Controller
         }
 
         return false;
+    }
+
+    public function get($id)
+    {
+        $credit = [];
+        if ($this->input->is_ajax_request()) {
+            $credit = $this->credits
+              ->get_many_by('lease_id', $id);
+        }
+
+        echo json_encode($credit);
     }
 }

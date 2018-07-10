@@ -23,9 +23,10 @@
           <tr>
             <th>Nama Leasing</th>
             <th>Tenor</th>
-            <!-- <th>Persentase</th> -->
+            <th>Persentase</th>
             <!-- <th>Pajak</th> -->
-            <th>Asuransi</th>
+            <!-- <th>Asuransi</th> -->
+            <th>Rata-rata Efektif</th>
             <th>Kontrol</th>
           </tr>
         </thead>
@@ -33,9 +34,10 @@
           <tr>
             <th>Nama Leasing</th>
             <th>Tenor</th>
-            <!-- <th>Persentase</th> -->
+            <th>Persentase</th>
             <!-- <th>Pajak</th> -->
-            <th>Asuransi</th>
+            <!-- <th>Asuransi</th> -->
+            <th>Rata-rata Efektif</th>
             <th>Kontrol</th>
           </tr>
         </tfoot>
@@ -50,14 +52,17 @@
               <td class="text-center">
                 <?php echo $credit->tenor ?> Bulan
               </td>
+              <td class="text-center">
+                <?php echo number_format($credit->percentage, 2) ?>%
+              </td>
               <!-- <td class="text-center">
-                <?php echo number_format($credit->percentage, 1) ?>%
+                <?php echo number_format($credit->tax, 2) ?>%
               </td> -->
               <!-- <td class="text-center">
-                <?php echo number_format($credit->tax, 1) ?>%
+                <?php echo number_format($credit->insurance, 2) ?>%
               </td> -->
               <td class="text-center">
-                <?php echo number_format($credit->insurance, 1) ?>%
+                <?php echo number_format($credit->effective_rate, 2) ?>%
               </td>
               <td class="text-center">
                 <a href="<?php echo base_url('credit/edit/' . $credit->id) ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Ubah <?php echo $credit->lease->name ?>">

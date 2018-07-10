@@ -41,7 +41,7 @@ class Product extends CI_Controller
         ]);
 
         $this->brands->before_dropdown = ['motor', 'parent'];
-        $this->data_credits = $this->leases->with('credits')->get_all();
+        $this->data_credits = $this->leases->get_all();
 
         $this->form_validation->set_rules('brand_id', 'Merek', 'required');
         $this->form_validation->set_rules('year', 'Tahun', 'required|max_length[9999]');
@@ -65,7 +65,7 @@ class Product extends CI_Controller
     {
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $brands = $this->brands->custom_dropdown();
-        $leases = $this->data_credits;
+        $leases = $this->leases->dropdown('id', 'name');
         $years = $this->products->years();
         $this->load->view('backend/header', $header);
         $this->load->view('backend/product/create', compact('brands', 'leases', 'years'));
@@ -96,7 +96,7 @@ class Product extends CI_Controller
         $product = $this->products->with('brand')->get($id);
         $header = ['title' => $this->title, 'styles' => $this->styles];
         $brands = $this->brands->custom_dropdown();
-        $leases = $this->data_credits;
+        $leases = $this->leases->dropdown('id', 'name');
         $years = $this->products->years();
         $this->load->view('backend/header', $header);
         $this->load->view('backend/product/edit', compact('product', 'leases', 'brands', 'years'));

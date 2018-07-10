@@ -97,6 +97,23 @@
     </div>
     <div class="form-row mb-2">
       <div class="form-group col-md-12">
+        <?php echo form_label('Leasing', 'product-leases') ?>
+        <select name="leases" class="form-control selectpicker<?php echo empty(form_error('leases')) ? null : ' is-invalid' ?>" id="product-leases" title="Pilih Leasing Pembayaran">
+          <?php
+            foreach($leases as $k => $v) {
+              ?>
+                <option value="<?php echo $k ?>"><?php echo $v ?></option>
+              <?php
+            }
+          ?>
+        </select>
+        <div class="invalid-feedback">
+          <?php echo form_error('leases') ?>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mb-2">
+      <div class="form-group col-md-12">
         <?php echo form_label('Keterangan', 'product-description') ?>
         <?php echo form_textarea(['name' => 'description', 'id' => 'product-description', 'class' => empty(form_error('description')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)', 'value' => set_value('description')]) ?>
         <div class="invalid-feedback">
@@ -113,25 +130,6 @@
         </div>
       </div>
     </div>
-
-    <div class="form-row mb-2">
-      <div class="form-group col-md-12">
-        <?php echo form_label('Leasing', 'product-leases') ?>
-        <select name="leases" class="form-control selectpicker<?php echo empty(form_error('leases')) ? null : ' is-invalid' ?>" id="product-leases" title="Pilih Leasing Pembayaran">
-          <?php
-            foreach($leases as $lease) {
-              ?>
-                <option value="<?php echo $lease->id ?>"><?php echo $lease->name ?></option>
-              <?php
-            }
-          ?>
-        </select>
-        <div class="invalid-feedback">
-          <?php echo form_error('leases') ?>
-        </div>
-      </div>
-    </div>
-
     <?php include APPPATH . 'views/backend/button_form.php' ?>
     <?php echo form_close() ?>
   </div>

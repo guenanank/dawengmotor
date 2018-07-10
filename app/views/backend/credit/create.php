@@ -81,6 +81,20 @@
         </div>
       </div>
     </div>
+    <div class="form-row mb-2">
+      <div class="form-group col-md-12">
+        <?php echo form_label('Rata-rata Efektif', 'credit-effective_rate') ?>
+        <div class="input-group">
+          <?php echo form_input(['name' => 'effective_rate', 'data-mask' => '00.00', 'id' => 'credit-effective_rate', 'class' => empty(form_error('effective_rate')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Rata-rata Efektif Kredit', 'value' => set_value('effective_rate')]) ?>
+          <div class="input-group-append">
+            <span class="input-group-text">%</span>
+          </div>
+          <div class="invalid-feedback">
+            <?php echo form_error('effective_rate') ?>
+          </div>
+        </div>
+      </div>
+    </div>
     <?php include APPPATH . 'views/backend/button_form.php' ?>
     <?php echo form_close() ?>
   </div>
