@@ -47,7 +47,6 @@ class Product extends CI_Controller
         $this->form_validation->set_rules('year', 'Tahun', 'required|max_length[9999]');
         $this->form_validation->set_rules('price', 'Harga', 'required');
         $this->form_validation->set_rules('down_payment', 'Uang Muka', 'required');
-        $this->form_validation->set_rules('administration', 'Administrasi', 'required');
         $this->form_validation->set_rules('description', 'Keterangan', 'required');
     }
 

@@ -36,21 +36,20 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="form-row mb-2">
+    <div class="form-row mb-2">
       <div class="form-group col-md-12">
-        <?php echo form_label('Persentase', 'credit-percentage') ?>
+        <?php echo form_label('Administrasi', 'credit-administration') ?>
         <div class="input-group">
-          <?php echo form_input(['name' => 'percentage', 'data-mask' => '00.00', 'id' => 'credit-percentage', 'class' => empty(form_error('percentage')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Persentase Kredit', 'value' => set_value('percentage')]) ?>
-          <div class="input-group-append">
-            <span class="input-group-text">%</span>
+          <div class="input-group-prepend">
+            <span class="input-group-text">Rp.</span>
           </div>
+          <?php echo form_input(['name' => 'administration', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'credit-administration', 'class' => empty(form_error('administration')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Administrasi Kredit', 'value' => set_value('administration')]) ?>
           <div class="invalid-feedback">
-          <?php echo form_error('percentage') ?>
+          <?php echo form_error('administration') ?>
         </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- <div class="form-row mb-2">
       <div class="form-group col-md-12">

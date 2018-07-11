@@ -34,11 +34,9 @@ class Product_model extends MY_Model
         if (is_object($row)) {
             $row->price = number_format($row->price);
             $row->down_payment = number_format($row->down_payment);
-            $row->administration = number_format($row->administration);
         } else {
             $row['price'] = number_format($row['price']);
             $row['down_payment'] = number_format($row['down_payment']);
-            $row['administration'] = number_format($row['administration']);
         }
         return $row;
     }
@@ -48,11 +46,9 @@ class Product_model extends MY_Model
         if (is_object($row)) {
             $row->price = str_replace(',', null, $row->price);
             $row->down_payment = str_replace(',', null, $row->down_payment);
-            $row->administration = str_replace(',', null, $row->administration);
         } else {
             $row['price'] = str_replace(',', null, $row['price']);
             $row['down_payment'] = str_replace(',', null, $row['down_payment']);
-            $row['administration'] = str_replace(',', null, $row['administration']);
         }
         return $row;
     }

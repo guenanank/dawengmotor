@@ -19,6 +19,7 @@ class Credit extends CI_Controller
 
         $this->form_validation->set_rules('lease_id', 'Nama Leasing', 'trim|required');
         $this->form_validation->set_rules('tenor', 'Tenor', 'trim|required|numeric|max_length[100]');
+        $this->form_validation->set_rules('administration', 'Administrasi', 'trim|required|decimal');
         $this->form_validation->set_rules('insurance', 'Asuransi', 'trim|required|decimal');
         $this->form_validation->set_rules('effective_rate', 'Rata-rata Efektif', 'trim|required|decimal');
     }
@@ -79,14 +80,28 @@ class Credit extends CI_Controller
         return false;
     }
 
-    public function get($id)
+    public function calculate()
     {
-        $credit = [];
-        if ($this->input->is_ajax_request()) {
-            $credit = $this->credits
-              ->get_many_by('lease_id', $id);
+        $down_payment = $this->input->post('downPayment');
+        $price = $this->input->post('price');
+        $return = [];
+        foreach($this->credits->get_many_by('lease_id', $this->input->post('lease_id')) as $credit) {
+          $pure_dp = ($down_payment - $credit->administration) - substr(($credit->insurance * $price), 0, -2);
+          $percent = round((float) ($pure_dp / $price) * 100, 2);
+          $net_finance = $price + (substr(($credit->insurance * $price), 0, -2)) + $credit->administration - $down_payment;
+          $formula1 = round(($credit->effective_rate / 12) / 100, 2);
+          $formula2 = pow((1 + $formula1), ($credit->tenor * -1));
+          $installment = (floor($net_finance - $credit->effective_rate) * $formula1) / (1 - $formula2);
+          $flat = ((float)(($installment * $credit->tenor) - $net_finance) / $net_finance) * 100;
+          $return[] = [
+            'tenor' => $credit->tenor,
+            'installment' => round($installment),
+            'flat' => round($flat, 2)
+          ];
         }
 
-        echo json_encode($credit);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($return));
     }
 }

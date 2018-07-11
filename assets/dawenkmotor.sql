@@ -5,8 +5,6 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-USE `dawenkmotor`;
-
 DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `id` int(7) unsigned NOT NULL AUTO_INCREMENT,
@@ -949,8 +947,7 @@ INSERT INTO `brands` (`id`, `name`, `sub_from`, `type`, `created_at`, `updated_a
 (937,	'X-9 TOURING',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (938,	'X9-180 4T',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (939,	'X-EVO 250',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(940,	'ZIP 100',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `name` = VALUES(`name`), `sub_from` = VALUES(`sub_from`), `type` = VALUES(`type`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
+(940,	'ZIP 100',	5,	'motor',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00');
 
 DROP TABLE IF EXISTS `configs`;
 CREATE TABLE `configs` (
@@ -964,27 +961,30 @@ INSERT INTO `configs` (`id`, `key`, `value`) VALUES
 (1,	'SITE_NAME',	'Dawenk Motor'),
 (2,	'SITE_DESC',	'Dawenk Motor, Jual Beli Motor Baru Dan Bekas'),
 (3,	'SITE_KEYWORDS',	'jual motor, beli motor, beli motor bekas'),
-(4,	'CREDENTIAL',	'{\'username\':\'dawenkmotor\',\'password\':\'babacoi\',\'name\': \'Dawenk\'}')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `key` = VALUES(`key`), `value` = VALUES(`value`);
+(4,	'CREDENTIAL',	'{\'username\':\'dawenkmotor\',\'password\':\'babacoi\',\'name\': \'Dawenk\'}');
 
 DROP TABLE IF EXISTS `credits`;
 CREATE TABLE `credits` (
   `id` int(15) unsigned NOT NULL AUTO_INCREMENT,
   `lease_id` int(3) unsigned NOT NULL,
   `tenor` int(3) NOT NULL,
-  `percentage` decimal(7,2) NOT NULL,
-  `insurance` decimal(7,2) NOT NULL,
-  `tax` decimal(7,2) NOT NULL,
+  `administration` decimal(15,2) DEFAULT NULL,
+  `insurance` decimal(7,2) DEFAULT NULL,
+  `tax` decimal(7,2) DEFAULT NULL,
+  `effective_rate` decimal(7,2) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lease_id` (`lease_id`),
   CONSTRAINT `credits_ibfk_2` FOREIGN KEY (`lease_id`) REFERENCES `leases` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
-INSERT INTO `credits` (`id`, `lease_id`, `tenor`, `percentage`, `insurance`, `tax`, `created_at`, `updated_at`) VALUES
-(14,	3,	23,	0.00,	2.45,	0.00,	'2018-07-06 06:42:32',	'0000-00-00 00:00:00')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `lease_id` = VALUES(`lease_id`), `tenor` = VALUES(`tenor`), `percentage` = VALUES(`percentage`), `insurance` = VALUES(`insurance`), `tax` = VALUES(`tax`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
+INSERT INTO `credits` (`id`, `lease_id`, `tenor`, `administration`, `insurance`, `tax`, `effective_rate`, `created_at`, `updated_at`) VALUES
+(1,	3,	11,	750000.00,	2.85,	0.00,	29.00,	'2018-07-09 07:02:37',	'0000-00-00 00:00:00'),
+(2,	3,	17,	405000.00,	3.85,	0.00,	31.00,	'2018-07-09 07:03:02',	'0000-00-00 00:00:00'),
+(3,	3,	23,	205000.00,	4.85,	0.00,	31.00,	'2018-07-06 06:42:32',	'2018-07-10 06:53:59'),
+(4,	3,	29,	205000.00,	5.85,	0.00,	30.00,	'2018-07-09 07:04:05',	'0000-00-00 00:00:00'),
+(5,	3,	35,	205000.00,	6.61,	0.00,	30.00,	'2018-07-09 07:04:51',	'0000-00-00 00:00:00');
 
 DROP TABLE IF EXISTS `debtors`;
 CREATE TABLE `debtors` (
@@ -1018,8 +1018,7 @@ CREATE TABLE `leases` (
 
 INSERT INTO `leases` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
 (1,	'PT. Mandiri Utama Finance',	'',	'2018-06-13 19:56:15',	'2018-07-04 09:22:18'),
-(3,	'ADIRA FINANCE',	'',	'2018-06-14 00:40:13',	'2018-06-26 05:36:16')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `name` = VALUES(`name`), `description` = VALUES(`description`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
+(3,	'ADIRA FINANCE',	'',	'2018-06-14 00:40:13',	'2018-06-26 05:36:16');
 
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
@@ -1054,13 +1053,14 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 INSERT INTO `products` (`id`, `brand_id`, `year`, `description`, `condition`, `price`, `down_payment`, `negotiable`, `sold`, `photos`, `created_at`, `updated_at`) VALUES
-(14,	232,	'2017',	'vario',	1,	19700000.00,	1500000.00,	1,	0,	'[\"938bf172a1d4ccc406164f8836d4e986.jpg\",\"9adfa36f79f98afad75c0e1709e790dc.jpg\"]',	'2018-07-06 10:49:40',	'0000-00-00 00:00:00')
-ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `brand_id` = VALUES(`brand_id`), `year` = VALUES(`year`), `description` = VALUES(`description`), `condition` = VALUES(`condition`), `price` = VALUES(`price`), `down_payment` = VALUES(`down_payment`), `negotiable` = VALUES(`negotiable`), `sold` = VALUES(`sold`), `photos` = VALUES(`photos`), `created_at` = VALUES(`created_at`), `updated_at` = VALUES(`updated_at`);
+(14,	232,	'2017',	'vario',	1,	19700000.00,	1500000.00,	1,	0,	'[\"938bf172a1d4ccc406164f8836d4e986.jpg\",\"9adfa36f79f98afad75c0e1709e790dc.jpg\"]',	'2018-07-06 10:49:40',	'0000-00-00 00:00:00');
 
 DROP TABLE IF EXISTS `product_credits`;
 CREATE TABLE `product_credits` (
   `product_id` int(31) unsigned NOT NULL,
   `credit_id` int(15) unsigned NOT NULL,
+  `installment` decimal(15,2) unsigned NOT NULL,
+  `flat` decimal(7,2) unsigned NOT NULL,
   KEY `product_id` (`product_id`),
   KEY `credit_id` (`credit_id`),
   CONSTRAINT `product_credits_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -1084,4 +1084,4 @@ CREATE TABLE `submissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2018-07-06 13:51:35
+-- 2018-07-11 08:55:19

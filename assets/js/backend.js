@@ -1,47 +1,55 @@
 (function($) {
 
-  var price = $('input[name="price"]').val().replace(/,/g , '');
-  var downPayment = $('input[name="down_payment"]').val().replace(/,/g , '');
-  var administration = $('input[name="administration"]').val().replace(/,/g , '');
+  var price = $('input[name="price"]');
+  var downPayment = $('input[name="down_payment"]');
 
   $('select[name="leases"]').on('changed.bs.select', function() {
 
-      $.getJSON($('base').attr('href') + 'credit/get/' + $(this).val(), function(credit) {
-        // var lists = '<ul class="list-group list-group-flush">';
-        var lists = '';
-        $.each(credit, function(k, v) {
-            if(v.tenor == 11) {
-              var pureDP, percent, netFinance, formula1, formula2, installment, flat;
-              // console.log(price);
-              // console.log(downPayment);
-              // console.log(administration);
-              // console.log(v.insurance);
-
-              console.log(downPayment - administration);
-              console.log(price * v.insurance);
-              // console.log(v.insurance);
-              pureDP = (downPayment - administration) - (price * v.insurance);
-              percent = pureDP / price;
-              netFinance = price + (v.insurance * price) + administration - downPayment;
-              formula1 = v.effective_rate / 12;
-              formula2 = (1 + formula1) ^ - v.tenor;
-              installment = ((netFinance - v.effective_rate) * formula1) / (1 - formula2);
-              // flat =
-              // lists += '<li class="list-group-item">' + v.tenor + ' x ' + installment + '</li>';
-              lists += '<p>' + v.tenor + ' x ' + pureDP + '</p>';
-
-            }
-        });
-
-        lists += '';
-        // console.log(lists);
-        $('div#leases').html(lists);
+    if (price.val().length < 1 || downPayment.val().length < 1) {
+      swal({
+        title: '',
+        text: 'Bidang harga atau uang muka harus di isi.',
+        type: 'warning',
+        showConfirmButton: false,
+        timer: 5000
       });
+    } else {
+      $('div#leases').html('');
+      var id = $(this).val();
+      $.ajax({
+        type: 'POST',
+        url: $('base').attr('href') + 'credit/calculate',
+        data: {
+          lease_id: id,
+          price: price.val().replace(/,/g, ''),
+          downPayment: downPayment.val().replace(/,/g, '')
+        },
+        success: function(credits) {
+          $('div#leases').html('<h5 class="card-title">Angsuran</h5>');
+          var lists = '<ul class="list-group">';
+          $.each(credits, function(k, item) {
+            lists += '<li class="list-group-item">' + item.tenor + ' x Rp. ' + numberFormat(item.installment) + ' (Flat ' + item.flat + '%)</li>'
+          });
 
-      lists = '';
+          lists += '</ul>';
+          $('div#leases').append(lists).fadeIn('slow');
+        }
+      });
+    }
+
   });
 
-
+  var numberFormat = function(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+  }
 
   $('.krajee').fileinput({
     theme: 'fa',

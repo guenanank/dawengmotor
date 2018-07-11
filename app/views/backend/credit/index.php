@@ -23,9 +23,9 @@
           <tr>
             <th>Nama Leasing</th>
             <th>Tenor</th>
-            <th>Persentase</th>
+            <th>Administrasi</th>
             <!-- <th>Pajak</th> -->
-            <!-- <th>Asuransi</th> -->
+            <th>Asuransi</th>
             <th>Rata-rata Efektif</th>
             <th>Kontrol</th>
           </tr>
@@ -34,9 +34,9 @@
           <tr>
             <th>Nama Leasing</th>
             <th>Tenor</th>
-            <th>Persentase</th>
+            <th>Administrasi</th>
             <!-- <th>Pajak</th> -->
-            <!-- <th>Asuransi</th> -->
+            <th>Asuransi</th>
             <th>Rata-rata Efektif</th>
             <th>Kontrol</th>
           </tr>
@@ -52,15 +52,15 @@
               <td class="text-center">
                 <?php echo $credit->tenor ?> Bulan
               </td>
-              <td class="text-center">
-                <?php echo number_format($credit->percentage, 2) ?>%
+              <td class="text-right">
+                Rp. <?php echo $credit->administration ?>
               </td>
               <!-- <td class="text-center">
                 <?php echo number_format($credit->tax, 2) ?>%
               </td> -->
-              <!-- <td class="text-center">
+              <td class="text-center">
                 <?php echo number_format($credit->insurance, 2) ?>%
-              </td> -->
+              </td>
               <td class="text-center">
                 <?php echo number_format($credit->effective_rate, 2) ?>%
               </td>

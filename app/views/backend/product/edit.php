@@ -58,44 +58,6 @@
       </div>
     </div>
     <div class="form-row mb-2">
-      <div class="form-group col-md-4">
-        <?php echo form_label('Harga', 'product-price') ?>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-price">Rp. </span>
-          </div>
-          <?php echo form_input(['name' => 'price', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-price', 'class' => empty(form_error('price')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Harga Unit Kendaraan', 'value' => $product->price]) ?>
-          <div class="invalid-feedback">
-            <?php echo form_error('price') ?>
-          </div>
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <?php echo form_label('Uang Muka', 'product-down_payment') ?>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-down_payment">Rp. </span>
-          </div>
-          <?php echo form_input(['name' => 'down_payment', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-down_payment', 'class' => empty(form_error('down_payment')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Uang Muka Unit Kendaraan', 'value' => $product->down_payment]) ?>
-          <div class="invalid-feedback">
-            <?php echo form_error('down_payment') ?>
-          </div>
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <?php echo form_label('Administrasi', 'product-administration') ?>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-administration">Rp. </span>
-          </div>
-          <?php echo form_input(['name' => 'administration', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-administration', 'class' => empty(form_error('administration')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Administrasi Unit Kendaraan', 'value' => $product->administration]) ?>
-          <div class="invalid-feedback">
-            <?php echo form_error('administration') ?>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-row mb-2">
       <div class="form-group col-md-12">
         <?php echo form_label('Keterangan', 'product-description') ?>
         <?php echo form_textarea(['name' => 'description', 'id' => 'product-description', 'class' => empty(form_error('description')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)', 'value' => $product->description]) ?>
@@ -112,6 +74,52 @@
           <?php echo form_error('photos') ?>
         </div>
       </div>
+    </div>
+    <div class="form-row mb-2">
+      <div class="form-group col-md-6">
+        <?php echo form_label('Harga', 'product-price') ?>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-price">Rp. </span>
+          </div>
+          <?php echo form_input(['name' => 'price', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-price', 'class' => empty(form_error('price')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Harga Unit Kendaraan', 'value' => $product->price]) ?>
+          <div class="invalid-feedback">
+            <?php echo form_error('price') ?>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <?php echo form_label('Uang Muka', 'product-down_payment') ?>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-down_payment">Rp. </span>
+          </div>
+          <?php echo form_input(['name' => 'down_payment', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-down_payment', 'class' => empty(form_error('down_payment')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Uang Muka Unit Kendaraan', 'value' => $product->down_payment]) ?>
+          <div class="invalid-feedback">
+            <?php echo form_error('down_payment') ?>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mb-2">
+      <div class="form-group col-md-12">
+        <?php echo form_label('Leasing', 'product-leases') ?>
+        <select name="leases" class="form-control selectpicker<?php echo empty(form_error('leases')) ? null : ' is-invalid' ?>" id="product-leases" title="Pilih Leasing Pembayaran">
+          <?php
+            foreach($leases as $k => $v) {
+              ?>
+                <option value="<?php echo $k ?>"><?php echo $v ?></option>
+              <?php
+            }
+          ?>
+        </select>
+        <div class="invalid-feedback">
+          <?php echo form_error('leases') ?>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-4">
+      <div class="card-body" id="leases"></div>
     </div>
     <?php include APPPATH . 'views/backend/button_form.php' ?>
     <?php echo form_close() ?>

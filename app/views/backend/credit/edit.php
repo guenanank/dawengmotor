@@ -36,21 +36,20 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="form-row mb-2">
+    <div class="form-row mb-2">
       <div class="form-group col-md-12">
-        <?php echo form_label('Persentase', 'credit-percentage') ?>
+        <?php echo form_label('Administrasi', 'credit-administration') ?>
         <div class="input-group">
-          <?php echo form_input(['name' => 'percentage', 'data-mask' => '00.00', 'id' => 'credit-percentage', 'class' => empty(form_error('percentage')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Persentase Kredit', 'value' => $credit->percentage]) ?>
-          <div class="input-group-append">
-            <span class="input-group-text">%</span>
+          <div class="input-group-prepend">
+            <span class="input-group-text">Rp.</span>
           </div>
+          <?php echo form_input(['name' => 'administration', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'credit-administration', 'class' => empty(form_error('administration')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Administrasi Kredit', 'value' => $credit->administration]) ?>
           <div class="invalid-feedback">
-          <?php echo form_error('percentage') ?>
+          <?php echo form_error('administration') ?>
         </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- <div class="form-row mb-2">
       <div class="form-group col-md-12">
@@ -71,7 +70,7 @@
       <div class="form-group col-md-12">
         <?php echo form_label('Asuransi', 'credit-insurance') ?>
         <div class="input-group">
-          <?php echo form_input(['name' => 'insurance', 'data-mask' => '00.00', 'id' => 'credit-insurance', 'class' => empty(form_error('insurance')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Asuransi Kredit', 'value' => $credit->insurance]) ?>
+          <?php echo form_input(['name' => 'insurance', 'data-mask' => '00.00', 'data-mask-reverse' => 'true', 'id' => 'credit-insurance', 'class' => empty(form_error('insurance')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Asuransi Kredit', 'value' => $credit->insurance]) ?>
           <div class="input-group-append">
             <span class="input-group-text">%</span>
           </div>
@@ -85,7 +84,7 @@
       <div class="form-group col-md-12">
         <?php echo form_label('Rata-rata Efektif', 'credit-effective_rate') ?>
         <div class="input-group">
-          <?php echo form_input(['name' => 'effective_rate', 'data-mask' => '00.00', 'id' => 'credit-effective_rate', 'class' => empty(form_error('effective_rate')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Rata-rata Efektif Kredit', 'value' => set_value('effective_rate')]) ?>
+          <?php echo form_input(['name' => 'effective_rate', 'data-mask' => '00.00', 'data-mask-reverse' => 'true', 'id' => 'credit-effective_rate', 'class' => empty(form_error('effective_rate')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Rata-rata Efektif Kredit', 'value' => set_value('effective_rate')]) ?>
           <div class="input-group-append">
             <span class="input-group-text">%</span>
           </div>

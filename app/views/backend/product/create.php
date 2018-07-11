@@ -57,8 +57,27 @@
         </div>
       </div>
     </div>
+
     <div class="form-row mb-2">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-12">
+        <?php echo form_label('Keterangan', 'product-description') ?>
+        <?php echo form_textarea(['name' => 'description', 'id' => 'product-description', 'class' => empty(form_error('description')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)', 'value' => set_value('description')]) ?>
+        <div class="invalid-feedback">
+          <?php echo form_error('description') ?>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mb-1">
+      <div class="form-group col-md-12">
+        <?php echo form_label('Foto', 'product-photos') ?>
+        <?php echo form_upload(['name' => 'photos[]', 'id' => 'product-photos', 'class' => empty(form_error('photos')) ? 'form-control krajee' : 'form-control krajee is-invalid', 'multiple' => 'true']) ?>
+        <div class="invalid-feedback">
+          <?php echo form_error('photos') ?>
+        </div>
+      </div>
+    </div>
+    <div class="form-row mb-2">
+      <div class="form-group col-md-6">
         <?php echo form_label('Harga', 'product-price') ?>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -70,7 +89,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <?php echo form_label('Uang Muka', 'product-down_payment') ?>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -79,18 +98,6 @@
           <?php echo form_input(['name' => 'down_payment', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-down_payment', 'class' => empty(form_error('down_payment')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Uang Muka Unit Kendaraan', 'value' => set_value('down_payment')]) ?>
           <div class="invalid-feedback">
             <?php echo form_error('down_payment') ?>
-          </div>
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <?php echo form_label('Administrasi', 'product-administration') ?>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-administration">Rp. </span>
-          </div>
-          <?php echo form_input(['name' => 'administration', 'data-mask' => '000,000,000,000,000', 'data-mask-reverse' => 'true', 'id' => 'product-administration', 'class' => empty(form_error('administration')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Administrasi Unit Kendaraan', 'value' => set_value('administration')]) ?>
-          <div class="invalid-feedback">
-            <?php echo form_error('administration') ?>
           </div>
         </div>
       </div>
@@ -112,24 +119,8 @@
         </div>
       </div>
     </div>
-    <div id="leases"></div>
-    <div class="form-row mb-2">
-      <div class="form-group col-md-12">
-        <?php echo form_label('Keterangan', 'product-description') ?>
-        <?php echo form_textarea(['name' => 'description', 'id' => 'product-description', 'class' => empty(form_error('description')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)', 'value' => set_value('description')]) ?>
-        <div class="invalid-feedback">
-          <?php echo form_error('description') ?>
-        </div>
-      </div>
-    </div>
-    <div class="form-row mb-1">
-      <div class="form-group col-md-12">
-        <?php echo form_label('Foto', 'product-photos') ?>
-        <?php echo form_upload(['name' => 'photos[]', 'id' => 'product-photos', 'class' => empty(form_error('photos')) ? 'form-control krajee' : 'form-control krajee is-invalid', 'multiple' => 'true']) ?>
-        <div class="invalid-feedback">
-          <?php echo form_error('photos') ?>
-        </div>
-      </div>
+    <div class="card mb-4">
+      <div class="card-body" id="leases"></div>
     </div>
     <?php include APPPATH . 'views/backend/button_form.php' ?>
     <?php echo form_close() ?>
