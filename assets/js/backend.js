@@ -13,6 +13,7 @@
         showConfirmButton: false,
         timer: 5000
       });
+      $('div#leases').html('');
     } else {
       $('div#leases').html('');
       var id = $(this).val();
@@ -25,13 +26,23 @@
           downPayment: downPayment.val().replace(/,/g, '')
         },
         success: function(credits) {
-          $('div#leases').html('<h5 class="card-title">Angsuran</h5>');
-          var lists = '<ul class="list-group">';
-          $.each(credits, function(k, item) {
-            lists += '<li class="list-group-item">' + item.tenor + ' x Rp. ' + numberFormat(item.installment) + ' (Flat ' + item.flat + '%)</li>'
-          });
+          $('div#leases').html('<h6 class="card-title">Angsuran</h6>');
 
-          lists += '</ul>';
+          var lists = '';
+          $.each(credits, function(k, item) {
+              lists += '<div class="form-check">';
+              lists += '<input name="credits[]" class="form-check-input" type="checkbox" value="" id="' + item.credit_id + '">';
+              lists += '<label class="form-check-label" for="' + item.credit_id + '">';
+              lists += item.tenor + ' x Rp. ' + numberFormat(item.installment) + ' (Flat ' + item.flat + '%)';
+              lists += '</label>';
+              lists += '</div>';
+          });
+          // var lists = '<ul class="list-group">';
+          // $.each(credits, function(k, item) {
+          //   lists += '<li class="list-group-item">' + item.tenor + ' x Rp. ' + numberFormat(item.installment) + ' (Flat ' + item.flat + '%)</li>'
+          // });
+          // lists += '</ul>';
+
           $('div#leases').append(lists).fadeIn('slow');
         }
       });

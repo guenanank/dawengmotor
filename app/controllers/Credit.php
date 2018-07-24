@@ -84,8 +84,10 @@ class Credit extends CI_Controller
     {
         $down_payment = $this->input->post('downPayment');
         $price = $this->input->post('price');
-        $return = [];
-        foreach($this->credits->get_many_by('lease_id', $this->input->post('lease_id')) as $credit) {
+        $response = [];
+        $this->credits->after_get = ['set_money'];
+        $credits = $this->credits->get_many_by('lease_id', $this->input->post('lease_id'));
+        foreach($credits as $credit) {
           $pure_dp = ($down_payment - $credit->administration) - substr(($credit->insurance * $price), 0, -2);
           $percent = round((float) ($pure_dp / $price) * 100, 2);
           $net_finance = $price + (substr(($credit->insurance * $price), 0, -2)) + $credit->administration - $down_payment;
@@ -93,7 +95,8 @@ class Credit extends CI_Controller
           $formula2 = pow((1 + $formula1), ($credit->tenor * -1));
           $installment = (floor($net_finance - $credit->effective_rate) * $formula1) / (1 - $formula2);
           $flat = ((float)(($installment * $credit->tenor) - $net_finance) / $net_finance) * 100;
-          $return[] = [
+          $response[] = [
+            'credit_id' => $credit->id,
             'tenor' => $credit->tenor,
             'installment' => round($installment),
             'flat' => round($flat, 2)
@@ -101,7 +104,10 @@ class Credit extends CI_Controller
         }
 
         $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($return));
+            ->set_content_type('application/json', 'utf-8')
+            ->set_output(json_encode($response))
+            ->_display();
+
+        exit;
     }
 }

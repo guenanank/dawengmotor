@@ -1,7 +1,7 @@
 <?php
 
 if (!function_exists('debug')) {
-    function debug($data, $exit = true)
+    function dd($data, $exit = true)
     {
         if (empty($data) && $exit) {
             print_error('Data is empty');
@@ -50,19 +50,11 @@ if (!function_exists('time_elapsed')) {
             1 => 'second'
         ];
 
-        $a_plural = ['year' => 'years',
-            'month' => 'months',
-            'day' => 'days',
-            'hour' => 'hours',
-            'minute' => 'minutes',
-            'second' => 'seconds'
-        ];
-
         foreach ($a as $secs => $str) {
             $d = $etime / $secs;
             if ($d >= 1) {
                 $r = round($d);
-                return $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) . ' ago';
+                return $r . ' ' . ($r > 1 ? plural($str) : $str) . ' ago';
             }
         }
     }
