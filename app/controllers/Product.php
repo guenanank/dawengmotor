@@ -55,9 +55,9 @@ class Product extends CI_Controller
         $parent_brand = $this->brands->get_parent();
         $products = $this->products->with('brand')->get_all();
         $header = ['title' => $this->title, 'styles' => $this->styles];
-        $this->load->view('backend/header', $header);
-        $this->load->view('backend/product/index', compact('products', 'parent_brand'));
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('header', $header);
+        $this->load->view('product/index', compact('products', 'parent_brand'));
+        $this->load->view('footer', ['scripts' => $this->scripts]);
     }
 
     public function create()
@@ -66,9 +66,9 @@ class Product extends CI_Controller
         $brands = $this->brands->custom_dropdown();
         $leases = $this->leases->dropdown('id', 'name');
         $years = $this->products->years();
-        $this->load->view('backend/header', $header);
-        $this->load->view('backend/product/create', compact('brands', 'leases', 'years'));
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('header', $header);
+        $this->load->view('product/create', compact('brands', 'leases', 'years'));
+        $this->load->view('footer', ['scripts' => $this->scripts]);
     }
 
     public function insert()
@@ -97,9 +97,9 @@ class Product extends CI_Controller
         $brands = $this->brands->custom_dropdown();
         $leases = $this->leases->dropdown('id', 'name');
         $years = $this->products->years();
-        $this->load->view('backend/header', $header);
-        $this->load->view('backend/product/edit', compact('product', 'leases', 'brands', 'years'));
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('header', $header);
+        $this->load->view('product/edit', compact('product', 'leases', 'brands', 'years'));
+        $this->load->view('footer', ['scripts' => $this->scripts]);
     }
 
     public function update($id = null)

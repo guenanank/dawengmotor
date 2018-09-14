@@ -20,9 +20,9 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
-        $this->load->view('backend/header', ['title' => $this->title, 'styles' => $this->styles]);
-        $this->load->view('backend/dashboard/index');
-        $this->load->view('backend/footer', ['scripts' => $this->scripts]);
+        $this->load->view('header', ['title' => $this->title, 'styles' => $this->styles]);
+        $this->load->view('dashboard/index');
+        $this->load->view('footer', ['scripts' => $this->scripts]);
     }
 
 }

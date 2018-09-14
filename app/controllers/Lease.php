@@ -22,53 +22,70 @@ class Lease extends CI_Controller
     public function index()
     {
         $leases = $this->leases->get_all();
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/lease/index', compact('leases'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('lease/index', compact('leases'));
+        $this->load->view('footer');
     }
 
     public function create()
     {
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/lease/create');
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('lease/create');
+        $this->load->view('footer');
     }
 
     public function insert()
     {
-        if ($this->form_validation->run()) {
-            $this->leases->insert($this->input->post());
-            redirect('lease');
-        } else {
-            return $this->create();
-        }
+      if ($this->form_validation->run()) {
+          $status = 200;
+          $messege = ['create' => $this->leases->insert($this->input->post())];
+      } else {
+          $status = 422;
+          $messege = $this->form_validation->error_array();
+      }
+
+      return $this->output->set_content_type('application/json')
+        ->set_status_header($status)
+        ->set_output(json_encode($messege));
+      exit;
     }
 
     public function edit($id = null)
     {
         $lease = $this->leases->get($id);
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/lease/edit', compact('lease'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('lease/edit', compact('lease'));
+        $this->load->view('footer');
     }
 
     public function update($id = null)
     {
         $lease = $this->leases->get($id);
-        if (!empty($lease) && $this->form_validation->run()) {
-            $this->leases->update($lease->id, $this->input->post());
-            redirect('lease');
+        if ($this->form_validation->run()) {
+            $status = 200;
+            $messege = ['update' => $this->leases->update($lease->id, $this->input->post())];
         } else {
-            return $this->edit($lease->id);
+            $status = 422;
+            $messege = $this->form_validation->error_array();
         }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
     }
 
     public function delete($id = null)
     {
         $lease = $this->leases->get($id);
+        $return = false;
         if (!empty($lease)) {
-            return $this->leases->delete($lease->id);
+            $return = $this->leases->delete($lease->id);
         }
-        return false;
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header(200)
+          ->set_output(json_encode([$return]));
+        exit;
     }
 }

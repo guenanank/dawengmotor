@@ -24,28 +24,35 @@ class Brand extends CI_Controller
     public function index()
     {
         $brands = $this->brands->with('parent')->get_all();
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/brand/index', compact('brands'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('brand/index', compact('brands'));
+        $this->load->view('footer');
     }
 
     public function create()
     {
         $parents = $this->brands->get_parent();
         $types = $this->brands->types;
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/brand/create', compact('parents', 'types'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('brand/create', compact('parents', 'types'));
+        $this->load->view('footer');
     }
 
     public function insert()
     {
         if ($this->form_validation->run()) {
-            $this->brands->insert($this->input->post());
-            redirect('brand');
+            $status = 200;
+            $messege = ['create' => $this->brands->insert($this->input->post())];
         } else {
-            return $this->create();
+            $status = 422;
+            $messege = $this->form_validation->error_array();
         }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
+
     }
 
     public function edit($id = null)
@@ -53,29 +60,39 @@ class Brand extends CI_Controller
         $brand = $this->brands->get($id);
         $parents = $this->brands->get_parent();
         $types = $this->brands->types;
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/brand/edit', compact('brand', 'parents', 'types'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('brand/edit', compact('brand', 'parents', 'types'));
+        $this->load->view('footer');
     }
 
     public function update($id = null)
     {
         $brand = $this->brands->get($id);
-        if (!empty($brand) && $this->form_validation->run()) {
-            $this->brands->update($brand->id, $this->input->post());
-            redirect('brand');
+        if ($this->form_validation->run()) {
+            $status = 200;
+            $messege = ['update' => $this->brands->update($brand->id, $this->input->post())];
         } else {
-            return $this->edit($brand->id);
+            $status = 422;
+            $messege = $this->form_validation->error_array();
         }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
     }
 
     public function delete($id = null)
     {
         $brand = $this->brands->get($id);
+        $return = false;
         if (!empty($brand)) {
-            return $this->brands->delete($brand->id);
+            $return = $this->brands->delete($brand->id);
         }
 
-        return false;
+        return $this->output->set_content_type('application/json')
+          ->set_status_header(200)
+          ->set_output(json_encode([$return]));
+        exit;
     }
 }

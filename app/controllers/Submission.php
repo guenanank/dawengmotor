@@ -21,8 +21,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
      public function index()
      {
          $submissions = $this->submissions->with('debtor', 'product')->get_all();
-         $this->load->view('backend/header', ['title' => $this->title]);
-         $this->load->view('backend/submission/index', compact('submissions'));
-         $this->load->view('backend/footer');
+         $this->load->view('header', ['title' => $this->title]);
+         $this->load->view('submission/index', compact('submissions'));
+         $this->load->view('footer');
      }
  }

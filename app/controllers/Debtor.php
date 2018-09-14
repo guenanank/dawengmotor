@@ -32,9 +32,9 @@ class Debtor extends CI_Controller
     public function index()
     {
         $debtors = $this->debtors->get_all();
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/debtor/index', compact('debtors'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('debtor/index', compact('debtors'));
+        $this->load->view('footer');
     }
 
     public function create()
@@ -46,9 +46,9 @@ class Debtor extends CI_Controller
           'works' => $this->debtors->works(),
           'incomes' => $this->debtors->incomes()
         ];
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/debtor/create', $option);
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('debtor/create', $option);
+        $this->load->view('footer');
     }
 
     public function insert()
@@ -69,9 +69,9 @@ class Debtor extends CI_Controller
           'work' => $this->debtors->works(),
           'income' => $this->debtors->incomes()
         ];
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/debtor/edit', $option);
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('debtor/edit', $option);
+        $this->load->view('footer');
     }
 
     public function update($id = null)

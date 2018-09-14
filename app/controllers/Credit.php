@@ -27,17 +27,17 @@ class Credit extends CI_Controller
     public function index()
     {
         $credits = $this->credits->with('lease')->get_all();
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/credit/index', compact('credits'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('credit/index', compact('credits'));
+        $this->load->view('footer');
     }
 
     public function create()
     {
         $leases = $this->leases->dropdown('id', 'name');
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/credit/create', compact('leases'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('credit/create', compact('leases'));
+        $this->load->view('footer');
     }
 
     public function insert()
@@ -54,9 +54,9 @@ class Credit extends CI_Controller
     {
         $credit = $this->credits->with('lease')->get($id);
         $leases = $this->leases->dropdown('id', 'name');
-        $this->load->view('backend/header', ['title' => $this->title]);
-        $this->load->view('backend/credit/edit', compact('credit', 'leases'));
-        $this->load->view('backend/footer');
+        $this->load->view('header', ['title' => $this->title]);
+        $this->load->view('credit/edit', compact('credit', 'leases'));
+        $this->load->view('footer');
     }
 
     public function update($id = null)
