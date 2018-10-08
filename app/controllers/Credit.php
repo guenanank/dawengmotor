@@ -42,12 +42,22 @@ class Credit extends CI_Controller
 
     public function insert()
     {
-        if ($this->form_validation->run()) {
-            $this->credits->insert($this->input->post());
-            redirect('credit');
-        } else {
-            return $this->create();
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
         }
+
+        if ($this->form_validation->run()) {
+            $status = 200;
+            $messege = ['create' => $this->credits->insert($this->input->post())];
+        } else {
+            $status = 422;
+            $messege = $this->form_validation->error_array();
+        }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
     }
 
     public function edit($id = null)
@@ -61,41 +71,63 @@ class Credit extends CI_Controller
 
     public function update($id = null)
     {
-        $credit = $this->credits->get($id);
-        if (!empty($credit) && $this->form_validation->run()) {
-            $this->credits->update($credit->id, $this->input->post());
-            redirect('credit');
-        } else {
-            return $this->edit($credit->id);
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
         }
+
+        $credit = $this->credits->get($id);
+        if ($this->form_validation->run()) {
+            $status = 200;
+            $messege = ['update' => $this->credits->update($credit->id, $this->input->post())];
+        } else {
+            $status = 422;
+            $messege = $this->form_validation->error_array();
+        }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
     }
 
     public function delete($id = null)
     {
-        $credit = $this->credits->get($id);
-        if (!empty($credit)) {
-            return $this->credits->delete($credit->id);
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
         }
 
-        return false;
+        $credit = $this->credits->get($id);
+        $return = false;
+        if (!empty($credit)) {
+            $return = $this->credits->delete($credit->id);
+        }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header(200)
+          ->set_output(json_encode([$return]));
+        exit;
     }
 
     public function calculate()
     {
+      if ($this->input->is_ajax_request() == false) {
+          show_404();
+      }
+
         $down_payment = $this->input->post('downPayment');
         $price = $this->input->post('price');
         $response = [];
         $this->credits->after_get = ['set_money'];
         $credits = $this->credits->get_many_by('lease_id', $this->input->post('lease_id'));
-        foreach($credits as $credit) {
-          $pure_dp = ($down_payment - $credit->administration) - substr(($credit->insurance * $price), 0, -2);
-          $percent = round((float) ($pure_dp / $price) * 100, 2);
-          $net_finance = $price + (substr(($credit->insurance * $price), 0, -2)) + $credit->administration - $down_payment;
-          $formula1 = round(($credit->effective_rate / 12) / 100, 2);
-          $formula2 = pow((1 + $formula1), ($credit->tenor * -1));
-          $installment = (floor($net_finance - $credit->effective_rate) * $formula1) / (1 - $formula2);
-          $flat = ((float)(($installment * $credit->tenor) - $net_finance) / $net_finance) * 100;
-          $response[] = [
+        foreach ($credits as $credit) {
+            $pure_dp = ($down_payment - $credit->administration) - substr(($credit->insurance * $price), 0, -2);
+            $percent = round((float) ($pure_dp / $price) * 100, 2);
+            $net_finance = $price + (substr(($credit->insurance * $price), 0, -2)) + $credit->administration - $down_payment;
+            $formula1 = round(($credit->effective_rate / 12) / 100, 2);
+            $formula2 = pow((1 + $formula1), ($credit->tenor * -1));
+            $installment = (floor($net_finance - $credit->effective_rate) * $formula1) / (1 - $formula2);
+            $flat = ((float)(($installment * $credit->tenor) - $net_finance) / $net_finance) * 100;
+            $response[] = [
             'credit_id' => $credit->id,
             'tenor' => $credit->tenor,
             'installment' => round($installment),
@@ -103,10 +135,9 @@ class Credit extends CI_Controller
           ];
         }
 
-        $this->output
+        return $this->output
             ->set_content_type('application/json', 'utf-8')
-            ->set_output(json_encode($response))
-            ->_display();
+            ->set_output(json_encode($response));
 
         exit;
     }

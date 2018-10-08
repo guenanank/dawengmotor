@@ -9,28 +9,34 @@
 </div>
 <div class="card mt-3">
   <div class="card-header">
-    <i class="fa fa-plus">&nbsp;</i>Ubah Leasing Pembayaran
+    <i class="fa fa-plus"></i>&nsp;Ubah&nbsp;<?php echo $title ?>
   </div>
   <div class="card-body">
-    <?php echo form_open('lease/update/' . $lease->id) ?>
-    <div class="form-row mb-2">
-      <div class="form-group col-md-12">
-        <?php echo form_label('Nama', 'lease-name') ?>
-        <?php echo form_input(['name' => 'name', 'id' => 'lease-name', 'class' => empty(form_error('name')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Nama Leasing Pembayaran', 'value' => $lease->name]) ?>
-        <div class="invalid-feedback">
-          <?php echo form_error('name') ?>
-        </div>
+    <?php echo form_open('lease/update/' . $lease->id, ['class' => 'ajaxform', 'data-module' => 'lease']) ?>
+      <div class="form-group">
+        <?php echo form_label('Nama', 'lease-name', ['class' => 'col-form-label']) ?>
+        <?php echo form_input([
+              'name' => 'name',
+              'id' => 'lease-name',
+              'class' => 'form-control',
+              'placeholder' => sprintf('Nama %s', $title),
+              'value' => $lease->name
+            ])
+          ?>
+        <div id="feedback-name"></div>
       </div>
-    </div>
-    <div class="form-row mb-2">
-      <div class="form-group col-md-12">
-        <?php echo form_label('Keterangan', 'lease-description') ?>
-        <?php echo form_textarea(['name' => 'description', 'id' => 'lease-description', 'class' => empty(form_error('description')) ? 'form-control' : 'form-control is-invalid', 'placeholder' => 'Keterangan Leasing Pembayaran', 'value' => $lease->description]) ?>
-        <div class="invalid-feedback">
-          <?php echo form_error('description') ?>
-        </div>
+      <div class="form-group">
+        <?php echo form_label('Keterangan', 'lease-description', ['class' => 'col-form-label']) ?>
+        <?php echo form_textarea([
+              'name' => 'description',
+              'id' => 'lease-description',
+              'class' => 'form-control',
+              'placeholder' => sprintf('Keterangan %s', $title),
+              'value' => $lease->description
+            ])
+          ?>
+        <div id="feedback-description"></div>
       </div>
-    </div>
     <?php include APPPATH . 'views/button_form.php' ?>
     <?php echo form_close() ?>
   </div>

@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Debtor extends CI_Controller
 {
-    protected $title = 'Simulasi Angsuran';
+    protected $title = 'Debitur';
 
     public function __construct()
     {
@@ -53,21 +53,32 @@ class Debtor extends CI_Controller
 
     public function insert()
     {
-        if ($this->form_validation->run()) {
-            $this->debtors->insert($this->input->post());
-            redirect('debtor');
-        } else {
-            return $this->create();
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
         }
+
+        if ($this->form_validation->run()) {
+            $status = 200;
+            $messege = ['create' => $this->debtors->insert($this->input->post())];
+        } else {
+            $status = 422;
+            $messege = $this->form_validation->error_array();
+        }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
     }
 
     public function edit($id = null)
     {
-        $debtor = $this->debtors->get($id);
         $option = [
+          'debtor' => $this->debtors->get($id),
+          'gender' => $this->debtors->gender(),
           'home_status' => $this->debtors->home_status(),
-          'work' => $this->debtors->works(),
-          'income' => $this->debtors->incomes()
+          'works' => $this->debtors->works(),
+          'incomes' => $this->debtors->incomes()
         ];
         $this->load->view('header', ['title' => $this->title]);
         $this->load->view('debtor/edit', $option);
@@ -76,22 +87,40 @@ class Debtor extends CI_Controller
 
     public function update($id = null)
     {
-        $debtor = $this->debtors->get($id);
-        if (!empty($debtor) && $this->form_validation->run()) {
-            $this->debtors->update($debtor->id, $this->input->post());
-            redirect('debtor');
-        } else {
-            return $this->edit($debtor->id);
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
         }
+
+        $debtor = $this->debtors->get($id);
+        if ($this->form_validation->run()) {
+            $status = 200;
+            $messege = ['update' => $this->debtors->update($debtor->id, $this->input->post())];
+        } else {
+            $status = 422;
+            $messege = $this->form_validation->error_array();
+        }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
     }
 
     public function delete($id = null)
     {
-        $debtor = $this->debtors->get($id);
-        if (!empty($debtor)) {
-            return $this->debtors->delete($debtor->id);
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
         }
 
-        return false;
+        $debtor = $this->debtors->get($id);
+        $return = false;
+        if (!empty($debtor)) {
+            $return = $this->debtors->delete($debtor->id);
+        }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header(200)
+          ->set_output(json_encode([$return]));
+        exit;
     }
 }

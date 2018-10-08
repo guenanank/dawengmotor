@@ -1,7 +1,7 @@
 <?php
 
 if (!function_exists('debug')) {
-    function dd($data, $exit = true)
+    function debug($data, $exit = true)
     {
         if (empty($data) && $exit) {
             print_error('Data is empty');
@@ -205,5 +205,14 @@ if (!function_exists('array_flatten')) {
             }
         }
         return $result;
+    }
+}
+
+if (!function_exists('now_url')) {
+    function now_url()
+    {
+        $ci =& get_instance();
+        $url = $ci->config->site_url($ci->uri->uri_string());
+        return $ci->input->server('QUERY_STRING') ? sprintf('%s?%s', $url, $ci->input->server('QUERY_STRING')) : $url;
     }
 }

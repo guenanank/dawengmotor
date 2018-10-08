@@ -8,7 +8,7 @@
     if (price.val().length < 1 || downPayment.val().length < 1) {
       swal({
         title: '',
-        text: 'Bidang harga atau uang muka harus di isi.',
+        text: 'Bidang harga dan uang muka harus di isi.',
         type: 'warning',
         showConfirmButton: false,
         timer: 5000

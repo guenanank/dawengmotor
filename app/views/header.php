@@ -4,7 +4,7 @@
 <head>
   <base href="<?php echo base_url() ?>" />
   <title>Dawenk Motor
-    <?php echo empty($title) ? null : ' - ' . $title ?>
+    <?php echo empty($title) ? null : ' &HorizontalLine; ' . $title ?>
   </title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('asset/images/favicon.ico') ?>" />

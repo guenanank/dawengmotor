@@ -1,13 +1,21 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="pull-right">
-      <a href="<?php echo base_url('product') ?>" class="btn btn-secondary">
+      <a href="<?php echo base_url('product') ?>"
+        class="btn btn-secondary"
+        data-toggle="tooltip"
+        data-placement="left"
+        title="Kembali ke Daftar Produk">
       <i class="fa fa-arrow-left"></i>&nbsp;Kembali
     </a>&nbsp;
-    <a href="<?php echo base_url('lease') ?>" class="btn btn-dark">
+    <a href="<?php echo base_url('lease') ?>"
+      class="btn btn-dark"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="Tambah Daftar Leasing">
       <i class="fa fa-list"></i>&nbsp;Daftar Leasing
     </a>&nbsp;
-    <a href="<?php echo base_url('credit/create') ?>" class="btn btn-success">
+    <a href="<?php echo base_url('credit/create') ?>" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Tambah&nbsp;<?php echo $title ?>">
       <i class="fa fa-plus"></i>&nbsp;Tambah
     </a>
     </div>
@@ -15,7 +23,8 @@
 </div>
 <div class="card mt-3">
   <div class="card-header">
-    <i class="fa fa-table">&nbsp;</i>Daftar Simulasi Perhitungan Angsuran</div>
+    <i class="fa fa-table">&nbsp;</i>Daftar&nbsp;<?php echo $title ?>
+  </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

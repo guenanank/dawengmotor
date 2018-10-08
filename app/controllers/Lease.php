@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Lease extends CI_Controller
 {
-    protected $title = 'Merek Kendaraan';
+    protected $title = 'Leasing Pembayaran';
 
     public function __construct()
     {
@@ -36,18 +36,22 @@ class Lease extends CI_Controller
 
     public function insert()
     {
-      if ($this->form_validation->run()) {
-          $status = 200;
-          $messege = ['create' => $this->leases->insert($this->input->post())];
-      } else {
-          $status = 422;
-          $messege = $this->form_validation->error_array();
-      }
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
+        }
 
-      return $this->output->set_content_type('application/json')
+        if ($this->form_validation->run()) {
+            $status = 200;
+            $messege = ['create' => $this->leases->insert($this->input->post())];
+        } else {
+            $status = 422;
+            $messege = $this->form_validation->error_array();
+        }
+
+        return $this->output->set_content_type('application/json')
         ->set_status_header($status)
         ->set_output(json_encode($messege));
-      exit;
+        exit;
     }
 
     public function edit($id = null)
@@ -60,6 +64,10 @@ class Lease extends CI_Controller
 
     public function update($id = null)
     {
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
+        }
+
         $lease = $this->leases->get($id);
         if ($this->form_validation->run()) {
             $status = 200;
@@ -77,6 +85,10 @@ class Lease extends CI_Controller
 
     public function delete($id = null)
     {
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
+        }
+      
         $lease = $this->leases->get($id);
         $return = false;
         if (!empty($lease)) {

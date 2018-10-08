@@ -25,7 +25,7 @@ class Debtor_model extends MY_Model
         ])->order_by('number', 'desc')->limit('1')->get($this->_table)->result();
 
         $nomer = empty($terakhir) ? 0 : substr($terakhir, 6);
-        return sprintf('%dDW%02d%04d', date('y'), date('m'), $nomer + 1);
+        return sprintf('%d%02dDW%04d', date('y'), date('m'), $nomer + 1);
     }
 
     public function gender()
