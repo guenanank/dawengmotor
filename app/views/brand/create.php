@@ -49,7 +49,7 @@
       <div class="form-group">
         <?php echo form_label('Tipe', 'brand-type', ['class' => 'col-form-label']) ?>
         <select name="type"
-            class="form-control selectpicker" 
+            class="form-control selectpicker"
             id="brand-type"
             title="Pilih Tipe <?php echo $title ?>">
         <?php

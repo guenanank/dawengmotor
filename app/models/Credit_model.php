@@ -1,20 +1,21 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Description of Credits Model
  *
  * @author nanank
  */
-class Credit_model extends MY_Model {
-
+class Credit_model extends MY_Model
+{
     public $belongs_to = ['lease'];
     public $after_get = ['get_money'];
     public $before_create = ['set_money', 'created_at'];
     public $before_update = ['set_money', 'updated_at'];
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -37,5 +38,4 @@ class Credit_model extends MY_Model {
         }
         return $row;
     }
-
 }

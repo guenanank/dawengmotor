@@ -12,6 +12,10 @@ class Debtor_model extends MY_Model
     public $before_create = ['created_at'];
     public $before_update = ['updated_at'];
 
+    private $gender = ['Pria', 'Wanita'];
+    private $home_status = ['Pribadi', 'Sewa/Kontrak', 'Keluarga', 'Kantor', 'Lainnya'];
+    private $works = ['PNS', 'BUMN', 'TNI/Polri', 'Karyawan Swasta', 'Profesional', 'Wiraswasta'];
+
     public function __construct()
     {
         parent::__construct();
@@ -28,35 +32,31 @@ class Debtor_model extends MY_Model
         return sprintf('%d%02dDW%04d', date('y'), date('m'), $nomer + 1);
     }
 
-    public function gender()
+    public function gender($gender = null)
     {
-        return [
-          'male' => 'Pria',
-          'female' => 'Wanita'
-        ];
+        $keys = array_map(function ($item) {
+            return camelize($item);
+        }, $this->gender);
+        $lists = array_combine($keys, $this->gender);
+        return is_null($gender) ? $lists : $lists[$gender];
     }
 
-    public function home_status()
+    public function home_status($home_status = null)
     {
-        return [
-          'pribadi' => 'Pribadi',
-          'sewa' => 'Sewa/Kontrak',
-          'keluarga' => 'Keluarga',
-          'kantor' => 'Kantor',
-          'lainnya' => 'Lainnya'
-        ];
+        $keys = array_map(function ($item) {
+            return camelize($item);
+        }, $this->home_status);
+        $lists = array_combine($keys, $this->home_status);
+        return is_null($home_status) ? $lists : $lists[$home_status];
     }
 
-    public function works()
+    public function works($works = null)
     {
-        return [
-          'pns' => 'PNS',
-          'bumn' => 'BUMN',
-          'tni/polri' => 'TNI/Polri',
-          'karyawan' => 'Karyawan Swasta',
-          'profesional' => 'Profesional',
-          'wiraswasta' => 'Wiraswasta'
-        ];
+        $keys = array_map(function ($item) {
+            return camelize($item);
+        }, $this->works);
+        $lists = array_combine($keys, $this->works);
+        return is_null($works) ? $lists : $lists[$works];
     }
 
     public function incomes()

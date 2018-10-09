@@ -44,10 +44,18 @@
                 <tr>
                   <td><?php echo $debtor->fullname ?></td>
                   <td class="text-center">
-                    <a href="<?php echo base_url('debtor/edit/' . $debtor->id) ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Ubah <?php echo $debtor->fullname ?>">
+                    <a href="<?php echo base_url('debtor/edit/' . $debtor->id) ?>"
+                      class="btn btn-info"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Ubah <?php echo $debtor->fullname ?>">
                         <i class="fa fa-edit"></i>
                       </a>&nbsp;
-                    <a href="<?php echo base_url('debtor/delete/' . $debtor->id) ?>" class="btn btn-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus <?php echo $debtor->fullname ?>?">
+                    <a href="<?php echo base_url('debtor/delete/' . $debtor->id) ?>"
+                      class="btn btn-danger delete"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Hapus <?php echo $debtor->fullname ?>?">
                         <i class="fa fa-trash"></i>
                       </a>
                   </td>

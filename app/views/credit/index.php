@@ -74,10 +74,18 @@
                 <?php echo number_format($credit->effective_rate, 2) ?>%
               </td>
               <td class="text-center">
-                <a href="<?php echo base_url('credit/edit/' . $credit->id) ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Ubah <?php echo $credit->lease->name ?>">
+                <a href="<?php echo base_url('credit/edit/' . $credit->id) ?>"
+                  class="btn btn-info"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Ubah <?php echo $credit->lease->name ?>">
                   <i class="fa fa-edit"></i>
                 </a>&nbsp;
-                <a href="<?php echo base_url('credit/delete/' . $credit->id) ?>" class="btn btn-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus <?php echo $credit->lease->name ?>?">
+                <a href="<?php echo base_url('credit/delete/' . $credit->id) ?>"
+                  class="btn btn-danger delete"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Hapus <?php echo $credit->lease->name ?>?">
                   <i class="fa fa-trash"></i>
                 </a>
               </td>

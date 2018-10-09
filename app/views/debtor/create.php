@@ -106,7 +106,7 @@
       <select name="home_status"
           class="form-control selectpicker"
           id="debtor-home_status"
-          title="Pilih Status Tempat Tinggal/Rumah">
+          title="<?php echo sprintf('Pilih Status Tempat Tinggal/Rumah %s', $title) ?>">
           <?php
             foreach($home_status as $key => $value) {
               ?>
@@ -124,7 +124,7 @@
       <select name="work"
         class="form-control selectpicker"
         id="debtor-work"
-        title="Pilih Pekerjaan Debitur">
+        title="<?php echo sprintf('Pilih Pekerjaan %s', $title) ?>">
           <?php
             foreach($works as $key => $value) {
               ?>
@@ -154,7 +154,7 @@
       <select name="income"
           class="form-control selectpicker"
           id="debtor-income"
-          title="Pilih Pemasukan Debitur">
+          title="<?php echo sprintf('Pilih Pemasukan %s', $title) ?>">
           <?php
             foreach($incomes as $key => $value) {
               ?>

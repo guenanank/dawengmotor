@@ -1,7 +1,11 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="pull-right">
-      <a href="<?php echo base_url('lease') ?>" class="btn btn-secondary">
+      <a href="<?php echo base_url('lease') ?>"
+        class="btn btn-secondary"
+        data-toggle="tooltip"
+        data-placement="left"
+        title="<?php echo sprintf('Kembali ke Daftar %s', $title) ?>">
         <i class="fa fa-arrow-left"></i>&nbsp;Kembali
       </a>
     </div>

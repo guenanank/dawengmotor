@@ -43,8 +43,9 @@ echo script_tag('assets/js/bootstrap.bundle.min.js');
 echo script_tag('assets/js/jquery.easing.min.js');
 echo script_tag('assets/js/jquery.dataTables.js');
 echo script_tag('assets/js/dataTables.bootstrap4.js');
-echo script_tag('assets/js/jquery.easing.min.js');
 echo script_tag('assets/js/sweetalert.min.js');
+echo script_tag('assets/js/bootstrap-datepicker.id.min.js');
+echo script_tag('assets/js/bootstrap-datepicker.min.js');
 
 echo script_tag('assets/js/bootstrap-select.bundle.min.js');
 echo script_tag('assets/js/jquery.mask.min.js');
@@ -52,7 +53,7 @@ echo script_tag('assets/js/ajaxform.js');
 // Custom scripts for all pages
 if(!empty($scripts)) {
   foreach($scripts as $script) {
-    echo script_tag($script);
+    echo script_tag(sprintf('assets/js/%s.js', $script));
   }
 }
 ?>
@@ -85,6 +86,18 @@ if(!empty($scripts)) {
       });
 
       $('.selectpicker').selectpicker();
+      $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+      });
+      $('.textEditor').summernote({
+        height: 450,
+        toolbar: [
+          ['style', ['clear', 'bold', 'italic', 'underline']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['picture', 'video', 'link']],
+          ['misc', ['undo', 'redo', 'codeview', 'help']]
+        ]
+      });
 
       $('body').on('click', 'a.delete', function(e) {
         e.preventDefault();

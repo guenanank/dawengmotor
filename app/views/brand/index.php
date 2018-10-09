@@ -46,9 +46,7 @@
             foreach($brands as $brand) {
               ?>
           <tr>
-            <td>
-              <?php echo $brand->name ?>
-            </td>
+            <td><?php echo $brand->name ?></td>
             <td class="text-center">
               <?php echo isset($brand->parent) ? $brand->parent->name : null ?>
             </td>
@@ -56,10 +54,18 @@
               <?php echo ucwords($brand->type) ?>
             </td>
             <td class="text-center">
-              <a href="<?php echo base_url('brand/edit/' . $brand->id) ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Ubah <?php echo $brand->name ?>">
+              <a href="<?php echo base_url('brand/edit/' . $brand->id) ?>"
+                class="btn btn-info"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Ubah <?php echo $brand->name ?>">
                   <i class="fa fa-edit"></i>
                 </a>&nbsp;
-              <a href="<?php echo base_url('brand/delete/' . $brand->id) ?>" class="btn btn-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus <?php echo $brand->name ?>?">
+              <a href="<?php echo base_url('brand/delete/' . $brand->id) ?>"
+                class="btn btn-danger delete"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Hapus <?php echo $brand->name ?>?">
                   <i class="fa fa-trash"></i>
                 </a>
             </td>

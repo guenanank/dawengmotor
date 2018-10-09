@@ -63,10 +63,18 @@
                 <h5><strong class="text-primary">Rp. <?php echo $product->price ?>.-</strong></h5>
               </td>
               <td class="text-center">
-                <a href="<?php echo base_url('product/edit/' . $product->id) ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Ubah <?php echo $product->brand->name ?>">
+                <a href="<?php echo base_url('product/edit/' . $product->id) ?>"
+                  class="btn btn-info"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Ubah <?php echo $product->brand->name ?>">
                       <i class="fa fa-edit"></i>
                     </a>&nbsp;
-                <a href="<?php echo base_url('product/delete/' . $product->id) ?>" class="btn btn-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus <?php echo $product->brand->name ?>?">
+                <a href="<?php echo base_url('product/delete/' . $product->id) ?>"
+                  class="btn btn-danger delete"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Hapus <?php echo $product->brand->name ?>?">
                       <i class="fa fa-trash"></i>
                     </a>
               </td>
