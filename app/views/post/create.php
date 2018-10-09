@@ -29,7 +29,6 @@
          ?>
         <div id="feedback-title"></div>
       </div>
-
       <div class="form-group">
         <?php echo form_label('Kategori', 'post-category', ['class' => 'col-form-label']) ?>
         <select name="category"
@@ -48,7 +47,6 @@
         </select>
         <div id="feedback-category"></div>
       </div>
-
       <div class="form-group">
         <?php echo form_label('Konten', 'post-content', ['class' => 'col-form-label']) ?>
         <?php echo form_textarea([
@@ -61,7 +59,19 @@
          ?>
         <div id="feedback-content"></div>
       </div>
-
+      <div class="form-group">
+        <?php echo form_label('Label', 'post-tags', ['class' => 'col-form-label']) ?>
+        <?php echo form_input([
+            'name' => 'tags',
+            'id' => 'post-tags',
+            'class' => 'form-control',
+            'data-role' => 'tagsinput',
+            'placeholder' => sprintf('Label %s', $title),
+            'value' => set_value('tags')
+          ])
+         ?>
+        <div id="feedback-tag"></div>
+      </div>
     <?php include APPPATH . 'views/button_form.php' ?>
     <?php echo form_close() ?>
   </div>

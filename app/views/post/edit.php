@@ -59,6 +59,19 @@
          ?>
         <div id="feedback-content"></div>
       </div>
+      <div class="form-group">
+        <?php echo form_label('Label', 'post-tags', ['class' => 'col-form-label']) ?>
+        <?php echo form_input([
+            'name' => 'tags',
+            'id' => 'post-tags',
+            'class' => 'form-control',
+            'data-role' => 'tagsinput',
+            'placeholder' => sprintf('Label %s', $title),
+            'value' => $post->tags
+          ])
+         ?>
+        <div id="feedback-tag"></div>
+      </div>
     <?php include APPPATH . 'views/button_form.php' ?>
     <?php echo form_close() ?>
   </div>

@@ -10,8 +10,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Post extends CI_Controller
 {
     protected $title = 'Artikel Berita';
-    protected $scripts = ['summernote-bs4.min'];
-    protected $styles = ['summernote-bs4'];
+    protected $scripts = ['summernote-bs4.min', 'tagsinput'];
+    protected $styles = ['summernote-bs4', 'tagsinput'];
 
     public function __construct()
     {

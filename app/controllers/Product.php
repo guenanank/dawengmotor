@@ -11,13 +11,15 @@ class Product extends CI_Controller
 {
     protected $title = 'Unit Produk';
     protected $scripts = [
-      'assets/js/fileinput.min.js',
-      'assets/js/theme.min.js',
-      'assets/js/backend.js',
+      'summernote-bs4.min',
+      'fileinput.min',
+      'theme.min',
+      'product',
     ];
 
     protected $styles = [
-      'assets/css/fileinput.min.css'
+      'summernote-bs4',
+      'fileinput.min'
     ];
 
     private $data_credits;

@@ -85,20 +85,6 @@ if(!empty($scripts)) {
         $(this).ajaxform();
       });
 
-      $('.selectpicker').selectpicker();
-      $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
-      });
-      $('.textEditor').summernote({
-        height: 450,
-        toolbar: [
-          ['style', ['clear', 'bold', 'italic', 'underline']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['insert', ['picture', 'video', 'link']],
-          ['misc', ['undo', 'redo', 'codeview', 'help']]
-        ]
-      });
-
       $('body').on('click', 'a.delete', function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
@@ -127,7 +113,22 @@ if(!empty($scripts)) {
               });
             }
           });
+      });
 
+      $('.selectpicker').selectpicker();
+      $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd'
+      });
+
+      $('.textEditor').summernote({
+        height: 400,
+        placeholder: $('.textEditor').attr('placeholder'),
+        toolbar: [
+          ['style', ['clear', 'bold', 'italic', 'underline']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['picture', 'video', 'link']],
+          ['misc', ['undo', 'redo', 'codeview', 'help']]
+        ]
       });
     });
   </script>

@@ -12,10 +12,14 @@
       class="btn btn-dark"
       data-toggle="tooltip"
       data-placement="top"
-      title="Tambah Daftar Leasing">
+      title="Lihat Daftar Leasing">
       <i class="fa fa-list"></i>&nbsp;Daftar Leasing
     </a>&nbsp;
-    <a href="<?php echo base_url('credit/create') ?>" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Tambah&nbsp;<?php echo $title ?>">
+    <a href="<?php echo base_url('credit/create') ?>"
+      class="btn btn-success"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="Tambah&nbsp;<?php echo $title ?>">
       <i class="fa fa-plus"></i>&nbsp;Tambah
     </a>
     </div>

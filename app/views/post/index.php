@@ -51,7 +51,7 @@
                 class="btn btn-danger delete"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Hapus <?php echo $post->title ?>?">
+                title="Hapus <?php echo $post->title ?>">
                   <i class="fa fa-trash"></i>
                 </a>
             </td>
