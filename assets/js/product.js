@@ -1,5 +1,6 @@
 (function($) {
 
+  var base_url = $('base').attr('href');
   var price = $('input[name="price"]');
   var downPayment = $('input[name="down_payment"]');
 
@@ -19,7 +20,7 @@
       var id = $(this).val();
       $.ajax({
         type: 'POST',
-        url: $('base').attr('href') + 'credit/calculate',
+        url: base_url + 'credit/calculate',
         data: {
           lease_id: id,
           price: price.val().replace(/,/g, ''),
