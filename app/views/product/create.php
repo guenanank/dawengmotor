@@ -13,7 +13,8 @@
 </div>
 <div class="card mt-3">
   <div class="card-header">
-    <i class="fa fa-plus">&nbsp;</i>Tambah Unit Produk
+    <i class="fa fa-plus"></i>&nbsp;Tambah&nbsp;
+    <?php echo $title ?>
   </div>
   <div class="card-body">
     <?php echo form_open_multipart('product/insert', ['class' => 'ajaxform']) ?>
@@ -25,7 +26,7 @@
             class="form-control selectpicker"
             id="product-brand_id"
             data-live-search="true"
-            title="Pilih Unit Merek Kendaraan">
+            title="<?php echo sprintf('Pilih Merek %s', $title) ?>">
           <?php
             foreach ($brands as $parent => $brand) {
               ?>
@@ -52,7 +53,7 @@
             class="form-control selectpicker"
             id="product-year"
             data-live-search="true"
-            title="Pilih Unit Tahun">
+            title="<?php echo sprintf('Pilih Tahun %s', $title) ?>">
         <?php
           foreach ($years as $key => $value) {
             ?>
@@ -67,30 +68,30 @@
       </div>
     </div>
 
-      <div class="form-group">
-        <?php echo form_label('Keterangan', 'product-description', ['class' => 'col-form-label']) ?>
-        <?php echo form_textarea([
-              'name' => 'description',
-              'id' => 'product-description',
-              'class' => 'form-control',
-              'placeholder' => 'Keterangan Unit Kendaraan (Berkas, Plat Nomer, Kondisi, Tahun, dll)',
-              'value' => set_value('description')
-            ])
-          ?>
-        <div id="feedback-description"></div>
-      </div>
+    <div class="form-group">
+      <?php echo form_label('Keterangan', 'product-description', ['class' => 'col-form-label']) ?>
+      <?php echo form_textarea([
+            'name' => 'description',
+            'id' => 'product-description',
+            'class' => 'form-control',
+            'placeholder' => sprintf('Keterangan %s Kendaraan (Berkas, Plat Nomer, Kondisi, dll)', $title),
+            'value' => set_value('description')
+          ])
+        ?>
+      <div id="feedback-description"></div>
+    </div>
 
-      <div class="form-group">
-        <?php echo form_label('Foto', 'product-photos', ['class' => 'col-form-label']) ?>
-        <?php echo form_upload([
-              'name' => 'photos[]',
-              'id' => 'product-photos',
-              'class' => 'form-control krajee',
-              'multiple' => 'true'
-            ])
-          ?>
-        <div id="feedback-photos"></div>
-      </div>
+    <div class="form-group">
+      <?php echo form_label('Foto', 'product-photos', ['class' => 'col-form-label']) ?>
+      <?php echo form_upload([
+            'name' => 'photos[]',
+            'id' => 'product-photos',
+            'class' => 'form-control krajee',
+            'multiple' => 'true'
+          ])
+        ?>
+      <div id="feedback-photos"></div>
+    </div>
 
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -105,9 +106,9 @@
                 'data-mask-reverse' => 'true',
                 'id' => 'product-price',
                 'class' => 'form-control rounded-right',
-                'placeholder' =>
-                'Harga Unit Kendaraan',
-                'value' => set_value('price')
+                'placeholder' => sprintf('Harga %s', $title),
+                'value' => set_value('price'),
+                'aria-describedby' => 'addon-price'
               ])
             ?>
           <div id="feedback-price"></div>
@@ -125,8 +126,9 @@
                 'data-mask-reverse' => 'true',
                 'id' => 'product-down_payment',
                 'class' => 'form-control rounded-right',
-                'placeholder' => 'Uang Muka Unit Kendaraan',
-                'value' => set_value('down_payment')
+                'placeholder' => sprintf('Uang Muka %s', $title),
+                'value' => set_value('down_payment'),
+                'aria-describedby' => 'addon-down_payment'
               ])
             ?>
           <div id="feedback-down_payment"></div>
@@ -134,27 +136,37 @@
       </div>
     </div>
 
-      <div class="form-group">
-        <?php echo form_label('Leasing', 'product-leases', ['class' => 'col-form-label']) ?>
-        <select name="leases"
-            class="form-control selectpicker"
-            id="product-leases"
-            title="Pilih Leasing Pembayaran">
-          <?php
-            foreach($leases as $k => $v) {
-              ?>
-                <option value="<?php echo $k ?>"><?php echo $v ?></option>
-              <?php
-            }
-          ?>
-        </select>
-        <div class="invalid-feedback">
-          <?php echo form_error('leases') ?>
+    <div class="form-group">
+      <?php echo form_label('Leasing', 'product-leases', ['class' => 'col-form-label']) ?>
+      <select name="lease_id"
+          class="form-control selectpicker"
+          id="product-lease_id"
+          title="<?php echo sprintf('Pilih Leasing %s', $title) ?>">
+        <?php
+          foreach($leases as $k => $v) {
+            ?>
+              <option value="<?php echo $k ?>"><?php echo $v ?></option>
+            <?php
+          }
+        ?>
+      </select>
+      <div id="feedback-lease_id"></div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover table-sm">
+            <caption>Daftar Simulasi Angsuran</caption>
+            <thead class="text-center thead-light">
+              <th scope="col">Tenor</th>
+              <th scope="col">Angsuran</th>
+              <th scope="col">Bunga</th>
+            </thead>
+            <tbody id="leases"></tbody>
+          </table>
         </div>
       </div>
-
-    <div class="card mb-4">
-      <div class="card-body" id="leases"></div>
     </div>
 
     <?php include APPPATH . 'views/button_form.php' ?>

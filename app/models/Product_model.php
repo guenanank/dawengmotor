@@ -19,6 +19,52 @@ class Product_model extends MY_Model
         parent::__construct();
     }
 
+    // public function get_photo($row)
+    // {
+    //     if (is_object($row)) {
+    //         $decode = json_decode($row->photos, true);
+    //         $photos = array_map(function($photo) {
+    //           return sprintf('%sassets/uploads/original/%s', base_url(), $photo);
+    //         }, $decode);
+    //
+    //         $return = [];
+    //         foreach($photos as $index => $photo) {
+    //           $metadata = exif_read_data($photo);
+    //           $return[] = [
+    //             'index' => $index,
+    //             'caption' => $decode[$index],
+    //             'url' => $photo,
+    //             'mime' => $metadata['MimeType'],
+    //             'size' => $metadata['FileSize']
+    //           ];
+    //         }
+    //
+    //         $row->photos = $return;
+    //
+    //     } else {
+    //       $decode = json_decode($row['photos'], true);
+    //       $photos = array_map(function($photo) {
+    //         return sprintf('%sassets/uploads/original/%s', base_url(), $photo);
+    //       }, $decode);
+    //
+    //       $return = [];
+    //       foreach($photos as $index => $photo) {
+    //         $metadata = exif_read_data($photo);
+    //         $return[] = [
+    //           'index' => $index,
+    //           'caption' => $decode[$index],
+    //           'url' => $photo,
+    //           'mime' => $metadata['MimeType'],
+    //           'size' => $metadata['FileSize']
+    //         ];
+    //       }
+    //
+    //       $row['photos'] = $return;
+    //     }
+    //
+    //     return $row;
+    // }
+
     public function get_photo($row)
     {
         if (is_object($row)) {

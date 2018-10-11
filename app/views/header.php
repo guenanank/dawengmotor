@@ -29,9 +29,18 @@
     echo link_tag('assets/css/sb-admin.min.css');
     ?>
     <style>
+      .table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
       .table tbody>tr>th,
       .table tbody>tr>td {
         vertical-align: middle;
+      }
+
+      input[type="radio"], input[type="checkbox"] {
+        line-height: normal;
+        margin: 0;
       }
     </style>
     <script>

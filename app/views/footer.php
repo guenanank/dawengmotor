@@ -44,7 +44,6 @@ echo script_tag('assets/js/jquery.easing.min.js');
 echo script_tag('assets/js/jquery.dataTables.js');
 echo script_tag('assets/js/dataTables.bootstrap4.js');
 echo script_tag('assets/js/sweetalert.min.js');
-echo script_tag('assets/js/bootstrap-datepicker.id.min.js');
 echo script_tag('assets/js/bootstrap-datepicker.min.js');
 
 echo script_tag('assets/js/bootstrap-select.bundle.min.js');
@@ -82,7 +81,15 @@ if(!empty($scripts)) {
 
       $('form.ajaxform').submit(function(e) {
         e.preventDefault();
-        $(this).ajaxform();
+        var form = e.target;
+        var data = new FormData(form);
+        $.each(form.files, function(k, v) {
+          data.append('photos', form.files[k]);
+        });
+
+        $(this).ajaxform({
+          data: data
+        });
       });
 
       $('body').on('click', 'a.delete', function(e) {

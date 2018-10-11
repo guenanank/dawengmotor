@@ -16,7 +16,7 @@ class Lease extends CI_Controller
         parent::__construct();
         $this->load->model('Lease_model', 'leases');
         $this->form_validation->set_rules('name', 'Nama', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('description', 'Keterangan', 'alpha_numeric');
+        $this->form_validation->set_rules('description', 'Keterangan', 'trim');
     }
 
     public function index()
@@ -88,7 +88,7 @@ class Lease extends CI_Controller
         if ($this->input->is_ajax_request() == false) {
             show_404();
         }
-      
+
         $lease = $this->leases->get($id);
         $return = false;
         if (!empty($lease)) {

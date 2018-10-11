@@ -24,15 +24,15 @@
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
+      <table class="table table-bordered table-sm table-hover" id="dataTable">
+        <thead class="thead-light text-center">
           <tr>
-            <th>Nama</th>
-            <th>Keterangan</th>
-            <th>Kontrol</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Keterangan</th>
+            <th scope="col">Kontrol</th>
           </tr>
         </thead>
-        <tfoot>
+        <tfoot class="thead-light text-center">
           <tr>
             <th>Nama</th>
             <th>Keterangan</th>
@@ -52,14 +52,14 @@
               </td>
               <td class="text-center">
                 <a href="<?php echo base_url('lease/edit/' . $lease->id) ?>"
-                  class="btn btn-info"
+                  class="btn btn-info btn-sm"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Ubah <?php echo $lease->name ?>">
                   <i class="fa fa-edit"></i>
                 </a>&nbsp;
                 <a href="<?php echo base_url('lease/delete/' . $lease->id) ?>"
-                  class="btn btn-danger delete"
+                  class="btn btn-danger btn-sm delete"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Hapus <?php echo $lease->name ?>">

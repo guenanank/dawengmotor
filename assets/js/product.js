@@ -4,7 +4,12 @@
   var price = $('input[name="price"]');
   var downPayment = $('input[name="down_payment"]');
 
-  $('select[name="leases"]').on('changed.bs.select', function() {
+  price.blur(function() {
+    $('select[name="lease_id"]').selectpicker('refresh');
+    $('tbody#leases').html('');
+  });
+
+  $('select[name="lease_id"]').on('changed.bs.select', function() {
 
     if (price.val().length < 1 || downPayment.val().length < 1) {
       swal({
@@ -12,11 +17,14 @@
         text: 'Bidang harga dan uang muka harus di isi.',
         type: 'warning',
         showConfirmButton: false,
-        timer: 5000
+        timer: 3000
       });
-      $('div#leases').html('');
+
+      $('tbody#leases').html('');
+
     } else {
-      $('div#leases').html('');
+
+      $('tbody#leases').html('');
       var id = $(this).val();
       $.ajax({
         type: 'POST',
@@ -30,21 +38,26 @@
           $('div#leases').html('<h6 class="card-title">Angsuran</h6>');
 
           var lists = '';
-          $.each(credits, function(k, item) {
-              lists += '<div class="form-check">';
-              lists += '<input name="credits[]" class="form-check-input" type="checkbox" value="" id="' + item.credit_id + '">';
-              lists += '<label class="form-check-label" for="' + item.credit_id + '">';
-              lists += item.tenor + ' x Rp. ' + numberFormat(item.installment) + ' (Flat ' + item.flat + '%)';
-              lists += '</label>';
-              lists += '</div>';
-          });
-          // var lists = '<ul class="list-group">';
-          // $.each(credits, function(k, item) {
-          //   lists += '<li class="list-group-item">' + item.tenor + ' x Rp. ' + numberFormat(item.installment) + ' (Flat ' + item.flat + '%)</li>'
-          // });
-          // lists += '</ul>';
 
-          $('div#leases').append(lists).fadeIn('slow');
+          $.each(credits, function(k, item) {
+            lists += '<tr>';
+
+            lists += '<td class="text-center">' + item.tenor + 'x</td>';
+
+            lists += '<td class="text-right">';
+            lists += '<input type="hidden" name="credits[' + item.credit_id + '][installment]" value="' + item.installment + '">';
+            lists += 'Rp. ' + numberFormat(item.installment) + ' / Bulan';
+            lists += '</td>';
+
+            lists += '<td class="text-center">';
+            lists += '<input type="hidden" name="credits[' + item.credit_id + '][flat]" value="' + item.flat + '">';
+            lists += item.flat + '% (Flat)';
+            lists += '</td>';
+
+            lists += '</tr>';
+          });
+
+          $('tbody#leases').append(lists).fadeIn('slow');
         }
       });
     }
@@ -69,7 +82,7 @@
     toolbar: [
       ['style', ['bold', 'italic', 'underline']],
       ['para', ['ul', 'ol', 'paragraph']],
-      ['misc', ['undo', 'redo', 'help']]
+      ['misc', ['help']]
     ]
   });
 

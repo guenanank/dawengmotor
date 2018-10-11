@@ -31,19 +31,19 @@
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
+      <table class="table table-bordered table-sm table-hover" id="dataTable">
+        <thead class="thead-light text-center">
           <tr>
-            <th>Nama Leasing</th>
-            <th>Tenor</th>
-            <th>Administrasi</th>
-            <!-- <th>Pajak</th> -->
-            <th>Asuransi</th>
-            <th>Rata-rata Efektif</th>
-            <th>Kontrol</th>
+            <th scope="col">Nama Leasing</th>
+            <th scope="col">Tenor</th>
+            <th scope="col">Administrasi</th>
+            <!-- <th scope="col">Pajak</th> -->
+            <th scope="col">Asuransi</th>
+            <th scope="col">Rata-rata Efektif</th>
+            <th scope="col">Kontrol</th>
           </tr>
         </thead>
-        <tfoot>
+        <tfoot class="thead-light text-center">
           <tr>
             <th>Nama Leasing</th>
             <th>Tenor</th>
@@ -79,14 +79,14 @@
               </td>
               <td class="text-center">
                 <a href="<?php echo base_url('credit/edit/' . $credit->id) ?>"
-                  class="btn btn-info"
+                  class="btn btn-info btn-sm"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Ubah <?php echo $credit->lease->name ?>">
                   <i class="fa fa-edit"></i>
                 </a>&nbsp;
                 <a href="<?php echo base_url('credit/delete/' . $credit->id) ?>"
-                  class="btn btn-danger delete"
+                  class="btn btn-danger btn-sm delete"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Hapus <?php echo $credit->lease->name ?>?">
