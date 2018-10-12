@@ -67,8 +67,6 @@
         <div id="feedback-year"></div>
       </div>
     </div>
-
-
     <div class="form-group">
       <?php echo form_label('Keterangan', 'product-description', ['class' => 'col-form-label']) ?>
       <?php echo form_textarea([
@@ -81,8 +79,6 @@
           ?>
       <div id="feedback-description"></div>
     </div>
-
-
     <div class="form-group">
       <?php echo form_label('Foto', 'product-photos', ['class' => 'col-form-label']) ?>
       <?php echo form_upload([
@@ -92,9 +88,9 @@
               'multiple' => 'true'
             ])
           ?>
+      <span class="d-none" id="photos"><?php echo json_encode($product->photos, true) ?></span>
       <div id="feedback-photos"></div>
     </div>
-
     <div class="form-row">
       <div class="form-group col-md-6">
         <?php echo form_label('Harga', 'product-price', ['class' => 'col-form-label']) ?>
@@ -137,9 +133,8 @@
         </div>
       </div>
     </div>
-
     <div class="form-group">
-      <?php echo form_label('Leasing', 'product-leases', ['class' => 'col-form-label']) ?>
+      <?php echo form_label('Leasing', 'product-lease_id', ['class' => 'col-form-label']) ?>
       <select name="lease_id"
             class="form-control selectpicker"
             id="product-lease_id"
@@ -147,14 +142,15 @@
           <?php
             foreach($leases as $k => $v) {
               ?>
-                <option value="<?php echo $k ?>"><?php echo $v ?></option>
+                <option value="<?php echo $k ?>" <?php echo set_select('lease_id', $k, $k == $product->lease_id ? true : false) ?>>
+                  <?php echo $v ?>
+                </option>
               <?php
             }
           ?>
         </select>
       <div id="feedback-lease_id"></div>
     </div>
-
     <div class="row justify-content-center">
       <div class="col-10">
         <div class="table-responsive">

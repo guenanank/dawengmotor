@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Product_model extends MY_Model
 {
-    public $belongs_to = ['brand'];
+    public $belongs_to = ['brand', 'lease' => ['primary_key' => 'lease_id', 'model' => 'lease_model']];
     public $after_get = ['get_photo', 'get_money'];
     public $before_create = ['set_money', 'created_at'];
     public $before_update = ['set_money', 'updated_at'];
@@ -18,52 +18,6 @@ class Product_model extends MY_Model
     {
         parent::__construct();
     }
-
-    // public function get_photo($row)
-    // {
-    //     if (is_object($row)) {
-    //         $decode = json_decode($row->photos, true);
-    //         $photos = array_map(function($photo) {
-    //           return sprintf('%sassets/uploads/original/%s', base_url(), $photo);
-    //         }, $decode);
-    //
-    //         $return = [];
-    //         foreach($photos as $index => $photo) {
-    //           $metadata = exif_read_data($photo);
-    //           $return[] = [
-    //             'index' => $index,
-    //             'caption' => $decode[$index],
-    //             'url' => $photo,
-    //             'mime' => $metadata['MimeType'],
-    //             'size' => $metadata['FileSize']
-    //           ];
-    //         }
-    //
-    //         $row->photos = $return;
-    //
-    //     } else {
-    //       $decode = json_decode($row['photos'], true);
-    //       $photos = array_map(function($photo) {
-    //         return sprintf('%sassets/uploads/original/%s', base_url(), $photo);
-    //       }, $decode);
-    //
-    //       $return = [];
-    //       foreach($photos as $index => $photo) {
-    //         $metadata = exif_read_data($photo);
-    //         $return[] = [
-    //           'index' => $index,
-    //           'caption' => $decode[$index],
-    //           'url' => $photo,
-    //           'mime' => $metadata['MimeType'],
-    //           'size' => $metadata['FileSize']
-    //         ];
-    //       }
-    //
-    //       $row['photos'] = $return;
-    //     }
-    //
-    //     return $row;
-    // }
 
     public function get_photo($row)
     {

@@ -23,7 +23,7 @@ class Product extends CI_Controller
       // 'bootstrap-switch'
     ];
 
-    private $data_credits;
+    // private $data_credits;
     private $file_upload;
 
     public function __construct()
@@ -38,7 +38,7 @@ class Product extends CI_Controller
         $this->file_upload = $this->config->item('file_upload');
 
         $this->brands->before_dropdown = ['motor', 'parent'];
-        $this->data_credits = $this->leases->get_all();
+        // $this->data_credits = $this->leases->get_all();
 
         $this->form_validation->set_rules('brand_id', 'Merek', 'required');
         $this->form_validation->set_rules('year', 'Tahun', 'required|max_length[9999]');
@@ -59,11 +59,10 @@ class Product extends CI_Controller
 
     public function create()
     {
-        $header = ['title' => $this->title, 'styles' => $this->styles];
         $brands = $this->brands->custom_dropdown();
         $leases = $this->leases->dropdown('id', 'name');
         $years = $this->products->years();
-        $this->load->view('header', $header);
+        $this->load->view('header', ['title' => $this->title, 'styles' => $this->styles]);
         $this->load->view('product/create', compact('brands', 'leases', 'years'));
         $this->load->view('footer', ['scripts' => $this->scripts]);
     }
@@ -74,30 +73,29 @@ class Product extends CI_Controller
             show_404();
         }
 
-        $data = $this->input->post();
+        $input_post = $this->input->post();
         if ($this->form_validation->run()) {
-
             $this->brands->before_dropdown = [];
             $brands = $this->brands->dropdown('name');
             $this->load->library('uploads', [
               'upload_path' => sprintf('%soriginal', $this->file_upload['path']),
               'allowed_types' => $this->file_upload['image_allowed'],
-              'file_name' => sprintf('dw-%s-%s-0', url_title($brands[$data['brand_id']], '_', true), $data['year']),
+              'file_name' => sprintf('dw-%s-%s-0', url_title($brands[$input_post['brand_id']], '-', true), $input_post['year']),
               'file_ext_tolower' => true
             ]);
 
             if ($this->uploads->do_upload('photos')) {
                 $create = $this->products->insert([
-                    'brand_id' => $data['brand_id'],
-                    'year' => $data['year'],
-                    'description' => $data['description'],
-                    'price' => $data['price'],
-                    'down_payment' => $data['down_payment'],
-                    'lease_id' => $data['lease_id'],
+                    'brand_id' => $input_post['brand_id'],
+                    'year' => $input_post['year'],
+                    'description' => $input_post['description'],
+                    'price' => $input_post['price'],
+                    'down_payment' => $input_post['down_payment'],
+                    'lease_id' => $input_post['lease_id'],
                     'photos' => $this->filename($this->uploads->data())
                 ]);
                 $credits = [];
-                foreach ($data['credits'] as $id => $credit) {
+                foreach ($input_post['credits'] as $id => $credit) {
                     $credits[] = [
                       'product_id' => $create,
                       'credit_id' => $id,
@@ -126,53 +124,89 @@ class Product extends CI_Controller
     public function edit($id = null)
     {
         $product = $this->products->with('brand')->get($id);
-        debug($product);
-        $header = ['title' => $this->title, 'styles' => $this->styles];
         $brands = $this->brands->custom_dropdown();
         $leases = $this->leases->dropdown('id', 'name');
         $years = $this->products->years();
-        $this->load->view('header', $header);
+        $this->load->view('header', ['title' => $this->title, 'styles' => $this->styles]);
         $this->load->view('product/edit', compact('product', 'leases', 'brands', 'years'));
         $this->load->view('footer', ['scripts' => $this->scripts]);
     }
 
     public function update($id = null)
     {
+        if ($this->input->is_ajax_request() == false) {
+            show_404();
+        }
+
         $product = $this->products->get($id);
+        $input_post = $this->input->post();
         if ($this->form_validation->run()) {
-            $filename = [];
+            $this->brands->before_dropdown = [];
+            $brands = $this->brands->dropdown('name');
+            $this->load->library('uploads', [
+            'upload_path' => sprintf('%soriginal', $this->file_upload['path']),
+            'allowed_types' => $this->file_upload['image_allowed'],
+            'file_name' => sprintf('dw-%s-%s-0', url_title($brands[$input_post['brand_id']], '-', true), $input_post['year']),
+            'file_ext_tolower' => true
+          ]);
 
             if ($this->uploads->do_upload('photos')) {
-                $this->delete_photo($product->photos);
-                $filename = array_column($this->uploads->data(), 'file_name');
-            } else {
-                // debug($this->uploads->display_errors());
-                return $this->edit($product->id);
-            }
+                $create = $this->products->update($product->id, [
+                  'brand_id' => $input_post['brand_id'],
+                  'year' => $input_post['year'],
+                  'description' => $input_post['description'],
+                  'price' => $input_post['price'],
+                  'down_payment' => $input_post['down_payment'],
+                  'lease_id' => $input_post['lease_id'],
+                  'photos' => $this->filename($this->uploads->data())
+              ]);
 
-            $data = $this->input->post();
-            $data['photos'] = json_encode($filename, true);
-            $this->products->update($product->id, $data);
-            redirect('product');
+                $credits = [];
+                foreach ($input_post['credits'] as $id => $credit) {
+                    $credits[] = [
+                    'product_id' => $create,
+                    'credit_id' => $id,
+                    'installment' => $credit['installment'],
+                    'flat' => $credit['flat']
+                  ];
+                }
+
+                $status = 200;
+                $messege = $this->product_credits->insert_many($credits);
+            } else {
+                $status = 422;
+                $messege = $this->uploads->display_errors();
+            }
         } else {
-            return $this->edit($product->id);
+            $status = 422;
+            $messege = $this->form_validation->error_array();
         }
+
+        return $this->output->set_content_type('application/json')
+          ->set_status_header($status)
+          ->set_output(json_encode($messege));
+        exit;
     }
 
     public function delete($id = null)
     {
+        $return = false;
         $product = $this->products->get($id);
         if (!empty($product)) {
-            $this->delete_photo($product->photos);
-            return $this->products->delete($product->id);
+            foreach ($product->photos as $photo) {
+                $this->delete_photo($photo['caption']);
+            }
+            $return = $this->products->delete($product->id);
         }
 
-        return false;
+        return $this->output->set_content_type('application/json')
+          ->set_status_header(200)
+          ->set_output(json_encode([$return]));
+        exit;
     }
 
     private function filename($photos)
     {
-
         $filename = [];
         foreach ($photos as $key => $value) {
             $filename[] = [
