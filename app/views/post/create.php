@@ -67,9 +67,13 @@
             'class' => 'form-control',
             'data-role' => 'tagsinput',
             'placeholder' => sprintf('Label %s', $title),
-            'value' => set_value('tags')
+            'value' => set_value('tags'),
+            'aria-describedby' => 'labelHelpBlock'
           ])
          ?>
+        <small id="labelHelpBlock" class="form-text text-muted">
+            #hashtag &HorizontalLine; dipisahkan dengan koma ( , )
+        </small>
         <div id="feedback-tag"></div>
       </div>
     <?php include APPPATH . 'views/button_form.php' ?>

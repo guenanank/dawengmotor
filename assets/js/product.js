@@ -1,17 +1,21 @@
 (function($) {
 
-  var base_url = $('base').attr('href');
+  var baseUrl = $('base').attr('href');
   var price = $('input[name="price"]');
   var downPayment = $('input[name="down_payment"]');
+  var leaseId = $('select[name="lease_id"]');
 
   $('input[name="price"], input[name="down_payment"]').on('blur', function() {
     $('tbody#leases').html('').fadeOut('slow');
+    // if(leaseId.selectpicker('val') === true) {
+        leaseId.selectpicker('render');
+    // }
   });
 
-  $('select[name="lease_id"]').on('rendered.bs.select', function() {
+  leaseId.on('rendered.bs.select', function() {
     $.ajax({
       type: 'POST',
-      url: base_url + 'credit/calculate',
+      url: baseUrl + 'credit/calculate',
       data: {
         lease_id: $(this).val(),
         price: price.val().replace(/,/g, ''),
@@ -29,7 +33,9 @@
     });
   });
 
-  $('select[name="lease_id"]').on('changed.bs.select', function() {
+  leaseId.on('changed.bs.select', function() {
+    $('tbody#leases').html('').fadeOut('slow');
+
     if (price.val().length < 1 || downPayment.val().length < 1) {
       swal({
         title: '',
@@ -38,12 +44,10 @@
         showConfirmButton: false,
         timer: 3000
       });
-      $('tbody#leases').html('').fadeOut('slow');
     } else {
-      $('tbody#leases').html('').fadeOut('slow');
       $.ajax({
         type: 'POST',
-        url: base_url + 'credit/calculate',
+        url: baseUrl + 'credit/calculate',
         data: {
           lease_id: $(this).val(),
           price: price.val().replace(/,/g, ''),
@@ -106,14 +110,14 @@
     theme: 'fa',
     uploadUrl: '',
     maxFileCount: 5,
-    allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'],
+    allowedFileTypes: ['image'],
     dropZoneEnabled: false,
-    showRemove: false,
+    showRemove: true,
     showUpload: false,
     previewFileType: 'image',
     browseLabel: 'Cari Foto',
     elErrorContainer: '#feedback-photos',
-    overwriteInitial: false
+    overwriteInitial: true
   };
 
   if ($('span#photos').text() !== '') {

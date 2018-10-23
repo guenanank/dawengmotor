@@ -18,7 +18,6 @@
   </div>
   <div class="card-body">
     <?php echo form_open_multipart('product/update/' . $product->id, ['class' => 'ajaxform', 'data-module' => 'product']) ?>
-
     <div class="form-row">
       <div class="form-group col-md-9">
         <?php echo form_label('Merek', 'product-brand_id', ['class' => 'col-form-label']) ?>

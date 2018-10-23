@@ -22,8 +22,6 @@
         dataType: 'json',
         url: (setting.url) ? setting.url : $t.attr('action'),
         data: setting.data,
-        // data: typeof setting.data == 'undefined' ? setting.data : new FormData(this),
-        // data: typeof setting.data == 'undefined' ? setting.data : $t.serialize(),
         processData: false,
         contentType: false,
         beforeSend: function() {

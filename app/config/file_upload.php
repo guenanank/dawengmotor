@@ -2,11 +2,12 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$config['path'] = 'assets/uploads/';
-$config['image_allowed'] = 'gif|jpg|png|jpeg';
-$config['overwrite'] = true;
-$config['encrypt_name'] = true;
-$config['max_size'] = 1028;
+$config['upload']['path'] = 'assets/uploads/';
+$config['upload']['image_allowed'] = 'gif|jpg|png|jpeg';
+$config['upload']['overwrite'] = true;
+$config['upload']['encrypt_name'] = false;
+$config['upload']['max_size'] = 4112;
+$config['upload']['file_ext_tolower'] = true;
 
 // Image Manipulation
 $config['image_library'] = 'gd2';

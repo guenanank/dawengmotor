@@ -27,7 +27,7 @@
 </div>
 <div class="card mt-3">
   <div class="card-header">
-    <i class="fa fa-table">&nbsp;</i>Daftar Unit Produk</div>
+    <i class="fa fa-table"></i>&nbsp;Daftar&nbsp;<?php echo $title ?></div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered table-sm table-hover" id="dataTable">
@@ -62,7 +62,7 @@
               </td>
               <td>
                 <strong><?php echo sprintf('%s %s', $parent_brand[$product->brand->sub_from], $product->brand->name) ?></strong><br />
-                <?php echo word_limiter($product->description, 13) ?>
+                <?php echo word_limiter($product->description, 7) ?>
               </td>
               <td class="text-right">
                 <strong class="text-primary">Rp. <?php echo $product->down_payment ?>.-</strong>
