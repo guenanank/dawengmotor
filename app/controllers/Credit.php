@@ -128,11 +128,11 @@ class Credit extends CI_Controller
             $installment = (floor($net_finance - $credit->effective_rate) * $formula1) / (1 - $formula2);
             $flat = ((float)(($installment * $credit->tenor) - $net_finance) / $net_finance) * 100;
             $response[] = [
-            'credit_id' => $credit->id,
-            'tenor' => $credit->tenor,
-            'installment' => round($installment),
-            'flat' => round($flat, 2)
-          ];
+                'credit_id' => $credit->id,
+                'tenor' => $credit->tenor,
+                'installment' => round($installment),
+                'flat' => round($flat, 2)
+            ];
         }
 
         return $this->output

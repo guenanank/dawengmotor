@@ -84,7 +84,7 @@ class Product extends CI_Controller
             $this->load->library('uploads', $this->file_upload['upload']);
 
             if ($this->uploads->do_upload('photos')) {
-                $photos = $this->filename($this->uploads->data());
+                $photos = $this->_filename($this->uploads->data());
             }
 
             $create = $this->products->insert([
@@ -148,7 +148,7 @@ class Product extends CI_Controller
 
             $photos = json_encode($product->photos);
             if ($this->uploads->do_upload('photos')) {
-                $photos = $this->filename($this->uploads->data());
+                $photos = $this->_filename($this->uploads->data());
             }
 
             $update = $this->products->update($product->id, [
@@ -190,7 +190,7 @@ class Product extends CI_Controller
         $return = false;
         $product = $this->products->get($id);
         if (!empty($product)) {
-            $this->delete_photo(array_column($product->photos, 'caption'));
+            $this->_delete_photo(array_column($product->photos, 'caption'));
             $return = $this->products->delete($product->id);
         }
 
@@ -200,7 +200,7 @@ class Product extends CI_Controller
         exit;
     }
 
-    private function filename($photos)
+    private function _filename($photos)
     {
         $file_name = [];
         foreach ($photos as $photo) {
@@ -219,7 +219,7 @@ class Product extends CI_Controller
         return json_encode($file_name);
     }
 
-    private function delete_photo($photos)
+    private function _delete_photo($photos)
     {
         if (empty($photos)) {
             return;

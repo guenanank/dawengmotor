@@ -36,10 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | -------------------------------------------------------------------
 | Prototype:
 |
-|  $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
+|  $autoload['packages'] = [APPPATH.'third_party', '/usr/local/shared'];
 |
 */
-$autoload['packages'] = array();
+$autoload['packages'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -51,14 +51,14 @@ $autoload['packages'] = array();
 |
 | Prototype:
 |
-|	$autoload['libraries'] = array('database', 'email', 'session');
+|	$autoload['libraries'] = ['database', 'email', 'session'];
 |
 | You can also supply an alternative library name to be assigned
 | in the controller:
 |
-|	$autoload['libraries'] = array('user_agent' => 'ua');
+|	$autoload['libraries'] = ['user_agent' => 'ua'];
 */
-$autoload['libraries'] = array('database', 'form_validation', 'image');
+$autoload['libraries'] = ['database', 'form_validation', 'image'];
 
 /*
 | -------------------------------------------------------------------
@@ -71,15 +71,15 @@ $autoload['libraries'] = array('database', 'form_validation', 'image');
 |
 | Prototype:
 |
-|	$autoload['drivers'] = array('cache');
+|	$autoload['drivers'] = ['cache'];
 |
 | You can also supply an alternative property name to be assigned in
 | the controller:
 |
-|	$autoload['drivers'] = array('cache' => 'cch');
+|	$autoload['drivers'] = ['cache' => 'cch'];
 |
 */
-$autoload['drivers'] = array();
+$autoload['drivers'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -87,9 +87,9 @@ $autoload['drivers'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['helper'] = array('url', 'file');
+|	$autoload['helper'] = ['url', 'file'];
 */
-$autoload['helper'] = array('form', 'html', 'url', 'string', 'text', 'nanank');
+$autoload['helper'] = ['form', 'html', 'url', 'string', 'text', 'nanank'];
 
 /*
 | -------------------------------------------------------------------
@@ -97,13 +97,13 @@ $autoload['helper'] = array('form', 'html', 'url', 'string', 'text', 'nanank');
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['config'] = array('config1', 'config2');
+|	$autoload['config'] = ['config1', 'config2'];
 |
 | NOTE: This item is intended for use ONLY if you have created custom
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array();
+$autoload['config'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -111,13 +111,13 @@ $autoload['config'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['language'] = array('lang1', 'lang2');
+|	$autoload['language'] = ['lang1', 'lang2'];
 |
 | NOTE: Do not include the "_lang" part of your file.  For example
-| "codeigniter_lang.php" would be referenced as array('codeigniter');
+| "codeigniter_lang.php" would be referenced as ['codeigniter'];
 |
 */
-$autoload['language'] = array();
+$autoload['language'] = [];
 
 /*
 | -------------------------------------------------------------------
@@ -125,11 +125,11 @@ $autoload['language'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['model'] = array('first_model', 'second_model');
+|	$autoload['model'] = ['first_model', 'second_model'];
 |
 | You can also supply an alternative model name to be assigned
 | in the controller:
 |
-|	$autoload['model'] = array('first_model' => 'first');
+|	$autoload['model'] = ['first_model' => 'first'];
 */
-$autoload['model'] = array();
+$autoload['model'] = ['Config_model' => 'configs'];
