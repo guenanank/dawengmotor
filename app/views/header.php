@@ -3,8 +3,8 @@
 
 <head>
   <base href="<?php echo site_url() ?>" />
-  <title>Dawenk Motor
-    <?php echo empty($title) ? null : ' &HorizontalLine; ' . $title ?>
+  <title>
+    <?php echo sprintf('%s | %s', $this->session->userdata('sitename'), empty($title) ? null : $title) ?>
   </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,6 +55,7 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
   <?php include APPPATH . 'views/menu.php' ?>
   <div class="content-wrapper">
     <div class="container-fluid">

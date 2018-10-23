@@ -28,6 +28,9 @@ class Product extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->session->has_userdata('logged_in') == false) {
+            redirect('/login');
+        }
         $this->load->model('Product_model', 'products');
         $this->load->model('Product_credit_model', 'product_credits');
         $this->load->model('Brand_model', 'brands');

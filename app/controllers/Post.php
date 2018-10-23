@@ -16,6 +16,9 @@ class Post extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->session->has_userdata('logged_in') == false) {
+            redirect('/login');
+        }
         $this->load->model('Post_model', 'posts');
 
         $this->form_validation->set_rules('title', 'Judul', 'trim|required|max_length[127]');

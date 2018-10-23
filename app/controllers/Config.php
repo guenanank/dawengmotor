@@ -17,9 +17,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
      {
          parent::__construct();
          $this->load->library('encryption');
-         // $password = $this->encryption->encrypt('babacoi');
-         // $decrypt = $this->encryption->decrypt('119e42e538b165cba654cd9e72ac565f13ae6147f37c560ff927d16a61205b3dd3e11fc1f951366510628402d1d4504e91628fbd55fd98d2d877c33b597c61b7dxnf5j3bP0LxJtgYd0gYo8cxxhpQ+/U=');
-         // debug($password);
          $this->type = $this->configs->type();
      }
 

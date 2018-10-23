@@ -14,6 +14,9 @@ class Debtor extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->session->has_userdata('logged_in') == false) {
+            redirect('/login');
+        }
         $this->load->model('Debtor_model', 'debtors');
         $this->form_validation->set_rules('number', 'Nomer Urut', 'trim|required|max_length[16]');
         $this->form_validation->set_rules('gender', 'Jenis Kelamin', 'required');

@@ -14,6 +14,9 @@ class Credit extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->session->has_userdata('logged_in') == false) {
+            redirect('/login');
+        }
         $this->load->model('Lease_model', 'leases');
         $this->load->model('Credit_model', 'credits');
 

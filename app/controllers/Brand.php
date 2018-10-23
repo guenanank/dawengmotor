@@ -14,6 +14,9 @@ class Brand extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->session->has_userdata('logged_in') == false) {
+            redirect('/login');
+        }
         $this->load->model('Brand_model', 'brands');
         $this->brands->before_dropdown = ['parent'];
 

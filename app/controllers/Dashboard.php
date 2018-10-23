@@ -16,6 +16,9 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->session->has_userdata('logged_in') == false) {
+            redirect('/login');
+        }
     }
 
     public function index()
@@ -23,6 +26,12 @@ class Dashboard extends CI_Controller
         $this->load->view('header', ['title' => $this->title, 'styles' => $this->styles]);
         $this->load->view('dashboard/index');
         $this->load->view('footer', ['scripts' => $this->scripts]);
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('/login');
     }
 
 }
