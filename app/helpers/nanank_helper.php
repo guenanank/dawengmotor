@@ -4,7 +4,8 @@ if (!function_exists('debug')) {
     function debug($data, $exit = true)
     {
         if (empty($data) && $exit) {
-            print_error('Data is empty');
+            echo 'Data is empty';
+            exit();
         }
 
         if (is_object($data)) {
@@ -21,14 +22,6 @@ if (!function_exists('debug')) {
         if ($exit) {
             exit();
         }
-    }
-}
-
-if (!function_exists('print_error')) {
-    function print_error($msg = null)
-    {
-        echo $msg;
-        exit();
     }
 }
 

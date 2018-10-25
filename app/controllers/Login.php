@@ -28,7 +28,7 @@ class Login extends CI_Controller
         $this->load->view('login');
     }
 
-    public function do()
+    public function act()
     {
         if ($this->input->is_ajax_request() == false) {
             show_404();

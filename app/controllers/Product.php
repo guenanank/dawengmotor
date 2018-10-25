@@ -40,7 +40,7 @@ class Product extends CI_Controller
         $this->file_upload = $this->config->item('file_upload');
         $this->file_upload['upload']['upload_path'] = sprintf('%soriginal', $this->file_upload['upload']['path']);
         $this->file_upload['upload']['allowed_types'] = $this->file_upload['upload']['image_allowed'];
-        unset($this->file_upload['upload']['path']);
+        // unset($this->file_upload['upload']['path']);
         unset($this->file_upload['upload']['image_allowed']);
 
         $this->brands->before_dropdown = ['motor', 'parent'];
@@ -215,7 +215,7 @@ class Product extends CI_Controller
               'width' => $photo['image_width'],
               'height' => $photo['image_height'],
               'image_type' => $photo['image_type'],
-              'url' => sprintf('%soriginal/%s', base_url($this->file_upload['path']), $photo['file_name'])
+              'url' => sprintf('%s/%s', base_url($this->file_upload['upload']['upload_path']), $photo['file_name'])
             ];
         }
 
@@ -230,10 +230,10 @@ class Product extends CI_Controller
 
         $images = [];
         $this->load->helper('directory');
-        $map = directory_map($this->file_upload['path']);
+        $map = directory_map($this->file_upload['upload']['path']);
         foreach (array_keys($map) as $available_path) {
             $images[] = array_map(function ($photo) use ($available_path) {
-                return sprintf('%s%s%s', $this->file_upload['path'], $available_path, $photo);
+                return sprintf('%s%s%s', $this->file_upload['upload']['path'], $available_path, $photo);
             }, $photos);
         }
 

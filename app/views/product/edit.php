@@ -87,7 +87,7 @@
               'multiple' => 'true'
             ])
           ?>
-      <span class="d-none" id="photos"><?php echo json_encode($product->photos, true) ?></span>
+      <span class="d-none" id="photos"><?php echo json_encode($product->photos) ?></span>
       <div id="feedback-photos"></div>
     </div>
     <div class="form-row">

@@ -8,7 +8,7 @@
   $('input[name="price"], input[name="down_payment"]').on('blur', function() {
     $('tbody#leases').html('').fadeOut('slow');
     // if(leaseId.selectpicker('val') === true) {
-        leaseId.selectpicker('render');
+    leaseId.selectpicker('render');
     // }
   });
 
@@ -121,8 +121,8 @@
   };
 
   if ($('span#photos').text() !== '') {
-    var url = [],
-      previewConfig = [];
+    var url = [];
+    var previewConfig = [];
 
     $.each($.parseJSON($('span#photos').text()), function(k, v) {
       url.push(v.url);

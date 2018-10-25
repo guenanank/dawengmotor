@@ -34,7 +34,7 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Dawenk Motor</div>
       <div class="card-body">
-        <?php echo form_open('login/do', ['id' => 'login']) ?>
+        <?php echo form_open('login/act', ['id' => 'login']) ?>
 
           <div class="form-group">
               <?php echo form_input([
