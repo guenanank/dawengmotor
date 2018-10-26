@@ -12,6 +12,7 @@
 class Image
 {
     private $ci;
+    private $file_upload;
     protected $directory = 'assets/uploads';
 
     public function __construct()
@@ -20,6 +21,10 @@ class Image
         $this->ci->load->library('image_lib', [
           'maintain_ratio' => true
         ]);
+
+        $this->ci->config->load('file_upload', true);
+        $this->file_upload = $this->ci->config->item('file_upload');
+        $this->directory = $this->file_upload['upload']['path'];
     }
 
     public function thumbnail($image, $size = 150)

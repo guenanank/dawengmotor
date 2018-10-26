@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$config['upload']['path'] = 'assets/uploads/';
+$config['upload']['path'] = '../dawenkassets/uploads/';
 $config['upload']['image_allowed'] = 'gif|jpg|png|jpeg';
 // $config['upload']['overwrite'] = true;
 $config['upload']['encrypt_name'] = false;

@@ -112,7 +112,6 @@ class Product extends CI_Controller
 
             $status = 200;
             $messege = $this->product_credits->insert_many($credits);
-
         } else {
             $status = 422;
             $messege = $this->form_validation->error_array();
