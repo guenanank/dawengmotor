@@ -53,7 +53,7 @@ class Post_model extends MY_Model
     public function category($category = null)
     {
         $keys = array_map(function ($item) {
-            return camelize($item);
+            return url_title($item, '-', true);
         }, $this->category);
         $lists = array_combine($keys, $this->category);
         return is_null($category) ? $lists : $lists[$category];

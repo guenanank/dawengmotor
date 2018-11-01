@@ -28,7 +28,7 @@ class Product extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if($this->session->has_userdata('logged_in') == false) {
+        if ($this->session->has_userdata('logged_in') == false) {
             redirect('/login');
         }
         $this->load->model('Product_model', 'products');
@@ -80,7 +80,6 @@ class Product extends CI_Controller
 
         $input_post = $this->input->post();
         if ($this->form_validation->run()) {
-
             $this->brands->before_dropdown = [];
             $brands = $this->brands->dropdown('name');
             $this->file_upload['upload']['file_name'] = sprintf('dw-%s-%04d-0', url_title($brands[$input_post['brand_id']], '_', true), $input_post['year']);
@@ -88,6 +87,7 @@ class Product extends CI_Controller
 
             if ($this->uploads->do_upload('photos')) {
                 $photos = $this->_filename($this->uploads->data());
+                $this->_watermark($photos);
             }
 
             $create = $this->products->insert([
@@ -148,10 +148,13 @@ class Product extends CI_Controller
             $this->file_upload['upload']['file_name'] = sprintf('dw-%s-%04d-0', url_title($brands[$input_post['brand_id']], '_', true), $input_post['year']);
             $this->load->library('uploads', $this->file_upload['upload']);
 
-            $photos = json_encode($product->photos);
             if ($this->uploads->do_upload('photos')) {
                 $photos = $this->_filename($this->uploads->data());
+            } else {
+                $this->_watermark($product->photos);
+                $photos = json_encode($product->photos);
             }
+
 
             $update = $this->products->update($product->id, [
                 'brand_id' => $input_post['brand_id'],
@@ -219,6 +222,18 @@ class Product extends CI_Controller
         }
 
         return json_encode($file_name);
+    }
+
+    private function _watermark($image)
+    {
+        if (is_array($image)) {
+            foreach ($image as $value) {
+                $this->_watermark($value['caption']);
+            }
+        }
+
+        $this->image->watermark($image);
+        // $this->image->watermark($image, 'text', $this->session->userdata('sitename'));
     }
 
     private function _delete_photo($photos)

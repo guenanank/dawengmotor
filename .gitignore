@@ -9,9 +9,10 @@
 user_guide/*
 
 #codeigniter 3
-application/logs/*
-!application/logs/index.html
-!application/logs/.htaccess
+app/logs/*
+!app/logs/index.html
+!app/logs/.htaccess
 /vendor/
 /assets/uploads/*
 composer.lock
+app/config/database.php

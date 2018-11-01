@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-  <a class="navbar-brand" href="<?php echo base_url('dashboard') ?>"><?php echo $this->session->userdata('user') ?></a>
+  <a class="navbar-brand" href="<?php echo base_url('/') ?>">
+    <img src="<?php echo base_url('assets/img/dw-logo.png') ?>" width="150" height="30" alt="<?php echo $this->session->userdata('user') ?>">
+  </a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

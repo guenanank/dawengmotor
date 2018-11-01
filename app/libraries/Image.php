@@ -13,7 +13,7 @@ class Image
 {
     private $ci;
     private $file_upload;
-    protected $directory = 'assets/uploads';
+    protected $directory = '/var/www/dawenkassets/uploads';
 
     public function __construct()
     {
@@ -22,9 +22,9 @@ class Image
           'maintain_ratio' => true
         ]);
 
-        $this->ci->config->load('file_upload', true);
-        $this->file_upload = $this->ci->config->item('file_upload');
-        $this->directory = $this->file_upload['upload']['path'];
+        // $this->ci->config->load('file_upload', true);
+        // $this->file_upload = $this->ci->config->item('file_upload');
+        // $this->directory = $this->file_upload['upload']['path'];
     }
 
     public function thumbnail($image, $size = 150)
@@ -127,11 +127,32 @@ class Image
         $this->ci->image_lib->initialize($config);
         $this->ci->image_lib->rotate();
         $this->ci->image_lib->clear();
-        return;
     }
 
-    public function watermark()
+    public function watermark($image, $type = 'overlay', $watermark = 'assets/img/dw-logo.png')
     {
+        $source_image = sprintf('%soriginal/%s', $this->directory, $image);
+        $config['source_image'] = $source_image;
+        $config['wm_type'] = $type;
+
+        if($type == 'overlay') {
+            $config['wm_overlay_path'] = $watermark;
+            $config['wm_vrt_alignment'] = 'center';
+            $config['wm_hor_alignment'] = 'center';
+        } else {
+            $config['wm_text'] = $watermark;
+            $config['wm_font_path'] = './system/fonts/texb.ttf';
+            $config['wm_font_size'] = '16';
+            $config['wm_font_color'] = 'ffffff';
+            $config['wm_vrt_alignment'] = 'center';
+            $config['wm_hor_alignment'] = 'center';
+            $config['wm_padding'] = '20';
+        }
+
+        $this->ci->image_lib->initialize($config);
+        $this->ci->image_lib->watermark();
+        // $this->ci->image_lib->clear();
+        // return;
     }
 
     public function make_directory($name)
