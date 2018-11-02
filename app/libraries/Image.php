@@ -13,7 +13,7 @@ class Image
 {
     private $ci;
     private $file_upload;
-    protected $directory = '/var/www/dawenkassets/uploads';
+    protected $directory = 'assets/uploads';
 
     public function __construct()
     {

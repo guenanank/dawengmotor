@@ -155,7 +155,6 @@ class Product extends CI_Controller
                 $photos = json_encode($product->photos);
             }
 
-
             $update = $this->products->update($product->id, [
                 'brand_id' => $input_post['brand_id'],
                 'year' => $input_post['year'],
@@ -219,6 +218,10 @@ class Product extends CI_Controller
               'image_type' => $photo['image_type'],
               'url' => sprintf('%s/%s', base_url($this->file_upload['upload']['upload_path']), $photo['file_name'])
             ];
+
+            $this->load->library('image_lib');
+            $this->_resize($photo['full_path']);
+            $this->_watermark($photo['full_path']);
         }
 
         return json_encode($file_name);
@@ -226,14 +229,27 @@ class Product extends CI_Controller
 
     private function _watermark($image)
     {
-        if (is_array($image)) {
-            foreach ($image as $value) {
-                $this->_watermark($value['caption']);
-            }
-        }
+        $watermark['source_image'] = $image;
+        $watermark['quality'] = '100%';
+        $watermark['wm_type'] = 'overlay';
+        $watermark['wm_overlay_path'] = './assets/img/dw-watermark.png';
+        $watermark['wm_vrt_alignment'] = 'middle';
+        $watermark['wm_hor_alignment'] = 'center';
+        $this->image_lib->clear();
+        $this->image_lib->initialize($watermark);
+        $this->image_lib->watermark();
+    }
 
-        $this->image->watermark($image);
-        // $this->image->watermark($image, 'text', $this->session->userdata('sitename'));
+    private function _resize($image)
+    {
+        $resize['source_image'] = $image;
+        $resize['maintain_ratio'] = true;
+        $resize['width'] = 1024;
+        $resize['height'] = 768;
+        $resize['quality'] = '100%';
+        $this->image_lib->clear();
+        $this->image_lib->initialize($resize);
+        $this->image_lib->resize();
     }
 
     private function _delete_photo($photos)

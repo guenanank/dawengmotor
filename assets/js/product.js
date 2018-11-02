@@ -110,6 +110,7 @@
     theme: 'fa',
     uploadUrl: '',
     maxFileCount: 5,
+    maxFileSize: 4096,
     allowedFileTypes: ['image'],
     dropZoneEnabled: false,
     showRemove: true,
